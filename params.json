@@ -1,0 +1,8 @@
+{
+    "method": "dbm",
+    "n_hidden": 20,
+    "lr": 0.001,
+    "gamma": 0.8,
+    "beta": 50,
+    "init_sd": 0.1
+}
