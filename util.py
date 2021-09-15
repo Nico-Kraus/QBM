@@ -82,7 +82,7 @@ def play_eps_greedy_rounds(env, agent, num_samples, loop_break, fields):
     return scores, eps_history
 
 
-def compare_learning_curves(x, scores, filename):
+def compare_learning_curves(scores, filename):
 
     x = [i+1 for i in range(len(scores)+1)]
 
@@ -106,7 +106,7 @@ def compare_learning_curves(x, scores, filename):
     plt.savefig("images/" + filename)
 
 
-def plot_learning_curve(x, scores, epsilons, filename):
+def plot_learning_curve(scores, epsilons, filename):
 
     x = [i+1 for i in range(len(scores)+1)]
     

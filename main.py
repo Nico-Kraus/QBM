@@ -17,5 +17,5 @@ if __name__ == '__main__':
     # scores,eps_history = play_eps_greedy_rounds(env, agent, num_samples, loop_break, [[0,4],[2,4]])
     scores,eps_history = play_eps_greedy(env, agent, num_samples, loop_break, env.start)
 
-    # filename = create_filename(env, params)
-    # plot_learning_curve(scores, eps_history, filename)
+    filename = create_filename(env, params)
+    plot_learning_curve(scores, eps_history, filename)
