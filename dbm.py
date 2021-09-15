@@ -19,11 +19,12 @@ class Dbm():
     def get_h(self, s , a):
 
         h = {}
+        J = {}
 
         for i in range(self.n_hidden ):
-            Q[(i, i)] = 0
+            h[(i, i)] = 0
             for j in range(i):
-                    Q[(j, i)] = 0
+                    J[(j, i)] = 0
 
         for i in range(self.n_hidden):
             h[(i, i)] += self.W1[s][i] + self.W2[a][i]
@@ -31,20 +32,18 @@ class Dbm():
         for i in range(self.n_hidden):
             for j in range(self.n_hidden):
                 if i > j:
-                    h[(j, i)] += self.Wh[j][i]
+                    J[(j, i)] += self.Wh[j][i]
                 if i < j:
-                    h[(i, j)] += self.Wh[j][i]
+                    J[(i, j)] += self.Wh[j][i]
 
         for i in range(self.n_hidden):
-            if Q[(i, i)] == 0:
-                del Q[(i, i)]
+            if h[(i, i)] == 0:
+                del h[(i, i)]
             for j in range(i):
-                if Q[(j, i)] == 0:
-                    del Q[(j, i)]
-
-        J = {}
+                if J[(j, i)] == 0:
+                    del J[(j, i)]
         
-        response = SimulatedAnnealingSampler().sample_ising(h, J, num_reads=500, num_sweeps=200, beta_range=[0.1, 30])
+        response = SimulatedAnnealingSampler().sample_ising(h, J, num_reads=500, num_sweeps=200, beta_range=[0.1, 15])
         #response = SimulatedAnnealingSampler().sample_ising(h, J, num_reads=20, num_sweeps=200, beta_range=[0.1, 15])
         samples = list(response.samples())
         h = []

@@ -9,7 +9,7 @@ if __name__ == '__main__':
     params = load_config("params.json")
     agent = Agent(env, **params)
 
-    # std_dev_from_h(agent)
+    std_dev_from_h(agent)
 
     num_samples = 10000
     loop_break = 4
