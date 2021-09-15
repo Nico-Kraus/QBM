@@ -20,8 +20,27 @@ class Dbm():
 
         h = {}
 
+        for i in range(self.n_hidden ):
+            Q[(i, i)] = 0
+            for j in range(i):
+                    Q[(j, i)] = 0
+
         for i in range(self.n_hidden):
-            h[(i, i)] = self.W1[s][i] + self.W2[a][i]
+            h[(i, i)] += self.W1[s][i] + self.W2[a][i]
+
+        for i in range(self.n_hidden):
+            for j in range(self.n_hidden):
+                if i > j:
+                    h[(j, i)] += self.Wh[j][i]
+                if i < j:
+                    h[(i, j)] += self.Wh[j][i]
+
+        for i in range(self.n_hidden):
+            if Q[(i, i)] == 0:
+                del Q[(i, i)]
+            for j in range(i):
+                if Q[(j, i)] == 0:
+                    del Q[(j, i)]
 
         J = {}
         
@@ -72,9 +91,9 @@ class Dbm():
             for w_ah in W_a:
                 w_ah[...] += delta * h[index]
                 index += 1
-        for h_index in range(self.n_hidden):
-            with np.nditer(self.Wh[h_index], op_flags=['readwrite']) as W_h:
-                index = 0
+        for j in range(self.n_hidden):
+            with np.nditer(self.Wh[j], op_flags=['readwrite']) as W_h:
+                i = 0
                 for w_hh in W_h:
-                    w_hh[...] += delta * h[index]
-                    index += 1
+                    w_hh[...] += delta * h[i]
+                    i += 1
