@@ -1,4 +1,3 @@
-import numpy as np
 from env import Env
 from agent import Agent
 from util import load_config, create_filename, plot_learning_curve, play_eps_greedy_rounds, play_eps_greedy, std_dev_from_h

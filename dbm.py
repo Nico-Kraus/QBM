@@ -13,6 +13,7 @@ class Dbm():
         self.beta = beta
         self.W1 = np.random.normal(0, init_sd, (self.n_states, self.n_hidden))
         self.W2 = np.random.normal(0, init_sd, (self.n_actions, self.n_hidden))
+        self.Wh = np.random.normal(0, init_sd, (self.n_hidden, self.n_hidden))
 
 
     def get_h(self, s , a):
@@ -49,9 +50,13 @@ class Dbm():
         sum1 = np.dot(self.W1[s], h)
         sum2 = np.dot(self.W2[a], h)
         sum3 = 0
+        for i in range(self.n_hidden):
+            for j in range(self.n_hidden):
+                sum3 += self.Wh[i][j] * h[i] * h[j]
+        sum4 = 0
         for item in h:
-            sum3 += item * math.log(item) + (1 - item) * math.log(1 - item)
-        result = sum1 + sum2 - 1/self.beta * sum3
+            sum4 += item * math.log(item) + (1 - item) * math.log(1 - item)
+        result = sum1 + sum2 + sum3 - 1/self.beta * sum4
         return result
 
 
@@ -67,3 +72,9 @@ class Dbm():
             for w_ah in W_a:
                 w_ah[...] += delta * h[index]
                 index += 1
+        for h_index in range(self.n_hidden):
+            with np.nditer(self.Wh[h_index], op_flags=['readwrite']) as W_h:
+                index = 0
+                for w_hh in W_h:
+                    w_hh[...] += delta * h[index]
+                    index += 1
