@@ -1,2 +1,2 @@
 # QBM
-Testing classical boltzmann machines vs quantum boltzmann machines
+## Testing classical boltzmann machines vs quantum boltzmann machines
