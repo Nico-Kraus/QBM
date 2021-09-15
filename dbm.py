@@ -27,14 +27,14 @@ class Dbm():
                     J[(j, i)] = 0
 
         for i in range(self.n_hidden):
-            h[(i, i)] += self.W1[s][i] + self.W2[a][i]
+            h[(i, i)] -= (self.W1[s][i] + self.W2[a][i])
 
         for i in range(self.n_hidden):
             for j in range(self.n_hidden):
                 if i > j:
-                    J[(j, i)] += self.Wh[j][i]
+                    J[(j, i)] -= self.Wh[j][i]
                 if i < j:
-                    J[(i, j)] += self.Wh[j][i]
+                    J[(i, j)] -= self.Wh[j][i]
 
         for i in range(self.n_hidden):
             if h[(i, i)] == 0:
@@ -43,7 +43,7 @@ class Dbm():
                 if J[(j, i)] == 0:
                     del J[(j, i)]
         
-        response = SimulatedAnnealingSampler().sample_ising(h, J, num_reads=500, num_sweeps=200, beta_range=[0.1, 15])
+        response = SimulatedAnnealingSampler().sample_ising(h, J, num_reads=500, num_sweeps=200, beta_range=[2, 20])
         #response = SimulatedAnnealingSampler().sample_ising(h, J, num_reads=20, num_sweeps=200, beta_range=[0.1, 15])
         samples = list(response.samples())
         h = []
