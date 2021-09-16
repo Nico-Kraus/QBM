@@ -5,19 +5,19 @@ from dbm import Dbm
 from dbm_2 import Dbm_2
 
 class Agent():
-    def __init__(self, env, method, n_hidden, lr, gamma, beta, init_sd):
+    def __init__(self, env, params):
         self.env = env
-        self.gamma = gamma
-        self.lr = lr
+        self.gamma = params["gamma"]
+        self.lr = params["lr"]
         self.n_actions = self.env.n_actions
         self.n_states = self.env.rows * self.env.cols
-        self.n_hidden = n_hidden
-        if method == 'rbm':
-            self.method = Rbm(self.n_actions, self.n_states, n_hidden, lr, beta, init_sd)
-        if method == 'dbm':
-            self.method = Dbm(self.n_actions, self.n_states, n_hidden, lr, beta, init_sd)
-        if method == 'dbm_2':
-            self.method = Dbm_2(self.n_actions, self.n_states, n_hidden, lr, beta, init_sd)
+        self.n_hidden = params["n_hidden"]
+        if params["method"] == 'rbm':
+            self.method = Rbm(self.n_actions, self.n_states, params)
+        if params["method"] == 'dbm':
+            self.method = Dbm(self.n_actions, self.n_states, params)
+        if params["method"] == 'dbm_2':
+            self.method = Dbm_2(self.n_actions, self.n_states, params)
 
 
     def choose_action(self, state):

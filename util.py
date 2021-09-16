@@ -26,7 +26,7 @@ def std_dev_from_h(agent):
     print(str(mean) +  " Mean std")
 
 
-def play_eps_greedy(env, agent, num_samples, break_loop, start):
+def play_eps_greedy(env, agent, num_samples, max_steps, start):
 
     env.set_start(start)
     agent.print_policy()
@@ -47,7 +47,7 @@ def play_eps_greedy(env, agent, num_samples, break_loop, start):
             agent.learn(obs, action, reward, obs_)
             obs = obs_
             index += 1
-            if index >= break_loop:
+            if index >= max_steps:
                 break
         
         print('.', end='', flush=True)
@@ -56,11 +56,6 @@ def play_eps_greedy(env, agent, num_samples, break_loop, start):
 
         if i % 100 == 0 and i != 0:
             print()
-            agent.print_action_choices(0)
-            agent.print_action_choices(2)
-            print(agent.method.get_h(0,1))
-            print(agent.method.get_h(0,2))
-            print(agent.method.get_h(2,2))
             agent.print_policy()
             avg_score = np.mean(scores[-100:])
             print('episode: %d, avg score: %.2f, epsilon: %.2f' %(i, avg_score, epsilon))
@@ -68,7 +63,7 @@ def play_eps_greedy(env, agent, num_samples, break_loop, start):
     return scores, eps_history
 
 
-def play_eps_greedy_rounds(env, agent, num_samples, loop_break, fields):
+def play_eps_greedy_rounds(env, agent, num_samples, max_steps, fields):
     
     scores = []
     eps_history = []
@@ -76,7 +71,7 @@ def play_eps_greedy_rounds(env, agent, num_samples, loop_break, fields):
         start = np.zeros(2, dtype=int)
         start[0] = field[0]
         start[1] = field[1]
-        new_scores, new_eps_history = play_eps_greedy(env, agent, num_samples, loop_break, start)
+        new_scores, new_eps_history = play_eps_greedy(env, agent, num_samples, max_steps, start)
         scores += new_scores
         eps_history += new_eps_history
     return scores, eps_history

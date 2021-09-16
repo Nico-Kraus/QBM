@@ -4,16 +4,19 @@ from dwave_qbsolv import QBSolv
 from neal.sampler import SimulatedAnnealingSampler
 
 class Dbm():
-    def __init__(self, n_actions, n_states, n_hidden, lr, beta, init_sd):
+    def __init__(self, n_actions, n_states, params):
         print("use dbm")
-        self.lr = lr
+        self.lr = params["lr"]
         self.n_actions = n_actions
         self.n_states = n_states
-        self.n_hidden = n_hidden
-        self.beta = beta
-        self.W1 = np.random.normal(0, init_sd, (self.n_states, self.n_hidden))
-        self.W2 = np.random.normal(0, init_sd, (self.n_actions, self.n_hidden))
-        self.Wh = np.random.normal(0, init_sd, (self.n_hidden, self.n_hidden))
+        self.n_hidden = params["n_hidden"]
+        self.beta = params["beta"]
+        self.num_reads = params["annealing"]["num_reads"]
+        self.num_sweeps = params["annealing"]["num_sweeps"]
+        self.beta_range = params["annealing"]["beta_range"]
+        self.W1 = np.random.normal(0, params["init_sd"], (self.n_states, self.n_hidden))
+        self.W2 = np.random.normal(0, params["init_sd"], (self.n_actions, self.n_hidden))
+        self.Wh = np.random.normal(0, params["init_sd"], (self.n_hidden, self.n_hidden))
 
 
     def get_h(self, s , a):
@@ -43,8 +46,7 @@ class Dbm():
                 if J[(j, i)] == 0:
                     del J[(j, i)]
         
-        response = SimulatedAnnealingSampler().sample_ising(h, J, num_reads=500, num_sweeps=200, beta_range=[2, 20])
-        #response = SimulatedAnnealingSampler().sample_ising(h, J, num_reads=20, num_sweeps=200, beta_range=[0.1, 15])
+        response = SimulatedAnnealingSampler().sample_ising(h, J, num_reads=self.num_reads, num_sweeps=self.num_sweeps, beta_range=self.beta_range)
         samples = list(response.samples())
         h = []
         for i in range(self.n_hidden):
