@@ -4,6 +4,7 @@ import json
 import time
 
 def std_dev_from_h(agent):
+    print("Testing Annealing params")
     n_hidden = agent.n_hidden
     all_values = [[] for _ in range(n_hidden)]
     
