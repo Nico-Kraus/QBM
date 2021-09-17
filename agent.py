@@ -1,5 +1,7 @@
 import numpy as np
 import random
+from util import std_dev_from_h
+from q_table import Q_table
 from rbm import Rbm
 from dbm import Dbm
 from dbm_2 import Dbm_2
@@ -12,18 +14,22 @@ class Agent():
         self.n_actions = self.env.n_actions
         self.n_states = self.env.rows * self.env.cols
         self.n_hidden = params["n_hidden"]
+        if params["method"] == 'q_table':
+            self.method = Q_table(self.n_actions, self.n_states)
         if params["method"] == 'rbm':
             self.method = Rbm(self.n_actions, self.n_states, params)
         if params["method"] == 'dbm':
             self.method = Dbm(self.n_actions, self.n_states, params)
+            std_dev_from_h(self)
         if params["method"] == 'dbm_2':
             self.method = Dbm_2(self.n_actions, self.n_states, params)
+            std_dev_from_h(self)
 
 
     def choose_action(self, state):
         actions = np.zeros(4)
-        for a in range(self.n_actions):
-            actions[a] = self.method.Q(state,a)
+        for action in range(self.n_actions):
+            actions[action] = self.method.Q(state, action)
         action = np.argmax(actions)
         return action
 

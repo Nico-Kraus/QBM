@@ -2,15 +2,15 @@ import numpy as np
 import math
 
 class Rbm():
-    def __init__(self, n_actions, n_states, n_hidden, lr, beta, init_sd):
+    def __init__(self, n_actions, n_states, params):
         print("use rbm")
-        self.lr = lr
+        self.lr = params["lr"]
         self.n_actions = n_actions
         self.n_states = n_states
         self.n_visible = n_actions + n_states
-        self.n_hidden = n_hidden
-        self.beta = beta
-        self.W = np.random.normal(0, init_sd, (self.n_visible, self.n_hidden))
+        self.n_hidden = params["n_hidden"]
+        self.beta = params["beta"]
+        self.W = np.random.normal(0, params["init_sd"], (self.n_visible, self.n_hidden))
 
 
     def sigmoid(self, x):
