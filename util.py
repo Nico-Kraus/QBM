@@ -5,13 +5,12 @@ import time
 
 def std_dev_from_h(agent):
     n_hidden = agent.n_hidden
-    all_values = [[] for n in range(n_hidden)]
+    all_values = [[] for _ in range(n_hidden)]
     
     start = time.time()
     
     for _ in range(100):
         h = agent.method.get_h(0,0)
-        print(h)
         for i in range(n_hidden):
             all_values[i].append(h[i])
     
@@ -23,6 +22,7 @@ def std_dev_from_h(agent):
         std = np.std(values)
         stds.append(std)
     mean = np.mean(stds)
+    print(agent.method.get_h(0,0))
     print(str(mean) +  " Mean std")
 
 
@@ -138,6 +138,6 @@ def load_config(path_to_config):
 
 
 def create_filename(env, params):
-    return '%s_%dx%d_h_%d_lr_0,00%d_g_0,%d_b_%d_is_0,%d' %(params["method"], env.rows, env.cols, params["n_hidden"], int(params["lr"]*1000), int(params["gamma"]*100), params["beta"], int(params["init_sd"]*10))
+    return '%s_%dx%d_h_%d_lr_0,00%d_g_0,%d_b_%d_is_0,%d_an_%d_%d_%d_%d' %(params["method"], env.rows, env.cols, params["n_hidden"], int(params["lr"]*1000), int(params["gamma"]*100), params["beta"], int(params["init_sd"]*10), params["annealing"]["num_reads"], params["annealing"]["num_sweeps"], params["annealing"]["beta_range"][0], params["annealing"]["beta_range"][1])
 
 

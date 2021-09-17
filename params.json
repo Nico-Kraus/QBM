@@ -1,13 +1,22 @@
 {
-    "method": "dbm",
-    "n_hidden": 15,
-    "lr": 0.001,
-    "gamma": 0.8,
-    "beta": 50,
-    "init_sd": 0.1,
-    "annealing": {
-        "num_reads": 10,
-        "num_sweeps": 10,
-        "beta_range": [2, 20]
+    "env": {
+        "example": 1
+    },
+    "play": {
+        "num_samples": 100,
+        "max_steps": 10
+    },
+    "agent": {
+        "method": "dbm",
+        "n_hidden": 20,
+        "lr": 0.001,
+        "gamma": 0.8,
+        "beta": 50,
+        "init_sd": 0.1,
+        "annealing": {
+            "num_reads": 10,
+            "num_sweeps": 10,
+            "beta_range": [2, 20]
+        }
     }
 }

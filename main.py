@@ -4,17 +4,15 @@ from util import load_config, create_filename, plot_learning_curve, play_eps_gre
 
 if __name__ == '__main__':
 
-    env = Env.make_example(2, "stay")
-
     params = load_config("params.json")
-    agent = Agent(env, params)
+
+    env = Env.make_example(params["env"]["example"], "stay")
+    agent = Agent(env, params["agent"])
 
     std_dev_from_h(agent)
 
-    num_samples = 10000
-    max_steps = 10
     # scores,eps_history = play_eps_greedy_rounds(env, agent, num_samples, loop_break, [[0,4],[2,4]])
-    scores,eps_history = play_eps_greedy(env, agent, num_samples, max_steps, env.start)
+    scores,eps_history = play_eps_greedy(env, agent, params["play"]["num_samples"],params["play"]["max_steps"], env.start)
 
-    filename = create_filename(env, params)
+    filename = create_filename(env, params["agent"])
     plot_learning_curve(scores, eps_history, filename)
