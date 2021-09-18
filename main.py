@@ -9,8 +9,8 @@ if __name__ == '__main__':
     env = Env.make_example(params["env"]["example"], "stay")
     agent = Agent(env, params["agent"])
 
-    scores,eps_history = play_eps_greedy_rounds(env, agent, params["play"]["num_samples"], params["play"]["max_steps"], [[3,2],[1,2],[0,0]])
-    # scores,eps_history = play_eps_greedy(env, agent, params["play"]["num_samples"], params["play"]["max_steps"], env.start)
+    # scores,eps_history = play_eps_greedy_rounds(env, agent, params["play"]["num_samples"], params["play"]["max_steps"], [[3,2],[1,2],[0,0]])
+    scores,eps_history = play_eps_greedy(env, agent, params["play"]["num_samples"], params["play"]["max_steps"], env.start)
 
     filename = create_filename(env, params["agent"])
     plot_learning_curve(scores, eps_history, filename)
