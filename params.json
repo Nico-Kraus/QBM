@@ -1,14 +1,14 @@
 {
     "env": {
-        "example": 6
+        "example": 2
     },
     "play": {
         "num_samples": 10000,
-        "max_steps": 40
+        "max_steps": 10
     },
     "agent": {
-        "method": "dbm",
-        "n_hidden": 30, 
+        "method": "qbm",
+        "n_hidden": 15, 
         "lr": 0.001,
         "gamma": 0.8,
         "beta": 50,

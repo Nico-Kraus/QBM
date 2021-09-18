@@ -1,8 +1,9 @@
 import numpy as np
 import math
+from dwave_qbsolv import QBSolv
 from neal.sampler import SimulatedAnnealingSampler
 
-class Dbm():
+class Qbm():
     def __init__(self, n_actions, n_states, params):
         print("use dbm")
         self.lr = params["lr"]
@@ -20,38 +21,37 @@ class Dbm():
 
     def get_h(self, s , a):
 
-        h = {}
-        J = {}
+        Q = {}
 
         for i in range(self.n_hidden ):
-            h[(i, i)] = 0
+            Q[(i, i)] = 0
             for j in range(i):
-                    J[(j, i)] = 0
+                    Q[(j, i)] = 0
 
         for i in range(self.n_hidden):
-            h[(i, i)] -= (self.W1[s][i] + self.W2[a][i])
+            Q[(i, i)] -= (self.W1[s][i] + self.W2[a][i])
 
         for i in range(self.n_hidden):
             for j in range(self.n_hidden):
                 if i > j:
-                    J[(j, i)] -= self.Wh[j][i]
+                    Q[(j, i)] -= self.Wh[j][i]
                 if i < j:
-                    J[(i, j)] -= self.Wh[j][i]
+                    Q[(i, j)] -= self.Wh[j][i]
 
         for i in range(self.n_hidden):
-            if h[(i, i)] == 0:
-                del h[(i, i)]
+            if Q[(i, i)] == 0:
+                del Q[(i, i)]
             for j in range(i):
-                if J[(j, i)] == 0:
-                    del J[(j, i)]
+                if Q[(j, i)] == 0:
+                    del Q[(j, i)]
         
-        response = SimulatedAnnealingSampler().sample_ising(h, J, num_reads=self.num_reads, num_sweeps=self.num_sweeps, beta_range=self.beta_range)
+        response = SimulatedAnnealingSampler().sample_qubo(Q, num_reads=self.num_reads, num_sweeps=self.num_sweeps, beta_range=self.beta_range)
         samples = list(response.samples())
         h = []
         for i in range(self.n_hidden):
             solutions = []
             for sample in samples:
-                solutions.append( (sample[(i,i)] + 1)/2)
+                solutions.append( sample[i] )
             h_i = np.average(solutions)
             if h_i >= 1:
                 h_i = 0.999999
@@ -59,23 +59,18 @@ class Dbm():
                 h_i = 0.000001
             h.append(h_i)
 
-        #print(h)
+        energies = list(response.record["energy"])
+        avg_energie = np.average(energies)
 
-        return h, 0
+        return h, avg_energie
 
 
     def Q(self, s, a):
-        h, _ = self.get_h(s, a)
-        sum1 = np.dot(self.W1[s], h)
-        sum2 = np.dot(self.W2[a], h)
-        sum3 = 0
-        for i in range(self.n_hidden):
-            for j in range(self.n_hidden):
-                sum3 += self.Wh[i][j] * h[i] * h[j]
+        h, avg_energie = self.get_h(s, a)
         sum4 = 0
         for item in h:
             sum4 += item * math.log(item) + (1 - item) * math.log(1 - item)
-        result = sum1 + sum2 + sum3 - 1/self.beta * sum4
+        result = -avg_energie - 1/self.beta * sum4
         return result
 
 

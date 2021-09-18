@@ -5,6 +5,7 @@ from q_table import Q_table
 from rbm import Rbm
 from dbm import Dbm
 from dbm_2 import Dbm_2
+from qbm import Qbm
 
 class Agent():
     def __init__(self, env, params):
@@ -24,6 +25,9 @@ class Agent():
         if params["method"] == 'dbm_2':
             self.method = Dbm_2(self.n_actions, self.n_states, params)
             std_dev_from_h(self)
+        if params["method"] == 'qbm':
+            self.method = Qbm(self.n_actions, self.n_states, params)
+            #std_dev_from_h(self)
 
 
     def choose_action(self, state):
@@ -34,7 +38,7 @@ class Agent():
         return action
 
 
-    def print_action_choices(self, state):#
+    def print_action_choices(self, state):
         actions = np.zeros(4)
         for a in range(self.n_actions):
             actions[a] = self.method.Q(state,a)
@@ -74,8 +78,15 @@ class Agent():
     def print_policy(self):
         for i in range(self.env.map.shape[0]): # iterate over rows
             for j in range(self.env.map[i].shape[0]): # iterate over cols
-                state = j + self.env.cols * i
-                action = self.choose_action(state)
-                symbol = self.env.action_symbol(action)
-                print(symbol, end=' ')
+                if self.env.map[i][j] == -1:
+                    print("o", end=' ')
+                elif self.env.map[i][j] == 1:
+                    print("x", end=' ')
+                elif self.env.map[i][j] == 0:
+                    state = j + self.env.cols * i
+                    action = self.choose_action(state)
+                    symbol = self.env.action_symbol(action)
+                    print(symbol, end=' ')
+                else:
+                    print("error in print policy")
             print()

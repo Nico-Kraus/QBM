@@ -11,7 +11,7 @@ def std_dev_from_h(agent):
     start = time.time()
     
     for _ in range(100):
-        h = agent.method.get_h(0,0)
+        h, _ = agent.method.get_h(0,0)
         for i in range(n_hidden):
             all_values[i].append(h[i])
     
@@ -23,7 +23,8 @@ def std_dev_from_h(agent):
         std = np.std(values)
         stds.append(std)
     mean = np.mean(stds)
-    print(agent.method.get_h(0,0))
+    h, _ = agent.method.get_h(0,0)
+    print(h)
     print(str(mean) +  " Mean std")
 
 
