@@ -52,14 +52,12 @@ class Dbm():
             solutions = []
             for sample in samples:
                 solutions.append( (sample[(i,i)] + 1)/2)
-            h_i = np.average(solutions)
+            h_i = np.mean(solutions)
             if h_i >= 1:
                 h_i = 0.999999
             if h_i <= 0:
                 h_i = 0.000001
             h.append(h_i)
-
-        #print(h)
 
         return h, 0
 

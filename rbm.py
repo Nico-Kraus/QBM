@@ -21,12 +21,14 @@ class Rbm():
         else:
             return 1.0 / (1 + math.exp(-x))
 
+
     def get_h(self, s , a):
         h = self.W[s] + self.W[a + self.n_states]
         with np.nditer(h, op_flags=['readwrite']) as h_it:
             for h_i in h_it:
                 h_i[...] = self.sigmoid(h_i)
         return h
+
 
     def Q(self, s, a):
         h = self.get_h(s, a)
@@ -37,6 +39,7 @@ class Rbm():
             sum3 += item * math.log(item) + (1 - item) * math.log(1 - item)
         result = sum1 + sum2 - 1/self.beta * sum3
         return result
+
 
     def update_weight(self, delta, state, action):
         h = self.get_h(state, action)

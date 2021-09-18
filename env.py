@@ -19,6 +19,7 @@ class Env():
         self.num_states = self.rows*self.cols
         self.state = np.copy(self.start)
 
+
     @staticmethod
     def make_example(num, border):
         if num == 1:
@@ -101,13 +102,16 @@ class Env():
             env.print_env()
             return env
 
+
     def set_start(self, start):
         self.start = start
         self.reset()
 
+
     def set_state(self, obs_state):
         self.state[0] = obs_state // self.rows
         self.state[1] = obs_state % self.rows
+
 
     def add_reward(self, row, col):
         if row > self.rows or col > self.cols:
@@ -115,22 +119,27 @@ class Env():
         else:
             self.map[row][col] = 1
 
+
     def add_penalty(self, row, col):
         if row > self.rows or col > self.cols:
             print("penalty out of range")
         else:
             self.map[row][col] = -1
 
+
     def get_obs_state(self):
         return self.state[1] + self.state[0]*self.cols
 
+
     def get_matrix_state(self):
         return self.state
+
 
     def get_array_state(self):
         result = [0]*self.num_states
         result[self.state[1] + self.state[0]*self.cols] = 1
         return result
+
 
     def take_action(self, action):
         curr_state = np.copy(self.get_matrix_state())
@@ -158,6 +167,7 @@ class Env():
             done = True
         return obs, reward, done
 
+
     def action_name(self, action):
         if action == 0:
             name = 'LEFT'
@@ -168,6 +178,7 @@ class Env():
         if action == 3:
             name = 'UP'
         return name
+
 
     def action_symbol(self, action):
         if action == 0:
@@ -180,12 +191,14 @@ class Env():
             name = 'n'
         return name
 
+
     def get_reward(self):
         if self.map[self.state[0]][self.state[1]] == 1:
             reward = 1
         else:
             reward = 0
         return reward
+
 
     def print_env(self):
         for i in range(self.map.shape[0]): # iterate over rows
@@ -200,6 +213,7 @@ class Env():
                     print(self.map[i][j], end='')
             print()
         print()
+
 
     def reset(self):
         self.state = np.copy(self.start)

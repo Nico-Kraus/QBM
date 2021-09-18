@@ -52,7 +52,7 @@ class Qbm():
             solutions = []
             for sample in samples:
                 solutions.append( sample[i] )
-            h_i = np.average(solutions)
+            h_i = np.mean(solutions)
             if h_i >= 1:
                 h_i = 0.999999
             if h_i <= 0:
@@ -60,7 +60,7 @@ class Qbm():
             h.append(h_i)
 
         energies = list(response.record["energy"])
-        avg_energie = np.average(energies)
+        avg_energie = np.mean(energies)
 
         return h, avg_energie
 
