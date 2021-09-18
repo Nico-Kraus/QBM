@@ -5,7 +5,7 @@ import time
 
 def std_dev_from_h(agent):
     print("Testing Annealing params")
-    n_hidden = agent.n_hidden
+    n_hidden = agent.method.n_hidden
     all_values = [[] for _ in range(n_hidden)]
     
     start = time.time()
@@ -62,6 +62,8 @@ def play_eps_greedy(env, agent, num_samples, max_steps, start):
             avg_score = np.mean(scores[-100:])
             print('episode: %d, avg score: %.2f, epsilon: %.2f' %(i, avg_score, epsilon))
 
+    print()
+
     return scores, eps_history
 
 
@@ -81,7 +83,7 @@ def play_eps_greedy_rounds(env, agent, num_samples, max_steps, fields):
 
 def compare_learning_curves(scores, filename):
 
-    x = [i+1 for i in range(len(scores)+1)]
+    x = [i+1 for i in range(len(scores[0])+1)]
 
     fig, ax = plt.subplots()
 
@@ -93,7 +95,7 @@ def compare_learning_curves(scores, filename):
         for t in range(N):
             running_avg[t] = np.mean(scores[i][max(0, t-100):(t+1)])
         running_avg[N] = 1
-        ax.scatter(x, running_avg, color=color, linewidths=0.5)
+        ax.plot(x, running_avg, color=color)
         ax.set_ylabel(name, color=color)
 
     ax.axes.get_xaxis().set_visible(False)
@@ -141,5 +143,11 @@ def load_config(path_to_config):
 
 def create_filename(env, params):
     return '%s_%dx%d_h_%d_lr_0,00%d_g_0,%d_b_%d_is_0,%d_an_%d_%d_%d_%d' %(params["method"], env.rows, env.cols, params["n_hidden"], int(params["lr"]*1000), int(params["gamma"]*100), params["beta"], int(params["init_sd"]*10), params["annealing"]["num_reads"], params["annealing"]["num_sweeps"], params["annealing"]["beta_range"][0], params["annealing"]["beta_range"][1])
+
+def create_filename_compare(env, agents):
+    filename = '%dx%d' %(env.rows, env.cols)
+    for agent in agents:
+        filename += '_%s' %(agent["method"])
+    return filename
 
 

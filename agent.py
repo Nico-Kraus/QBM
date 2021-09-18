@@ -14,7 +14,6 @@ class Agent():
         self.lr = params["lr"]
         self.n_actions = self.env.n_actions
         self.n_states = self.env.rows * self.env.cols
-        self.n_hidden = params["n_hidden"]
         if params["method"] == 'q_table':
             self.method = Q_table(self.n_actions, self.n_states)
         if params["method"] == 'rbm':
@@ -23,11 +22,12 @@ class Agent():
             self.method = Dbm(self.n_actions, self.n_states, params)
             std_dev_from_h(self)
         if params["method"] == 'dbm_2':
+            print("under cnstruction")
             self.method = Dbm_2(self.n_actions, self.n_states, params)
             std_dev_from_h(self)
         if params["method"] == 'qbm':
             self.method = Qbm(self.n_actions, self.n_states, params)
-            #std_dev_from_h(self)
+            std_dev_from_h(self)
 
 
     def choose_action(self, state):
