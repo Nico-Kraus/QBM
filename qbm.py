@@ -5,7 +5,7 @@ from neal.sampler import SimulatedAnnealingSampler
 
 class Qbm():
     def __init__(self, n_actions, n_states, params):
-        print("use dbm")
+        print("use qbm")
         self.lr = params["lr"]
         self.n_actions = n_actions
         self.n_states = n_states

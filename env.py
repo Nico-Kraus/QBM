@@ -95,10 +95,13 @@ class Env():
             env.add_reward(rows-1, cols-1)
             # env.add_penalty(2,1)
             # env.add_penalty(1,4)
-            env.add_penalty(5,0)
+
+            #env.add_penalty(5,0)
+            env.add_penalty(4,3)
+            env.add_penalty(4,4)
             env.add_penalty(4,5)
-            env.add_penalty(7,3)
-            env.add_penalty(0,7)
+            #env.add_penalty(7,3)
+            #env.add_penalty(0,7)
             env.print_env()
             return env
 

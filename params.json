@@ -1,11 +1,11 @@
 {
     "env": {
-        "example": 1,
+        "example": 6,
         "border_rule": "stay"
     },
     "play": {
-        "num_samples": 200,
-        "max_steps": 10
+        "num_samples": 10000,
+        "max_steps": 40
     },
     "agents": [
         {
@@ -16,7 +16,7 @@
             "__comment": "Methods can be q_table, rbm or dbm. annealing is only necessary in dbm."
         },{
             "method": "rbm",
-            "n_hidden": 15, 
+            "n_hidden": 20, 
             "lr": 0.001,
             "gamma": 0.8,
             "beta": 50,
@@ -24,7 +24,7 @@
             "__comment": "Methods can be q_table, rbm or dbm. annealing is only necessary in dbm."
         },{
             "method": "dbm",
-            "n_hidden": 15, 
+            "n_hidden": 20, 
             "lr": 0.001,
             "gamma": 0.8,
             "beta": 50,
@@ -37,7 +37,7 @@
             "__comment": "Methods can be q_table, rbm or dbm. annealing is only necessary in dbm."
         },{
             "method": "qbm",
-            "n_hidden": 15, 
+            "n_hidden": 20,
             "lr": 0.001,
             "gamma": 0.8,
             "beta": 50,
