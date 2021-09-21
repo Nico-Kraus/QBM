@@ -93,15 +93,14 @@ def compare_learning_curves(scores, filename, agents):
     for i in range(len(scores)):
         running_avg = np.empty(N+1)
         color = "C" + str(i)
-        name = "Score " + str(i)
         for t in range(N):
             running_avg[t] = np.mean(scores[i][max(0, t-100):(t+1)])
         running_avg[N] = 1
-        ax.plot(x, running_avg, color=color, linewidth=1,label=agents[i]["method"])
+        ax.plot(x, running_avg, color=color, linewidth=1,label=agents[i]["name"])
         
     ax.set_ylabel("Score", color="C0")
     ax.set_xlabel("Training Steps", color="C0")
-    #ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
+    ax.legend(loc='upper left', borderaxespad=0.)
     ax.axes.get_xaxis().set_visible(False)
     ax.yaxis.set_label_position('left')
     ax.tick_params(axis='y', colors="C0")

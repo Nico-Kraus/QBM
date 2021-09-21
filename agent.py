@@ -70,7 +70,7 @@ class Agent():
             action_ = self.choose_action(state_)
             Qs2a2 = self.method.Q(state_,action_)
         elif self.env.map[self.env.state[0]][self.env.state[1]] == 1:
-            Qs2a2 = 1
+            Qs2a2 = 0
         elif self.env.map[self.env.state[0]][self.env.state[1]] == -1:
             Qs2a2 = 0
         else:
