@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import json
 import time
+import os
+os.environ['KMP_DUPLICATE_LIB_OK']='True'
 
 def std_dev_from_h(agent):
     print("Testing Annealing params")
@@ -81,7 +83,7 @@ def play_eps_greedy_rounds(env, agent, num_samples, max_steps, fields):
     return scores, eps_history
 
 
-def compare_learning_curves(scores, filename):
+def compare_learning_curves(scores, filename, agents):
 
     x = [i+1 for i in range(len(scores[0])+1)]
 
@@ -95,14 +97,16 @@ def compare_learning_curves(scores, filename):
         for t in range(N):
             running_avg[t] = np.mean(scores[i][max(0, t-100):(t+1)])
         running_avg[N] = 1
-        ax.plot(x, running_avg, color=color)
-        ax.set_ylabel(name, color=color)
-
+        ax.plot(x, running_avg, color=color, linewidth=1,label=agents[i]["method"])
+        
+    ax.set_ylabel("Score", color="C0")
+    ax.set_xlabel("Training Steps", color="C0")
+    #ax.legend(bbox_to_anchor=(1.05, 1), loc='upper left', borderaxespad=0.)
     ax.axes.get_xaxis().set_visible(False)
     ax.yaxis.set_label_position('left')
     ax.tick_params(axis='y', colors="C0")
 
-    plt.savefig("images/" + filename)
+    plt.savefig("images/" + filename, dpi=300)
 
 
 def plot_learning_curve(scores, epsilons, filename):

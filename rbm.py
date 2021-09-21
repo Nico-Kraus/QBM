@@ -42,6 +42,7 @@ class Rbm():
 
 
     def update_weight(self, delta, state, action):
+        delta *= self.lr
         h = self.get_h(state, action)
         with np.nditer(self.W[state], op_flags=['readwrite']) as W_s:
             index = 0

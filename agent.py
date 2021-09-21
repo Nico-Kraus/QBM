@@ -2,6 +2,7 @@ import numpy as np
 import random
 from util import std_dev_from_h
 from q_table import Q_table
+from dn import Dn
 from rbm import Rbm
 from dbm import Dbm
 from dbm_2 import Dbm_2
@@ -11,11 +12,13 @@ class Agent():
     def __init__(self, env, params):
         self.env = env
         self.gamma = params["gamma"]
-        self.lr = params["lr"]
         self.n_actions = self.env.n_actions
         self.n_states = self.env.rows * self.env.cols
+        self.params = params
         if params["method"] == 'q_table':
-            self.method = Q_table(self.n_actions, self.n_states)
+            self.method = Q_table(self.n_actions, self.n_states, params)
+        if params["method"] == 'dn':
+            self.method = Dn(self.n_actions, self.n_states, params)
         if params["method"] == 'rbm':
             self.method = Rbm(self.n_actions, self.n_states, params)
         if params["method"] == 'dbm':
@@ -61,6 +64,7 @@ class Agent():
 
 
     def learn(self, state, action, reward, state_):
+        # Todo in network
         Qs1a1 = self.method.Q(state,action)
         if self.env.map[self.env.state[0]][self.env.state[1]] == 0:
             action_ = self.choose_action(state_)
@@ -71,7 +75,7 @@ class Agent():
             Qs2a2 = 0
         else:
             print("learn error occured")
-        delta = self.lr * (reward + self.gamma * Qs2a2 - Qs1a1)
+        delta = reward + self.gamma * Qs2a2 - Qs1a1
         self.method.update_weight(delta, state, action)
 
 

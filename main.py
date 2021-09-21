@@ -18,4 +18,4 @@ if __name__ == '__main__':
         compare_scores.append(scores)
 
     filename = create_filename_compare(env, params["agents"])
-    compare_learning_curves(compare_scores, filename)
+    compare_learning_curves(compare_scores, filename, params["agents"])

@@ -1,53 +1,58 @@
 {
     "env": {
-        "example": 6,
+        "example": 1,
         "border_rule": "stay"
     },
     "play": {
-        "num_samples": 10000,
-        "max_steps": 40
+        "num_samples": 1000,
+        "max_steps": 6
     },
     "agents": [
         {
             "method": "q_table",
+            "name": "q_table",
             "lr": 0.001,
-            "gamma": 0.8,
-            "init_sd": 0.1,
-            "__comment": "Methods can be q_table, rbm or dbm. annealing is only necessary in dbm."
+            "gamma": 0.8
+        },{
+            "method": "dn",
+            "name": "dn_4",
+            "n_hidden": 4,
+            "lr": 0.001,
+            "gamma": 0.8
         },{
             "method": "rbm",
-            "n_hidden": 20, 
+            "name": "rbm_4",
+            "n_hidden": 4,
             "lr": 0.001,
             "gamma": 0.8,
             "beta": 50,
-            "init_sd": 0.1,
-            "__comment": "Methods can be q_table, rbm or dbm. annealing is only necessary in dbm."
+            "init_sd": 0.1
         },{
             "method": "dbm",
-            "n_hidden": 20, 
+            "name": "dbm_4",
+            "n_hidden": 4,
             "lr": 0.001,
             "gamma": 0.8,
-            "beta": 50,
+            "beta": 1000,
             "init_sd": 0.1,
             "annealing": {
-                "num_reads": 20,
-                "num_sweeps": 20,
+                "num_reads": 40,
+                "num_sweeps": 40,
                 "beta_range": [2, 20]
-            },
-            "__comment": "Methods can be q_table, rbm or dbm. annealing is only necessary in dbm."
+            }
         },{
             "method": "qbm",
-            "n_hidden": 20,
+            "name": "qbm_4",
+            "n_hidden": 4,
             "lr": 0.001,
             "gamma": 0.8,
-            "beta": 50,
+            "beta": 1000,
             "init_sd": 0.1,
             "annealing": {
-                "num_reads": 20,
-                "num_sweeps": 20,
+                "num_reads": 40,
+                "num_sweeps": 40,
                 "beta_range": [2, 20]
-            },
-            "__comment": "Methods can be q_table, rbm or dbm. annealing is only necessary in dbm."
+            }
         }
     ]
 }
