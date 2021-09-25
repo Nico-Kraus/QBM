@@ -64,7 +64,6 @@ class Agent():
 
 
     def learn(self, state, action, reward, state_):
-        # Todo in network
         Qs1a1 = self.method.Q(state,action)
         if self.env.map[self.env.state[0]][self.env.state[1]] == 0:
             action_ = self.choose_action(state_)

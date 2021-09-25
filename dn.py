@@ -10,7 +10,7 @@ class Dn(nn.Module):
         self.n_actions = n_actions
         self.n_states = n_states
         self.lr = params["lr"]
-        self.n_hidden=params["n_hidden"]
+        self.n_hidden = params["n_hidden"]
 
         self.fc1 = nn.Linear(self.n_states, self.n_hidden)
         self.fc2 = nn.Linear(self.n_hidden, self.n_actions)

@@ -145,12 +145,12 @@ def load_config(path_to_config):
 
 
 def create_filename(env, params):
-    return '%s_%dx%d_h_%d_lr_0,00%d_g_0,%d_b_%d_is_0,%d_an_%d_%d_%d_%d' %(params["method"], env.rows, env.cols, params["n_hidden"], int(params["lr"]*1000), int(params["gamma"]*100), params["beta"], int(params["init_sd"]*10), params["annealing"]["num_reads"], params["annealing"]["num_sweeps"], params["annealing"]["beta_range"][0], params["annealing"]["beta_range"][1])
+    return '%s_%dx%d_h_%d_lr_0,00%d_g_0,%d_b_%d_is_0,%d_an_%d_%d_%d_%d' %(params["method"], env.rows, env.cols, params["n_hidden"], int(params["lr"]*1000), params["gamma"]*100, int(params["beta"]), int(params["init_sd"]*10), params["annealing"]["num_reads"], params["annealing"]["num_sweeps"], params["annealing"]["beta_range"][0], params["annealing"]["beta_range"][1])
 
 def create_filename_compare(env, agents):
     filename = '%dx%d' %(env.rows, env.cols)
     for agent in agents:
-        filename += '_%s' %(agent["method"])
+        filename += '_%s' %(agent["name"])
     return filename
 
 
