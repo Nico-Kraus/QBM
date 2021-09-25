@@ -83,6 +83,62 @@ def play_eps_greedy_rounds(env, agent, num_samples, max_steps, fields):
     return scores, eps_history
 
 
+def play_rdn_sample(env, agent, num_samples, max_steps, fields):
+
+    scores = []
+    for i in range(num_samples):
+        obs = env.reset()
+
+        for state in range(env.num_states):
+            env.set_state(state)
+            matrix_state = env.get_matrix_state()
+            if env.map[matrix_state[0]][matrix_state[1]] == 0:
+                for action in range(env.n_actions):
+                    env.set_state(state)
+                    obs = env.get_obs_state()
+                    obs_, reward, done = env.take_action(action)
+                    agent.learn(obs, action, reward, obs_)
+
+        if i % 100 == 0 and i != 0:
+            env.reset()
+            score = play(env, agent, max_steps, False)
+            agent.print_policy()
+            scores.append(score)
+            print('episode: ' + str(i) + ', score: ' + str(score))
+    
+    return scores
+
+
+def play(env, agent, break_loop, print_states=False):
+
+    score = 0
+    obs = env.reset()
+
+    for state in range(env.num_states):
+        if print_states == True:
+            print("play from state " + str(state))
+        env.set_state(state)
+        matrix_state = env.get_matrix_state()
+        if env.map[matrix_state[0]][matrix_state[1]] == 0:
+            if print_states == True:
+                env.print_env()
+            index = 0
+            done = False
+            while not done:
+                obs = env.get_obs_state()
+                action = agent.choose_action(obs)
+                obs_, reward, done = env.take_action(action)
+                if print_states == True:
+                    env.print_env()
+                score += reward
+                obs = obs_
+                index += 1
+                if index > break_loop:
+                    break
+
+    return score
+
+
 def compare_learning_curves(scores, filename, agents):
 
     x = [i+1 for i in range(len(scores[0])+1)]

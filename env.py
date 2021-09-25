@@ -209,7 +209,7 @@ class Env():
                 if self.get_matrix_state()[0] == i and self.get_matrix_state()[1] == j:
                     if self.map[i][j] >= 0:
                         print(' ', end='')
-                    print('\x1b[7m' + str(self.map[i][j]) + '\x1b[0m', end='')
+                    print('\x1b[6;30;42m' + str(self.map[i][j]) + '\x1b[0m', end='')
                 else:
                     if self.map[i][j] >= 0:
                         print(' ', end='')

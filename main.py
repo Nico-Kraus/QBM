@@ -1,6 +1,6 @@
 from env import Env
 from agent import Agent
-from util import load_config, create_filename, create_filename_compare, compare_learning_curves, plot_learning_curve, play_eps_greedy_rounds, play_eps_greedy
+from util import load_config, create_filename, create_filename_compare, compare_learning_curves, plot_learning_curve, play_eps_greedy_rounds, play_eps_greedy, play_rdn_sample
 
 if __name__ == '__main__':
 
@@ -14,7 +14,7 @@ if __name__ == '__main__':
     compare_scores = []
     for agent_params in params["agents"]:
         agent = Agent(env, agent_params)
-        scores, eps_history = play_eps_greedy(env, agent, params["play"]["num_samples"], params["play"]["max_steps"], env.start)
+        scores = play_rdn_sample(env, agent, params["play"]["num_samples"], params["play"]["max_steps"], env.start)
         compare_scores.append(scores)
 
     filename = create_filename_compare(env, params["agents"])
