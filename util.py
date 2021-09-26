@@ -99,7 +99,7 @@ def play_rdn_sample(env, agent, num_samples, max_steps, fields):
                     obs_, reward, done = env.take_action(action)
                     agent.learn(obs, action, reward, obs_)
 
-        if i % 100 == 0 and i != 0:
+        if i % 10 == 0 and i != 0:
             env.reset()
             score = play(env, agent, max_steps, False)
             agent.print_policy()
@@ -139,7 +139,7 @@ def play(env, agent, break_loop, print_states=False):
     return score
 
 
-def compare_learning_curves(scores, filename, agents):
+def compare_learning_curves(scores, filename, agents, avg):
 
     x = [i+1 for i in range(len(scores[0])+1)]
 
@@ -150,8 +150,39 @@ def compare_learning_curves(scores, filename, agents):
         running_avg = np.empty(N+1)
         color = "C" + str(i)
         for t in range(N):
-            running_avg[t] = np.mean(scores[i][max(0, t-100):(t+1)])
+            running_avg[t] = np.mean(scores[i][max(0, t-avg):(t+1)])
         running_avg[N] = 1
+        ax.plot(x, running_avg, color=color, linewidth=1,label=agents[i]["name"])
+        
+    ax.set_ylabel("Score", color="C0")
+    ax.set_xlabel("Training Steps", color="C0")
+    ax.legend(loc='upper left', borderaxespad=0.)
+    ax.axes.get_xaxis().set_visible(False)
+    ax.yaxis.set_label_position('left')
+    ax.tick_params(axis='y', colors="C0")
+
+    plt.savefig("images/" + filename, dpi=300)
+
+
+def compare_learning_curves_rdn(scores, filename, agents, avg):
+
+    x = [i+1 for i in range(len(scores[0])+1)]
+
+    fig, ax = plt.subplots()
+
+    max_score = 0
+    for score in scores:
+        new_max = max(score)
+        if new_max > max_score:
+            max_score = new_max
+
+    N = len(scores[0])
+    for i in range(len(scores)):
+        running_avg = np.empty(N+1)
+        color = "C" + str(i)
+        for t in range(N):
+            running_avg[t] = np.mean(scores[i][max(0, t-avg):(t+1)])
+        running_avg[N] = max([1, max_score])
         ax.plot(x, running_avg, color=color, linewidth=1,label=agents[i]["name"])
         
     ax.set_ylabel("Score", color="C0")
@@ -202,6 +233,7 @@ def load_config(path_to_config):
 
 def create_filename(env, params):
     return '%s_%dx%d_h_%d_lr_0,00%d_g_0,%d_b_%d_is_0,%d_an_%d_%d_%d_%d' %(params["method"], env.rows, env.cols, params["n_hidden"], int(params["lr"]*1000), params["gamma"]*100, int(params["beta"]), int(params["init_sd"]*10), params["annealing"]["num_reads"], params["annealing"]["num_sweeps"], params["annealing"]["beta_range"][0], params["annealing"]["beta_range"][1])
+
 
 def create_filename_compare(env, agents):
     filename = '%dx%d' %(env.rows, env.cols)

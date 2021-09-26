@@ -104,6 +104,31 @@ class Env():
             #env.add_penalty(0,7)
             env.print_env()
             return env
+        if num == 7:
+            rows = 8
+            cols = 8
+            env = Env(rows,cols,border)
+            start = np.zeros(2, dtype=int)
+            start[0] = 0
+            start[1] = 0
+            env.set_start(start)
+            env.add_reward(rows-1, cols-1)
+            env.add_penalty(1,1)
+            env.add_penalty(2,1)
+            env.add_penalty(1,4)
+            env.add_penalty(1,5)
+            env.add_penalty(3,3)
+            env.add_penalty(3,4)
+            env.add_penalty(5,0)
+            env.add_penalty(5,3)
+            env.add_penalty(6,3)
+            env.add_penalty(7,3)
+            env.add_penalty(6,5)
+            env.add_penalty(6,6)
+            env.add_penalty(6,7)
+            env.add_penalty(0,7)
+            env.print_env()
+            return env
 
 
     def set_start(self, start):

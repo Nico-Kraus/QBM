@@ -1,0 +1,1207 @@
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.3) (preloaded format=pdflatex 2021.5.30)  22 SEP 2021 15:46
+entering extended mode
+**"C:/Users/Nico Kraus/Desktop/Uni/SS 21/Einzelpraktikum/Abgabe Text/index.tex"
+
+(C:/Users/Nico Kraus/Desktop/Uni/SS 21/Einzelpraktikum/Abgabe Text/index.tex
+LaTeX2e <2020-10-01> patch level 4
+L3 programming layer <2021-05-27>
+(C:/Users/Nico Kraus/Desktop/Uni/SS 21/Einzelpraktikum/Abgabe Text\cup-journal.
+cls
+Document Class: cup-journal 2021/07/27 v1.0 Submission to CUP journals
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\article.c
+ls
+Document Class: article 2020/04/10 v1.4m Standard LaTeX document class
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\size10.cl
+o
+File: size10.clo 2020/04/10 v1.4m Standard LaTeX file (size option)
+)
+\c@part=\count181
+\c@section=\count182
+\c@subsection=\count183
+\c@subsubsection=\count184
+\c@paragraph=\count185
+\c@subparagraph=\count186
+\c@figure=\count187
+\c@table=\count188
+\abovecaptionskip=\skip47
+\belowcaptionskip=\skip48
+\bibindent=\dimen138
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/fbb\fbb.sty
+Package: fbb 2020/07/01 v1.16 Style file for fbb fonts.
+
+`fbb' v1.16, 2020/07/01 Text macros for fbb, a Bembo-like font family (msharpe)
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\fontenc.s
+ty
+Package: fontenc 2020/08/10 v2.0s Standard LaTeX package
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/ly1\ly1enc.def
+File: ly1enc.def 2009/07/22 v0.7 TeX 'n ANSI encoding (DPC/KB)
+Now handling font encoding LY1 ...
+... processing UTF-8 mapping file for font encoding LY1
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\ly1enc.df
+u
+File: ly1enc.dfu 2019/11/14 v1.2k UTF-8 support for inputenc
+   defining Unicode char U+00A0 (decimal 160)
+   defining Unicode char U+00A1 (decimal 161)
+   defining Unicode char U+00A2 (decimal 162)
+   defining Unicode char U+00A3 (decimal 163)
+   defining Unicode char U+00A4 (decimal 164)
+   defining Unicode char U+00A5 (decimal 165)
+   defining Unicode char U+00A6 (decimal 166)
+   defining Unicode char U+00A7 (decimal 167)
+   defining Unicode char U+00AA (decimal 170)
+   defining Unicode char U+00AB (decimal 171)
+   defining Unicode char U+00AD (decimal 173)
+   defining Unicode char U+00AE (decimal 174)
+   defining Unicode char U+00B0 (decimal 176)
+   defining Unicode char U+00B5 (decimal 181)
+   defining Unicode char U+00B6 (decimal 182)
+   defining Unicode char U+00B7 (decimal 183)
+   defining Unicode char U+00BA (decimal 186)
+   defining Unicode char U+00BB (decimal 187)
+   defining Unicode char U+00BC (decimal 188)
+   defining Unicode char U+00BD (decimal 189)
+   defining Unicode char U+00BE (decimal 190)
+   defining Unicode char U+00BF (decimal 191)
+   defining Unicode char U+00C0 (decimal 192)
+   defining Unicode char U+00C1 (decimal 193)
+   defining Unicode char U+00C2 (decimal 194)
+   defining Unicode char U+00C3 (decimal 195)
+   defining Unicode char U+00C4 (decimal 196)
+   defining Unicode char U+00C5 (decimal 197)
+   defining Unicode char U+00C6 (decimal 198)
+   defining Unicode char U+00C7 (decimal 199)
+   defining Unicode char U+00C8 (decimal 200)
+   defining Unicode char U+00C9 (decimal 201)
+   defining Unicode char U+00CA (decimal 202)
+   defining Unicode char U+00CB (decimal 203)
+   defining Unicode char U+00CC (decimal 204)
+   defining Unicode char U+00CD (decimal 205)
+   defining Unicode char U+00CE (decimal 206)
+   defining Unicode char U+00CF (decimal 207)
+   defining Unicode char U+00D0 (decimal 208)
+   defining Unicode char U+00D1 (decimal 209)
+   defining Unicode char U+00D2 (decimal 210)
+   defining Unicode char U+00D3 (decimal 211)
+   defining Unicode char U+00D4 (decimal 212)
+   defining Unicode char U+00D5 (decimal 213)
+   defining Unicode char U+00D6 (decimal 214)
+   defining Unicode char U+00D8 (decimal 216)
+   defining Unicode char U+00D9 (decimal 217)
+   defining Unicode char U+00DA (decimal 218)
+   defining Unicode char U+00DB (decimal 219)
+   defining Unicode char U+00DC (decimal 220)
+   defining Unicode char U+00DD (decimal 221)
+   defining Unicode char U+00DE (decimal 222)
+   defining Unicode char U+00DF (decimal 223)
+   defining Unicode char U+00E0 (decimal 224)
+   defining Unicode char U+00E1 (decimal 225)
+   defining Unicode char U+00E2 (decimal 226)
+   defining Unicode char U+00E3 (decimal 227)
+   defining Unicode char U+00E4 (decimal 228)
+   defining Unicode char U+00E5 (decimal 229)
+   defining Unicode char U+00E6 (decimal 230)
+   defining Unicode char U+00E7 (decimal 231)
+   defining Unicode char U+00E8 (decimal 232)
+   defining Unicode char U+00E9 (decimal 233)
+   defining Unicode char U+00EA (decimal 234)
+   defining Unicode char U+00EB (decimal 235)
+   defining Unicode char U+00EC (decimal 236)
+   defining Unicode char U+00ED (decimal 237)
+   defining Unicode char U+00EE (decimal 238)
+   defining Unicode char U+00EF (decimal 239)
+   defining Unicode char U+00F0 (decimal 240)
+   defining Unicode char U+00F1 (decimal 241)
+   defining Unicode char U+00F2 (decimal 242)
+   defining Unicode char U+00F3 (decimal 243)
+   defining Unicode char U+00F4 (decimal 244)
+   defining Unicode char U+00F5 (decimal 245)
+   defining Unicode char U+00F6 (decimal 246)
+   defining Unicode char U+00F8 (decimal 248)
+   defining Unicode char U+00F9 (decimal 249)
+   defining Unicode char U+00FA (decimal 250)
+   defining Unicode char U+00FB (decimal 251)
+   defining Unicode char U+00FC (decimal 252)
+   defining Unicode char U+00FD (decimal 253)
+   defining Unicode char U+00FE (decimal 254)
+   defining Unicode char U+00FF (decimal 255)
+   defining Unicode char U+0131 (decimal 305)
+   defining Unicode char U+0141 (decimal 321)
+   defining Unicode char U+0142 (decimal 322)
+   defining Unicode char U+0152 (decimal 338)
+   defining Unicode char U+0153 (decimal 339)
+   defining Unicode char U+0160 (decimal 352)
+   defining Unicode char U+0161 (decimal 353)
+   defining Unicode char U+0174 (decimal 372)
+   defining Unicode char U+0175 (decimal 373)
+   defining Unicode char U+0176 (decimal 374)
+   defining Unicode char U+0177 (decimal 375)
+   defining Unicode char U+0178 (decimal 376)
+   defining Unicode char U+017D (decimal 381)
+   defining Unicode char U+017E (decimal 382)
+   defining Unicode char U+0192 (decimal 402)
+   defining Unicode char U+0218 (decimal 536)
+   defining Unicode char U+0219 (decimal 537)
+   defining Unicode char U+021A (decimal 538)
+   defining Unicode char U+021B (decimal 539)
+   defining Unicode char U+0237 (decimal 567)
+   defining Unicode char U+02C6 (decimal 710)
+   defining Unicode char U+02DC (decimal 732)
+   defining Unicode char U+2013 (decimal 8211)
+   defining Unicode char U+2014 (decimal 8212)
+   defining Unicode char U+201C (decimal 8220)
+   defining Unicode char U+201D (decimal 8221)
+   defining Unicode char U+2020 (decimal 8224)
+   defining Unicode char U+2021 (decimal 8225)
+   defining Unicode char U+2022 (decimal 8226)
+   defining Unicode char U+2026 (decimal 8230)
+   defining Unicode char U+2030 (decimal 8240)
+   defining Unicode char U+2039 (decimal 8249)
+   defining Unicode char U+203A (decimal 8250)
+   defining Unicode char U+2122 (decimal 8482)
+   defining Unicode char U+FB00 (decimal 64256)
+   defining Unicode char U+FB01 (decimal 64257)
+   defining Unicode char U+FB02 (decimal 64258)
+   defining Unicode char U+FB03 (decimal 64259)
+   defining Unicode char U+FB04 (decimal 64260)
+   defining Unicode char U+FB05 (decimal 64261)
+   defining Unicode char U+FB06 (decimal 64262)
+)))
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\textcomp.
+sty
+Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/generic/iftex\ifetex
+.sty
+Package: ifetex 2019/10/25 v1.3 ifetex legacy package. Use iftex instead.
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/generic/iftex\iftex.
+sty
+Package: iftex 2020/03/06 v1.0d TeX engine tests
+))
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/etoolbox\etool
+box.sty
+Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count189
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/xstring\xstrin
+g.sty
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/generic/xstring\xstr
+ing.tex
+\integerpart=\count190
+\decimalpart=\count191
+)
+Package: xstring 2019/02/06 v1.83 String manipulations (CT)
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\ifthen.st
+y
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/fontaxes\fonta
+xes.sty
+Package: fontaxes 2020/07/21 v1.0e Font selection axes
+LaTeX Info: Redefining \upshape on input line 29.
+LaTeX Info: Redefining \itshape on input line 31.
+LaTeX Info: Redefining \slshape on input line 33.
+LaTeX Info: Redefining \swshape on input line 35.
+LaTeX Info: Redefining \scshape on input line 37.
+LaTeX Info: Redefining \sscshape on input line 39.
+LaTeX Info: Redefining \ulcshape on input line 41.
+LaTeX Info: Redefining \textsw on input line 47.
+LaTeX Info: Redefining \textssc on input line 48.
+LaTeX Info: Redefining \textulc on input line 49.
+)
+LaTeX Info: Redefining \swshape on input line 41.
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/xkeyval\xkeyva
+l.sty
+Package: xkeyval 2020/11/20 v2.8 package option processing (HA)
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/generic/xkeyval\xkey
+val.tex
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/generic/xkeyval\xkvu
+tils.tex
+\XKV@toks=\toks15
+\XKV@tempa@toks=\toks16
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/generic/xkeyval\keyv
+al.tex))
+\XKV@depth=\count192
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+)))
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/opensans\opens
+ans.sty
+Package: opensans 2019/06/20 Style file for Open Sans.
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/generic/iftex\ifluat
+ex.sty
+Package: ifluatex 2019/10/25 v1.5 ifluatex legacy package. Use iftex instead.
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/generic/iftex\ifxete
+x.sty
+Package: ifxetex 2019/10/25 v0.7 ifxetex legacy package. Use iftex instead.
+))
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\fontenc.s
+ty
+Package: fontenc 2020/08/10 v2.0s Standard LaTeX package
+LaTeX Font Info:    Trying to load font information for T1+cmss on input line 1
+12.
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\t1cmss.fd
+File: t1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+))
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/sansmath\sansm
+ath.sty
+Package: sansmath 2007/02/28  ver 1.1 Donald Arseneau
+\c@mv@sans=\count193
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `sans'
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 103.
+LaTeX Font Info:    Overwriting math alphabet `\mathsfsl' in version `sans'
+(Font)                  OT1/cmss/m/sl --> OT1/cmss/m/sl on input line 104.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `sans'
+(Font)                  OT1/cmr/m/n --> OT1/cmss/m/n on input line 105.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `sans'
+(Font)                  OML/cmm/m/it --> OML/cmm/m/it on input line 109.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `sans'
+(Font)                  OMS/cmsy/m/n --> OMS/cmsy/m/n on input line 110.
+LaTeX Font Info:    Overwriting math alphabet `\mathsfbf' in version `sans'
+(Font)                  OT1/cmss/bx/sl --> OT1/cmss/bx/n on input line 112.
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amsmat
+h.sty
+Package: amsmath 2020/09/23 v2.17i AMS math features
+\@mathmargin=\skip49
+
+For additional information on amsmath, use the `?' option.
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amstex
+t.sty
+Package: amstext 2000/06/29 v2.01 AMS text
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amsgen
+.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks17
+\ex@=\dimen139
+))
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amsbsy
+.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen140
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsmath\amsopn
+.sty
+Package: amsopn 2016/03/08 v2.02 operator names
+)
+\inf@bad=\count194
+LaTeX Info: Redefining \frac on input line 234.
+\uproot@=\count195
+\leftroot@=\count196
+LaTeX Info: Redefining \overline on input line 399.
+\classnum@=\count197
+\DOTSCASE@=\count198
+LaTeX Info: Redefining \ldots on input line 496.
+LaTeX Info: Redefining \dots on input line 499.
+LaTeX Info: Redefining \cdots on input line 620.
+\Mathstrutbox@=\box47
+\strutbox@=\box48
+\big@size=\dimen141
+LaTeX Font Info:    Redeclaring font encoding OML on input line 743.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 744.
+\macc@depth=\count199
+\c@MaxMatrixCols=\count266
+\dotsspace@=\muskip16
+\c@parentequation=\count267
+\dspbrk@lvl=\count268
+\tag@help=\toks18
+\row@=\count269
+\column@=\count270
+\maxfields@=\count271
+\andhelp@=\toks19
+\eqnshift@=\dimen142
+\alignsep@=\dimen143
+\tagshift@=\dimen144
+\tagwidth@=\dimen145
+\totwidth@=\dimen146
+\lineht@=\dimen147
+\@envbody=\toks20
+\multlinegap=\skip50
+\multlinetaggap=\skip51
+\mathdisplay@stack=\toks21
+LaTeX Info: Redefining \[ on input line 2923.
+LaTeX Info: Redefining \] on input line 2924.
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\amsfo
+nts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/mathastext\mat
+hastext.sty
+Package: mathastext 2019/11/16 v1.3w Use the text font in math mode (JFB)
+
+
+Package mathastext Warning: Unknown option `normal'.
+
+\mst@exists@muskip=\muskip17
+\mst@forall@muskip=\muskip18
+\mst@prime@muskip=\muskip19
+\mst@do@nonletters=\toks22
+\mst@do@easynonletters=\toks23
+\mst@do@az=\toks24
+\mst@do@AZ=\toks25
+\symmtoperatorfont=\mathgroup6
+\symmtletterfont=\mathgroup7
+** will use Euler font; command \MTEulerScale
+\symmteulervm=\mathgroup8
+** ! and ?
+** punctuation: , . : ; and \colon
+LaTeX Info: Redefining \rightarrowfill on input line 790.
+LaTeX Info: Redefining \leftarrowfill on input line 795.
+** + and =
+** adding = ; and + to \nfss@catcodes
+** parentheses ( ) [ ] and slash /
+** alldelims: < > \backslash \setminus | \vert \mid \{ and \}
+LaTeX Font Info:    Redeclaring math delimiter \backslash on input line 932.
+LaTeX Font Info:    Redeclaring math symbol \setminus on input line 944.
+LaTeX Info: Redefining \models on input line 953.
+** \# \mathdollar \% \& 
+** \imath and \jmath 
+LaTeX Font Info:    Overwriting math alphabet `\mathnormalbold' in version `nor
+mal'
+(Font)                  T1/cmss/b/n --> T1/cmss/b/n on input line 2140.
+LaTeX Font Info:    Overwriting math alphabet `\mathnormalbold' in version `bol
+d'
+(Font)                  T1/cmss/b/n --> T1/cmss/b/n on input line 2140.
+LaTeX Font Info:    Overwriting symbol font `mtletterfont' in version `normal'
+(Font)                  T1/cmss/m/n --> T1/cmss/m/n on input line 2140.
+LaTeX Font Info:    Overwriting symbol font `mtletterfont' in version `bold'
+(Font)                  T1/cmss/m/n --> T1/cmss/b/n on input line 2140.
+LaTeX Font Info:    Overwriting symbol font `mtoperatorfont' in version `normal
+'
+(Font)                  T1/cmss/m/n --> T1/cmss/m/n on input line 2140.
+LaTeX Font Info:    Overwriting symbol font `mtoperatorfont' in version `bold'
+(Font)                  T1/cmss/m/n --> T1/cmss/b/n on input line 2140.
+LaTeX Font Info:    Overwriting math alphabet `\Mathbf' in version `normal'
+(Font)                  T1/cmss/b/n --> T1/cmss/b/n on input line 2140.
+LaTeX Font Info:    Overwriting math alphabet `\Mathbf' in version `bold'
+(Font)                  T1/cmss/b/n --> T1/cmss/b/n on input line 2140.
+LaTeX Font Info:    Overwriting math alphabet `\Mathit' in version `normal'
+(Font)                  T1/cmss/m/it --> T1/cmss/m/it on input line 2140.
+LaTeX Font Info:    Overwriting math alphabet `\Mathit' in version `bold'
+(Font)                  T1/cmss/m/it --> T1/cmss/b/it on input line 2140.
+LaTeX Font Info:    Overwriting math alphabet `\Mathsf' in version `normal'
+(Font)                  T1/cmss/m/n --> T1/cmss/m/n on input line 2140.
+LaTeX Font Info:    Overwriting math alphabet `\Mathsf' in version `bold'
+(Font)                  T1/cmss/m/n --> T1/cmss/b/n on input line 2140.
+LaTeX Font Info:    Overwriting math alphabet `\Mathtt' in version `normal'
+(Font)                  T1/cmtt/m/n --> T1/cmtt/m/n on input line 2140.
+LaTeX Font Info:    Overwriting math alphabet `\Mathtt' in version `bold'
+(Font)                  T1/cmtt/m/n --> T1/cmtt/b/n on input line 2140.
+LaTeX Font Info:    Overwriting symbol font `mteulervm' in version `bold'
+(Font)                  U/zeur/m/n --> U/zeur/b/n on input line 2140.
+LaTeX Font Info:    Overwriting math alphabet `\MathEulerBold' in version `norm
+al'
+(Font)                  U/zeur/b/n --> U/zeur/b/n on input line 2140.
+LaTeX Font Info:    Overwriting math alphabet `\MathEulerBold' in version `bold
+'
+(Font)                  U/zeur/b/n --> U/zeur/b/n on input line 2140.
+** Latin letters in the normal (resp. bold) math versions are now
+** set up to use the fonts T1/cmss/m(b)/n
+** Other characters (digits, ...) and \log-like names will be
+** typeset with the n shape.
+** \hbar
+** minus as endash
+** Greek letters will use the Euler font. Use \MathastextEulerScale{<factor>} t
+o scale the font.
+** \HUGE has been (re)-defined.
+** mathastext has declared larger sizes for subscripts.
+** To keep LaTeX defaults, use option `defaultmathsizes'.
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lastpage\lastp
+age.sty
+Package: lastpage 2021/09/03 v1.2n Refers to last page's name (HMM; JPG)
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/enumitem\enumi
+tem.sty
+Package: enumitem 2019/06/20 v3.9 Customized lists
+\enitkv@toks@=\toks26
+\labelindent=\skip52
+\enit@outerparindent=\dimen148
+\enit@toks=\toks27
+\enit@inbox=\box49
+\enit@count@id=\count272
+\enitdp@description=\count273
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/threeparttable
+\threeparttable.sty
+Package: threeparttable 2003/06/13  v 3.0
+\@tempboxb=\box50
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/endnotes\endno
+tes.sty
+Package: endnotes 2020-01-02 endnotes package
+\c@endnote=\count274
+\endnotesep=\dimen149
+\@enotes=\write3
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/geometry\geome
+try.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/generic/iftex\ifvtex
+.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+)
+\Gm@cnth=\count275
+\Gm@cntv=\count276
+\c@Gm@tempcnt=\count277
+\Gm@bindingoffset=\dimen150
+\Gm@wd@mp=\dimen151
+\Gm@odd@mp=\dimen152
+\Gm@even@mp=\dimen153
+\Gm@layoutwidth=\dimen154
+\Gm@layoutheight=\dimen155
+\Gm@layouthoffset=\dimen156
+\Gm@layoutvoffset=\dimen157
+\Gm@dimlist=\toks28
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/geometry\geome
+try.cfg))
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/changepage\cha
+ngepage.sty
+Package: changepage 2009/10/20 v1.0c check page and change page layout
+\c@cp@cntr=\count278
+\cp@tempcnt=\count279
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/stringstrings\
+stringstrings.sty
+Package: stringstrings 2020/12/08 v1.24 Extensive array of string manipulation 
+routines for cosmetic and programming application
+\c@@letterindex=\count280
+\c@@@letterindex=\count281
+\c@@@@letterindex=\count282
+\c@@wordindex=\count283
+\c@@iargc=\count284
+\c@@gobblesize=\count285
+\c@@maxrotation=\count286
+\c@@stringsize=\count287
+\c@@@stringsize=\count288
+\c@@@@stringsize=\count289
+\c@@revisedstringsize=\count290
+\c@@gobbleindex=\count291
+\c@@charsfound=\count292
+\c@@alph=\count293
+\c@@alphaindex=\count294
+\c@@capstrigger=\count295
+\c@@fromindex=\count296
+\c@@toindex=\count297
+\c@@previousindex=\count298
+\c@@flag=\count299
+\c@@matchloc=\count300
+\c@@matchend=\count301
+\c@@matchsize=\count302
+\c@@matchmax=\count303
+\c@@skipped=\count304
+\c@@lcwords=\count305
+\c@@@matchloc=\count306
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/textpos\textpo
+s.sty
+Package: textpos 2020/09/26 v1.10
+
+Package: textpos 2020/09/26 1.10, absolute positioning of text on the page
+Package textpos Info: choosing support for LaTeX3 on input line 61.
+\TP@textbox=\box51
+\TP@holdbox=\box52
+\TPHorizModule=\dimen158
+\TPVertModule=\dimen159
+\TP@margin=\dimen160
+\TP@absmargin=\dimen161
+Grid set 16 x 16 = 38.39343pt x 49.68562pt
+\TPboxrulesize=\dimen162
+\TP@ox=\dimen163
+\TP@oy=\dimen164
+\TP@tbargs=\toks29
+TextBlockOrigin set to 0pt x 0pt
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/xcolor\xcolor.
+sty
+Package: xcolor 2016/05/11 v2.12 LaTeX color extensions (UK)
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics-cfg\c
+olor.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics-def\p
+dftex.def
+File: pdftex.def 2020/10/05 v1.2a Graphics/color driver for pdftex
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/colortbl\color
+tbl.sty
+Package: colortbl 2020/01/04 v1.0e Color table columns (DPC)
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/latex-tools\ar
+ray.sty
+Package: array 2020/10/01 v2.5c Tabular extension package (FMi)
+\col@sep=\dimen165
+\ar@mcellbox=\box53
+\extrarowheight=\dimen166
+\NC@list=\toks30
+\extratabsurround=\skip53
+\backup@length=\skip54
+\ar@cellbox=\box54
+)
+\everycr=\toks31
+\minrowclearance=\skip55
+)
+\rownum=\count307
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1348.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1352.
+Package xcolor Info: Model `RGB' extended on input line 1364.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1366.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1367.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1370.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1371.
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/xcolor\svgnam.
+def
+File: svgnam.def 2016/05/11 v2.12 Predefined colors according to SVG 1.1 (UK)
+))
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/caption\captio
+n.sty
+Package: caption 2020/10/26 v3.5g Customizing captions (AR)
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/caption\captio
+n3.sty
+Package: caption3 2020/10/21 v2.2e caption3 kernel (AR)
+\captionmargin=\dimen167
+\captionmargin@=\dimen168
+\captionwidth=\dimen169
+\caption@tempdima=\dimen170
+\caption@indent=\dimen171
+\caption@parindent=\dimen172
+\caption@hangindent=\dimen173
+Package caption Info: Standard document class detected.
+)
+\c@caption@flags=\count308
+\c@continuedfloat=\count309
+Package caption Info: changepage package is loaded.
+\caption@adjustwidth@hsize=\dimen174
+\caption@adjustwidth@linewidth=\dimen175
+Package caption Info: threeparttable package is loaded.
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/floatrow\float
+row.sty
+Package: floatrow 2008/08/02 v0.3b floatrow: float package extension
+\c@float@type=\count310
+\float@exts=\toks32
+\float@box=\box55
+\@floatcapt=\box56
+Package floatrow Info: Modified float package code loaded on input line 455.
+Package floatrow Info: Modified rotfloat package code loaded on input line 473.
+
+\FR@everyfloat=\toks33
+\flrow@foot=\insert252
+\FB@wd=\dimen176
+\FBo@wd=\dimen177
+\FBc@wd=\dimen178
+\FBo@ht=\skip56
+\FBc@ht=\skip57
+\FBf@ht=\skip58
+\FBo@max=\skip59
+\FBc@max=\skip60
+\FBf@max=\skip61
+\c@FBl@b=\count311
+\floatbox@depth=\count312
+\c@FRobj=\count313
+\c@FRsobj=\count314
+\Xhsize=\skip62
+\sXhsize=\skip63
+\Zhsize=\skip64
+\sZhsize=\skip65
+\flrow@rowbox=\box57
+\FR@Zunitlength=\dimen179
+\c@FBcnt=\count315
+\FPOScnt=\count316
+\LTleft=\skip66
+\LTright=\skip67
+\LTleft=\skip68
+\LTright=\skip69
+\flrow@types=\toks34
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\graph
+icx.sty
+Package: graphicx 2020/09/09 v1.2b Enhanced LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\graph
+ics.sty
+Package: graphics 2020/08/30 v1.4c Standard LaTeX Graphics (DPC,SPQR)
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics\trig.
+sty
+Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/graphics-cfg\g
+raphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 105.
+)
+\Gin@req@height=\dimen180
+\Gin@req@width=\dimen181
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/url\url.sty
+\Urlmuskip=\muskip20
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/mdframed\mdfra
+med.sty
+Package: mdframed 2013/07/01 1.9b: mdframed
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/kvoptions\kvop
+tions.sty
+Package: kvoptions 2020-10-07 v3.14 Key value format for package options (HO)
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/generic/ltxcmds\ltxc
+mds.sty
+Package: ltxcmds 2020-05-10 v1.25 LaTeX kernel commands for general use (HO)
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/generic/kvsetkeys\kv
+setkeys.sty
+Package: kvsetkeys 2019/12/15 v1.18 Key value parser (HO)
+))
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3packages/xpa
+rse\xparse.sty
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3kernel\expl3
+.sty
+Package: expl3 2021-05-27 L3 programming layer (loader) 
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3backend\l3ba
+ckend-pdftex.def
+File: l3backend-pdftex.def 2021-05-07 L3 backend support: PDF output (pdfTeX)
+\l__color_backend_stack_int=\count317
+\l__pdf_internal_box=\box58
+))
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3packages/xpa
+rse\xparse-2020-10-01.sty
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3packages/xpa
+rse\xparse-generic.tex)))
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/zref\zref-absp
+age.sty
+Package: zref-abspage 2020-07-03 v2.32 Module abspage for zref (HO)
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/zref\zref-base
+.sty
+Package: zref-base 2020-07-03 v2.32 Module base for zref (HO)
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/generic/infwarerr\in
+fwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/generic/kvdefinekeys
+\kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/generic/pdftexcmds\p
+dftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/generic/etexcmds\ete
+xcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/auxhook\auxhoo
+k.sty
+Package: auxhook 2019-12-17 v1.6 Hooks for auxiliary files (HO)
+)
+Package zref Info: New property list: main on input line 764.
+Package zref Info: New property: default on input line 765.
+Package zref Info: New property: page on input line 766.
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\atbegshi-
+ltx.sty
+Package: atbegshi-ltx 2020/08/17 v1.0a Emulation of the original atbegshi packa
+ge
+with kernel methods
+)
+\c@abspage=\count318
+Package zref Info: New property: abspage on input line 66.
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/needspace\need
+space.sty
+Package: needspace 2010/09/12 v1.3d reserve vertical space
+)
+\mdf@templength=\skip70
+\c@mdf@globalstyle@cnt=\count319
+\mdf@skipabove@length=\skip71
+\mdf@skipbelow@length=\skip72
+\mdf@leftmargin@length=\skip73
+\mdf@rightmargin@length=\skip74
+\mdf@innerleftmargin@length=\skip75
+\mdf@innerrightmargin@length=\skip76
+\mdf@innertopmargin@length=\skip77
+\mdf@innerbottommargin@length=\skip78
+\mdf@splittopskip@length=\skip79
+\mdf@splitbottomskip@length=\skip80
+\mdf@outermargin@length=\skip81
+\mdf@innermargin@length=\skip82
+\mdf@linewidth@length=\skip83
+\mdf@innerlinewidth@length=\skip84
+\mdf@middlelinewidth@length=\skip85
+\mdf@outerlinewidth@length=\skip86
+\mdf@roundcorner@length=\skip87
+\mdf@footenotedistance@length=\skip88
+\mdf@userdefinedwidth@length=\skip89
+\mdf@needspace@length=\skip90
+\mdf@frametitleaboveskip@length=\skip91
+\mdf@frametitlebelowskip@length=\skip92
+\mdf@frametitlerulewidth@length=\skip93
+\mdf@frametitleleftmargin@length=\skip94
+\mdf@frametitlerightmargin@length=\skip95
+\mdf@shadowsize@length=\skip96
+\mdf@extratopheight@length=\skip97
+\mdf@subtitleabovelinewidth@length=\skip98
+\mdf@subtitlebelowlinewidth@length=\skip99
+\mdf@subtitleaboveskip@length=\skip100
+\mdf@subtitlebelowskip@length=\skip101
+\mdf@subtitleinneraboveskip@length=\skip102
+\mdf@subtitleinnerbelowskip@length=\skip103
+\mdf@subsubtitleabovelinewidth@length=\skip104
+\mdf@subsubtitlebelowlinewidth@length=\skip105
+\mdf@subsubtitleaboveskip@length=\skip106
+\mdf@subsubtitlebelowskip@length=\skip107
+\mdf@subsubtitleinneraboveskip@length=\skip108
+\mdf@subsubtitleinnerbelowskip@length=\skip109
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/mdframed\md-fr
+ame-0.mdf
+File: md-frame-0.mdf 2013/07/01\ 1.9b: md-frame-0
+)
+\mdf@frametitlebox=\box59
+\mdf@footnotebox=\box60
+\mdf@splitbox@one=\box61
+\mdf@splitbox@two=\box62
+\mdf@splitbox@save=\box63
+\mdfsplitboxwidth=\skip110
+\mdfsplitboxtotalwidth=\skip111
+\mdfsplitboxheight=\skip112
+\mdfsplitboxdepth=\skip113
+\mdfsplitboxtotalheight=\skip114
+\mdfframetitleboxwidth=\skip115
+\mdfframetitleboxtotalwidth=\skip116
+\mdfframetitleboxheight=\skip117
+\mdfframetitleboxdepth=\skip118
+\mdfframetitleboxtotalheight=\skip119
+\mdffootnoteboxwidth=\skip120
+\mdffootnoteboxtotalwidth=\skip121
+\mdffootnoteboxheight=\skip122
+\mdffootnoteboxdepth=\skip123
+\mdffootnoteboxtotalheight=\skip124
+\mdftotallinewidth=\skip125
+\mdfboundingboxwidth=\skip126
+\mdfboundingboxtotalwidth=\skip127
+\mdfboundingboxheight=\skip128
+\mdfboundingboxdepth=\skip129
+\mdfboundingboxtotalheight=\skip130
+\mdf@freevspace@length=\skip131
+\mdf@horizontalwidthofbox@length=\skip132
+\mdf@verticalmarginwhole@length=\skip133
+\mdf@horizontalspaceofbox=\skip134
+\mdfsubtitleheight=\skip135
+\mdfsubsubtitleheight=\skip136
+\c@mdfcountframes=\count320
+
+****** mdframed patching \endmdf@trivlist
+
+****** -- success******
+
+\mdf@envdepth=\count321
+\c@mdf@env@i=\count322
+\c@mdf@env@ii=\count323
+\c@mdf@zref@counter=\count324
+Package zref Info: New property: mdf@pagevalue on input line 895.
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/mfirstuc\mfirs
+tuc.sty
+Package: mfirstuc 2017/11/14 v2.06 (NLCT)
+\@glsmfirst=\toks35
+\@glsmrest=\toks36
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/generic/alphalph\alp
+halph.sty
+Package: alphalph 2019/12/09 v2.6 Convert numbers to letters (HO)
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/generic/intcalc\intc
+alc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+))
+\cup@author@cnt=\count325
+\cup@affil@cnt=\count326
+\cup@affil@alt@cnt=\count327
+\cup@footnote@cnt=\count328
+\cup@affil@marker@cnt=\count329
+\cup@space@pre@title=\skip137
+\cup@space@post@title=\skip138
+\cup@space@post@author=\skip139
+\cup@space@post@address=\skip140
+\cup@space@post@email=\skip141
+\cup@space@post@date=\skip142
+\cup@space@inter@extra=\skip143
+\cup@maketitle@width=\skip144
+\c@scheme=\count330
+\c@chart=\count331
+\c@graph=\count332
+\cup@collect@toks=\toks37
+\cup@collect@empty@toks=\toks38
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/environ\enviro
+n.sty
+Package: environ 2014/05/04 v0.3 A new way to define environments
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/trimspaces\tri
+mspaces.sty
+Package: trimspaces 2009/09/17 v1.1 Trim spaces around a token list
+))
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/natbib\natbib.
+sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip145
+\bibsep=\skip146
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count333
+)
+(C:/Users/Nico Kraus/Desktop/Uni/SS 21/Einzelpraktikum/Abgabe Text\aas-macros.s
+ty))
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/microtype\micr
+otype.sty
+Package: microtype 2021/03/14 v2.8c Micro-typographical refinements (RS)
+\MT@toks=\toks39
+\MT@count=\count334
+LaTeX Info: Redefining \textls on input line 790.
+\MT@outer@kern=\dimen182
+LaTeX Info: Redefining \textmicrotypecontext on input line 1374.
+\MT@listname@count=\count335
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/microtype\micr
+otype-pdftex.def
+File: microtype-pdftex.def 2021/03/14 v2.8c Definitions specific to pdftex (RS)
+
+LaTeX Info: Redefining \lsstyle on input line 915.
+LaTeX Info: Redefining \lslig on input line 915.
+\MT@outer@space=\skip147
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/microtype\micr
+otype.cfg
+File: microtype.cfg 2021/03/14 v2.8c microtype main configuration file (RS)
+))
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/siunitx\siunit
+x.sty
+Package: siunitx 2021-05-28 v3.0.7 A comprehensive (SI) units package
+\l__siunitx_angle_tmp_dim=\dimen183
+\l__siunitx_angle_marker_box=\box64
+\l__siunitx_angle_unit_box=\box65
+\l__siunitx_compound_count_int=\count336
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/translations\t
+ranslations.sty
+Package: translations 2021/01/17 v1.10a internationalization of LaTeX2e package
+s (CN)
+)
+\l__siunitx_number_exponent_fixed_int=\count337
+\l__siunitx_number_min_decimal_int=\count338
+\l__siunitx_number_min_integer_int=\count339
+\l__siunitx_number_round_precision_int=\count340
+\l__siunitx_number_group_minimum_int=\count341
+\l__siunitx_table_tmp_box=\box66
+\l__siunitx_table_tmp_dim=\dimen184
+\l__siunitx_table_column_width_dim=\dimen185
+\l__siunitx_table_integer_box=\box67
+\l__siunitx_table_decimal_box=\box68
+\l__siunitx_table_before_box=\box69
+\l__siunitx_table_after_box=\box70
+\l__siunitx_table_carry_dim=\dimen186
+\l__siunitx_unit_tmp_int=\count342
+\l__siunitx_unit_position_int=\count343
+\l__siunitx_unit_total_int=\count344
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/l3packages/l3k
+eys2e\l3keys2e.sty
+Package: l3keys2e 2021-05-27 LaTeX2e option processing using LaTeX3 keys
+))
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/booktabs\bookt
+abs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen187
+\lightrulewidth=\dimen188
+\cmidrulewidth=\dimen189
+\belowrulesep=\dimen190
+\belowbottomsep=\dimen191
+\aboverulesep=\dimen192
+\abovetopsep=\dimen193
+\cmidrulesep=\dimen194
+\cmidrulekern=\dimen195
+\defaultaddspace=\dimen196
+\@cmidla=\count345
+\@cmidlb=\count346
+\@aboverulesep=\dimen197
+\@belowrulesep=\dimen198
+\@thisruleclass=\count347
+\@lastruleclass=\count348
+\@thisrulewidth=\dimen199
+)
+
+Package siunitx Info: Option "detect-all" has been deprecated in this release.
+(siunitx)             
+(siunitx)             Use "mode = match, propagate-math-font = true,
+(siunitx)             reset-math-version = false, reset-text-family = false,
+(siunitx)             reset-text-series = false, text-family-to-math = true,
+(siunitx)             text-series-to-math = true" as a replacement.
+
+
+Package siunitx Info: Option "separate-uncertainty" has been deprecated in
+(siunitx)             this release.
+(siunitx)             
+(siunitx)             Use "uncertainty-mode = separate" as a replacement.
+
+Package translations Info: No language package found. I am going to use `englis
+h' as default language. on input line 30.
+
+No file index.aux.
+\openout1 = `index.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 30.
+LaTeX Font Info:    ... okay on input line 30.
+LaTeX Font Info:    Checking defaults for LY1/ptm/m/n on input line 30.
+LaTeX Font Info:    Trying to load font information for LY1+ptm on input line 3
+0.
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/ly1\ly1ptm.fd
+File: ly1ptm.fd 2001/02/01 font definitions for LY1/ptm using Berry names.
+)
+LaTeX Font Info:    ... okay on input line 30.
+\c@mv@tabular=\count349
+\c@mv@boldtabular=\count350
+Package mathastext Info: current meaning of amsmath \resetMathstrut@ saved on i
+nput line 30.
+Package lastpage Info: Please have a look at the pageslts package at
+(lastpage)             https://www.ctan.org/pkg/pageslts
+(lastpage)             ! on input line 30.
+*geometry* driver: auto-detecting
+*geometry* detected driver: pdftex
+*geometry* verbose mode - [ preamble ] result:
+* driver: pdftex
+* paper: custom
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: twoside 
+* h-part:(L,W,R)=(42.67912pt, 514.99507pt, 39.83368pt)
+* v-part:(T,H,B)=(65.44142pt, 682.86615pt, 48.36958pt)
+* \paperwidth=597.50787pt
+* \paperheight=796.67715pt
+* \textwidth=514.99507pt
+* \textheight=682.86615pt
+* \oddsidemargin=-29.59087pt
+* \evensidemargin=-32.43631pt
+* \topmargin=-41.59085pt
+* \headheight=12.0pt
+* \headsep=22.76228pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=121.0pt
+* \marginparsep=11.0pt
+* \columnsep=19.99512pt
+* \skip\footins=13.0pt plus 6.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidetrue
+* \@mparswitchtrue
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/context/base/mkii\su
+pp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count351
+\scratchdimen=\dimen256
+\scratchbox=\box71
+\nofMPsegments=\count352
+\nofMParguments=\count353
+\everyMPshowfont=\toks40
+\MPscratchCnt=\count354
+\MPscratchDim=\dimen257
+\MPnumerator=\count355
+\makeMPintoPDFobject=\count356
+\everyMPtoPDFconversion=\toks41
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/epstopdf-pkg\e
+pstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/00miktex\epsto
+pdf-sys.cfg
+File: epstopdf-sys.cfg 2021/03/18 v2.0 Configuration of epstopdf for MiKTeX
+))
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: float package is loaded.
+Package caption Info: floatrow package is loaded.
+Package caption Info: End \AtBeginDocument code.
+LaTeX Info: Redefining \microtypecontext on input line 30.
+Package microtype Info: Generating PDF output.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using default protrusion set `alltext'.
+Package microtype Info: Automatic font expansion enabled (level 2),
+(microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
+Package microtype Info: Using default expansion set `alltext-nott'.
+LaTeX Info: Redefining \showhyphens on input line 30.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of interword spacing.
+Package microtype Info: No adjustment of character kerning.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `cmss' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/translations/d
+icts\translations-basic-dictionary-english.trsl
+File: translations-basic-dictionary-english.trsl (english translation file `tra
+nslations-basic-dictionary')
+)
+Package translations Info: loading dictionary `translations-basic-dictionary' f
+or `english'. on input line 30.
+
+(C:/Users/Nico Kraus/Desktop/Uni/SS 21/Einzelpraktikum/Abgabe Text\content.tex
+
+Class cup-journal Warning: No volume provided on input line 3.
+
+
+
+pdfTeX warning: pdflatex (file C:/Users/Nico Kraus/Desktop/Uni/SS 21/Einzelprak
+tikum/Abgabe Text/cup-logo-new.pdf): PDF inclusion: found PDF version <1.7>, bu
+t at most version <1.5> allowed
+<cup-logo-new.pdf, id=1, 319.94531pt x 165.61874pt>
+File: cup-logo-new.pdf Graphic file (type pdf)
+<use cup-logo-new.pdf>
+Package pdftex.def Info: cup-logo-new.pdf  used on input line 3.
+(pdftex.def)             Requested size: 73.97716pt x 38.29367pt.
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/microtype\mt-c
+mr.cfg
+File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
+(RS)
+)
+LaTeX Font Info:    Trying to load font information for U+msa on input line 3.
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.
+fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/microtype\mt-m
+sa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 3.
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.
+fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/microtype\mt-m
+sb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
+LaTeX Font Info:    Trying to load font information for U+zeur on input line 3.
+
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/eulervm\uzeur.
+fd
+File: uzeur.fd 2005/01/11 v4.0 (WaS)
+)
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/microtype\mt-e
+ur.cfg
+File: mt-eur.cfg 2006/07/31 v1.1 microtype config. file: AMS Euler Roman (RS)
+)
+LaTeX Font Info:    Trying to load font information for TS1+cmss on input line 
+3.
+
+(C:\Users\Nico Kraus\AppData\Local\Programs\MiKTeX 2.9\tex/latex/base\ts1cmss.f
+d
+File: ts1cmss.fd 2019/12/16 v2.5j Standard LaTeX font definitions
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `cmss' (encoding: TS1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+Package mdframed Info: mdframed works in twoside mode on input line 3.
+Package mdframed Info: mdframed inside a box 
+ mdframed uses option nobreak mdframed on input line 3.
+
+
+LaTeX Warning: Reference `mdf@pagelabel-1' on page 1 undefined on input line 3.
+
+
+
+Overfull \hbox (0.40776pt too wide) in paragraph at lines 10--11
+[]\T1/cmss/m/n/10 (-20) Wir wollen hier eine Meth-ode an-schauen, wie wir Quant
+en-
+ []
+
+
+Overfull \hbox (20.57639pt too wide) in paragraph at lines 18--19
+\T1/cmss/m/n/10 (-20) Boltzmann-Maschine oder einer Allgemeinen-Boltzmann-Masch
+ine
+ []
+
+[1{C:/Users/Nico Kraus/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}
+! pdfTeX error (font expansion): auto expansion is only possible with scalable 
+fonts.
+<argument> ...shipout:D \box_use:N \l_shipout_box 
+                                                  
+l.29 
+     
+
+ 
+Here is how much of TeX's memory you used:
+ 16396 strings out of 479047
+ 313538 string characters out of 2846600
+ 649662 words of memory out of 3000000
+ 33722 multiletter control sequences out of 15000+600000
+ 426848 words of font info for 120 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 88i,9n,131p,1740b,617s stack positions out of 5000i,500n,10000p,200000b,80000s
+!  ==> Fatal error occurred, no output PDF file produced!

@@ -1,0 +1,328 @@
+\begin{abstract}
+Wir wollen untersuchen, wie Quanten-Annealing für Reinforcment-Learning genutzt werden kann. Dafür nutzen wir Q-Learning mit einer $\epsilon$-Greedy-Strategie. Die Q-Funktion approximieren wir dabei mit einer Boltzmann-Maschine. Dabei repräsentiert der sichtbare Layer den Zustand und die Aktionen. Die Aktivierung des nicht-sichtbaren Layern können wir mit einem Quanten Annealer berechnen, bzw klassisch simulieren. Als Umgebung für unseren Agenten nutzen wir den ``zugefrorenen See'', ähnlich zu der bekannten Problemstellung von OpenAi mit kleinen Modifizierungen. Es zeigt sich, dass eine einfache Q-Table mit Abstand die besten Ergebnisse liefert. Wobei eine Quanten-Boltzmann Maschine komplexere Zusammenhänge modellieren kann und sehr ähnliche Ergebnisse liefert.
+\end{abstract}
+
+\section{Einleitung }
+\label{sec:int}
+
+Reinforment Learning ist ein sehr spannender Bereich innerhalb von maschinellem Lernen, da hier wenig vorarbeit vom Menschen geleistet werden muss. Wir brauchen keine Trainingsdaten manuell zu erstellen, sondern der Algorithmus erstellt seine Trainingsdaten selbst. Gleichzeitig stoßen klassische Rechner hier auch sehr schnell an ihre Grenzen, da die Datensätze sehr groß werden können. Daher ist eine spannende und offene Frage, ob zukünftige Quanten-Computer auch in diesem Bereich irgendwann Vorteile gegenüber klassischen Verfahren haben könnten.
+
+Wir wollen hier eine Methode anschauen, wie wir Quanten-Annealing für eine Deep-Boltzmann-Maschine anwenden können, die Ergebnisse untersuchen und mit klassischen Ansätzen vergleichen.
+
+Als Problem betrachten wir einen Agenten, der eine Frisbee auf einem zugefrorenen See finden muss. Es gibt jedoch Löcher im Eis. Der Agent startet auf einer Startposition und kann sich nun wie auf einem Schachbrett Feld für Feld über den See bewegen. Fällt er dabei in ein Loch, hat er verloren und bekommt 0 Punkte. Findet er den richtigen Weg zur Frisbee, hat er gewonnen und bekommt 1 Punkt. Wir versuchen also den kürzesten Weg vom der Startposition zur Frisbee zu finden, ohne dabei in ein Loch zu fallen.
+
+Ein bekanntes Problem dabei ist, dass wir einen guten Ausgleich zwischen Erkunden und bekannte Informationen verwenden finden wollen. Allgemeiner betrachtet, weiß der Agent nicht, wie viele Frisbees es gibt und wie viele Punkte er in dem Spiel bekommen kann. Daher will er möglichst viele Felder und Wege erkunden, bevor er sich einen konkreten Weg aussucht, den er bei jedem Spiel geht. Gleichzeitig will der Agent aber auch schnell die richtige Strategie finden, was konkret heißt, dass der Computer weniger Rechenzeit verbraucht, bis er den schnellsten Weg gefunden hat. Dieses Dilema lösen wir in unserem Beispiel mit der $\epsilon$-Greedy-Strategie.
+
+Um die beste Aktion von einem gegebenen Feld zu finden, müssen wir die Aktionen bewerten. Die einfachste Möglichkeit dafür ist eine sogenannte Q-Tabelle, die für jedes Feld jedem Zug einen Wert zuordnet.
+
+Eine mächtigere aber auch komplexere Möglichkeit ist, die Aktionen mit einer Q-Funktion zu bewerten, die durch ein neuronales Netz realisiert wird. Dafür können wir beliebige neuronale Netze auswählen und mit bekannten Optimierungsmethoden trainieren. Eine Boltzmann-Maschine ist dabei besonders interessant, da die Struktur einer Deep-Boltzmann-Maschine oder einer Allgemeinen-Boltzmann-Maschine sehr ähnlich zu der Struktur von einem Ising Model in einem Quanten-Annealer ist. So können wir die Aktivierung des nicht-sichtbaren Layers auf dem DWave oder alternativ mit simuliertem Quaten-Annealing brechnen.
+
+\section{Problemstellung}
+\label{sec:prob}
+
+\subsection{Umgebung}
+\label{subsec:umg}
+
+Als erstes wollen wir genau definieren, wie unsere Umgebung/das Spielfeld aussieht und welche Regeln es gibt. Wir haben also ein Spieldeld wie ein Schachbrett mit verschiedenen Feldern. Der Agent wird am Anfang auf ein Startfeld gesetzt, was sich in der Regel in einer der Ecken befindet. Von diesem Startfeld kann er nun in eine der vier Richtungen (links, unten, rechts, oben) einen Zug machen und sich ein Feld bewegen. Falls er sich mit diesem Zug vom Spielfeld bewegen würde, passiert nichts und er bleibt auf seinem Feld. Ist das Feld auf das er zieht ein Loch, wird das Spiel beendet und der Agent hat verloren. Das wird dadurch symbolisiert, dass er 0 Punkte bekommt. Ist das Feld auf das er zieht das Ziel, dann wird das Spiel auch beendet und der Agent bekommt einen Punkt als Belohnung. Falls das Feld leer ist, bewegt sich der Agent auf das Feld und der Agent kann einen weiteren Zug machen.
+
+Unten sehen wir Beispielhaft zwei Spielfelder. In den Grafiken unten steht S für Start, Z für Ziel und L für Loch:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/advanced1.png}
+\caption{4x4 Feld}
+\label{advanced}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/advanced2.png}
+\caption{3x5 Fekd}
+\label{advanced}
+\end{figure}
+
+\subsection{Varianten der Umgebung}
+\label{subsec:vars}
+
+Unsere Variante ist eine etwas abgewandelte Version von der ``Frozen-Lake'' Umgebung die aus der Library Gym von OpenAi stammt. In der Originalversion gibt es allerdings Unterschiede: Zum einen wird der Agent zurück aufs Startfeld gesetzt, wenn er das Spielfeld verlässt. Und zum anderen ist das Feld in den Standardeinstellungen ``rutschig''. Das heißt wählt der Agent für den nächsten Zug z.B. rechts aus, gibt es eine bestimmte Wahrscheinlichkeit, dass der Agent auch wirklich nach rechts geht. Ansonsten macht er einen zufälligen Zug. Beide Bedingungen machen das Spiel schwerer.
+
+In \citep{crawford2019reinforcement}, gibt es dagegen noch eine fünfte Aktion ``auf der Stelle bleiben''. Außerdem endet das Spiel nach einer festen Anzahl von Zügen und der Agent hat z.B. die Möglichkeit eine Belohnung öfter zu bekommen, indem er auf dem Zielfeld mehrere Züge bleibt. Die Löcher werden dann durch ``Bestrafungen'' ersetzt und der Agent kann über diese Felder drüber gehen. Dies ist also eine einfachere Version, da der Agent leichter zum Ziel kommt und die Belohnungen öfter einsammelt und damit öfter lernen kann. Außerdem werden zusätzlich Wände eingeführt, also im Prinzip Felder auf die der Agent nicht gehen kann. Die Grenzen des Spielfeldes sind auch Wände, dadurch reduzieren sich an den Randfeldern auch die Anzahl der möglichen Züge.
+
+Wir haben uns für unsere Variante entschieden, da wir so mit durch den Ähnlichkeit mit OpenAi bessere Vergleichbarkeit zu bekannten Methoden haben. Gleichzeitig haben wir die Variante vom ``Frozen-Lake'' etwas vereinfacht, da eine komplexe Boltzmann-Maschine sich beim lernen etwas schwerer tut, als eine einfache Q-Tabelle wie sie bei OpenAI verwendet wird. Dafür kann eine Boltzmann-Maschine komplexere Zusammenhänge zwischen Zuständen und Aktionen erkennen. Dies hilft uns für diese Umgebung nicht, man sollte dies jedoch im Hinterkopf behalten, wenn man die Resultate vergleicht.
+
+\subsection{Darstellung der Umgebung}
+\label{subsec:darstellung}
+
+In Folgenden werden wir die Position auf dem Spielfeld als Zustand und die Züge als Aktionen bezeichnen. Wir haben damit für jedes Feld einen möglichen Zustand. Für den menschlichen Verstand ist es vorteilhaft sich das Feld als Matrix vorzustellen mit Reihen und Spalten. Dann werden alle Einträge der Matrix auf 0 gesetzt und das Feld auf dem wir stehen, wird auf 1 gesetzt. Um die Zustände aber besser in einem Algorithmus verwenden zu können, verwandelt wir ihn in einen einzelnen Vektor, wo wiederum jeder Eintrag für ein Feld steht.
+
+In gleichem Sinne haben wir einen Vektor für die Aktionen, wobei der erste Eintrag für links, der zweite für unten, der dritte für rechts und der vierte für oben steht.
+
+Die Umgebung wird auf durch eine Matrix dargestellt, wobei eine 1 für das Ziel steht und eine -1 für ein Loch. Die restlichen Einträge sind 0.
+
+\subsection{Der Agent}
+\label{subsec:agent}
+
+Der Agent ist unsere Intelligenz, die sich über das Spielfeld bewegt. Ein Agent hat eine Methode wie er lernt, die beim Erstellen des Agenten ausgewählt wird. Mit dieser Methode kann er einen Zug auswählen und er kann aus einem gemachten Zug lernen. Er kann also abwechselnd Züge machen und daraus lernen, bis er hoffentlich nach genügend Spielen gelernt hat, welche Aktionen in welchem Zustand am besten ist. Dies nennt man die Police des Agenten. Am Anfang ist sie bei den meisten Methoden zufällig und wird dann durch das Lernen stück für stück verbessert.
+
+Betrachten wir als Beispiel eine bestmögliche Police für unser 4x4 Beispiel von oben.
+
+\begin{figure}[hbt!]
+\centering
+\includegraphics[width=\textwidth]{Figures/advanced1police.png}
+\caption{Beispiel einer optimalen Police}
+\label{police}
+\end{figure}
+
+Um diesen Lernvorgang sinnvoll zu gestalten nutzen wir die $\epsilon$-Greedy-Strategie. Wir spielen insgesamt 10000 Spiele wobei $\epsilon$ zu beginn auf 1 gesetzt wird. Jetzt wird eine Aktion zufällig gewählt. Nach jedem Spiel wird $\epsilon$ etwas gesenkt, um dann mit einer Wahrscheinlichkeit von $\epsilon$ eine zufällige Aktion zu wählen und sonst den besten Zug, den der Agent anhand seine Police auswählt. Nach 90\% der Spiele ist $\epsilon$ bei 0.01 angekommen, dass heißt wir wählen mit 99\% Wahrscheinlichkeit einen Zug nach der Police. So können wir bei den letzten 1000 Spielen beobachten, ob unser Agent die richtige Police gelernt hat.
+
+\subsection{Markov-Entscheidungsprozess}
+\label{subsec:mdp}
+
+Ein Markov-Entscheidungsprozess ist ein zeitlich diskreter, stochastischer Steuerungsprozess. Hier soll ein Agent Entscheidungen treffen, wonach sich der Zustand mit einer bestimmten Wahrscheinlichkeit ändert.
+
+Konkret ist ein Markov-Entscheidungsprozess ein Tupel $(S, A, \mathbb{P}, r, \gamma, \pi)$, wobei:
+
+\begin{itemize}
+ \item S eine endliche Menge von Zuständen ist
+ \item A eine Menge von Aktionen ist
+ \item $\mathbb{P}(s^{\prime} \in S | s \in S, a \in A)$ gibt für jede Kombination aus einem Zustand s und eine Aktion a, die Wahrscheinlich an, mit der wir in Zustand $s^{\prime}$ landen
+ \item $r(s,a)$ ist eine Funktion in die rellen Zahlen, welche uns für einen Zustand s und eine Aktion a die Belohung ausgibt
+ \item $\gamma \in [0,1)$ ist ein Diskontierungsfaktor für Belohungen in folgenden Zeitschritten
+ \item $\pi$ ist die Police, die uns für jeden Zustand angibt, welchen Zug wir als nächstes ausführen
+\end{itemize}
+
+Unsere Umgebung die wir weiter oben definiert haben führt uns also zu einem Markov-Entscheidungsprozess.  In unseren Beispielen verwenden wir größtenteils eine Wahrscheinlichkeit von 100\% in dem naheliegenden State $s^{\prime}$ zu landen ($\mathbb{P}(s^{\prime} \in S | s \in S, a \in A) = 1$)  und 0\% sonst ($\mathbb{P}(s^{\prime} \in S | s \in S, a \in A) = 0$).
+
+$r(s,a)$ ist in unserem Beispiel immer 0, es sei den wir landen auf dem Zielfeld, dann gilt $r(s,a) = 1$.
+
+$\gamma$ können wir selbst wählen und wir werden hier später verschiedene Werte testen. $\pi$ wollen wir optimieren, also ein optimales $\pi^{*}$ finden.
+
+\subsection{Value-Funktion}
+\label{subsec:V}
+
+Die Value-Funktion gibt für einen Zustand s und eine Police $\pi$ die zu erwartende Belohung an. Also die Belohnung, die vorraussichtlich in diesem und allen weiteren Zeitschritten gesammelt werden kann. Hier benötigen wir den Diskontierungsfaktor $\gamma$, damit der erwartete Gewinn auf jeden Fall endlich bleibt \citep{DBLP:journals/jmlr/SallansH04}
+
+\begin{align}
+	V(\pi, s) = \mathbb{E}[\sum\limits_{i=0}^{\infty} \gamma^{i} r(\Pi_{i}^{s},\pi(\Pi_{i}^{s})]
+\end{align}
+
+und damit können wir die optimale Police ausdrücken mit:
+
+\begin{align}
+	\pi^{*}(s) = argmax_{\pi} V(\pi,s)
+\end{align}
+
+Hier gilt es jedoch zu berücksichtigen, dass in unserem Beispiel, das Spiel endet, wenn wir in ein Loch fallen oder das Ziel erreichen. Wir müssen also die Value-Funktion dementsprechend anpassen. Die Summe geht dann nicht bis $\infty$, sondern nur bis zu dem Zug, in dem das Spiel endet.
+
+\subsection{Value-Iteration und Q-Funktion}
+\label{subsec:VQ}
+
+Die Value-Funktion können wir mit der Value-Iteration von Bellmann weiter aufteilen \citep{Bellman767}:
+\begin{align*}
+V(\pi, s) 	&= \mathbb{E}[ \sum\limits_{i=0}^{\infty} \gamma^{i} r(\Pi_{i}^{s},\pi( \Pi_{i}^{s} )] \\
+			&= \mathbb{E}[r(s,\pi(s)] + \gamma \mathbb{E}[\sum\limits_{i=1}^{\infty} \gamma^{i} r(\Pi_{i}^{s},\pi(\Pi_{i}^{s})] \\
+			&= \mathbb{E}[r(s,\pi(s)] + \gamma \mathbb{E}[\sum\limits_{s^{\prime}} \mathbb{P}(s^{\prime} | s, \pi(s) ) V(\pi, s^{\prime})]
+\end{align*}
+
+Und dies führt uns gleich zu der Q-Funktion, die zusätzlich eine konkrete Aktion bewerten soll:
+
+\begin{align}
+	Q(\pi, s, a) 	&= \mathbb{E}[r(s,a)] + \gamma \mathbb{E}[\sum\limits_{i=1}^{\infty} \gamma^{i} r(\Pi_{i}^{s},\pi(\Pi_{i}^{s})] 
+\end{align}
+
+So können wir die Bellmann Optimalitätsgleichung mit $Q^{*}(s,a) = max_{\pi}Q(\pi,s,a)$ aufstellen:
+
+\begin{align}
+	Q^{*}(s, a) 	&= \mathbb{E}[r(s,a)] + \gamma \sum\limits_{s^{\prime}} \mathbb{P}(s^{\prime} | s, a ) Q^{*}(s^{\prime}, a^{\prime})
+\end{align}
+
+Mit Hilfe dieser Gleichung können wir eine Folge $Q_k$ aufstellen die mit einem beliebigen Startwert $Q_{0}$ startet und dann iterativ durch die folgende Regel geupdatet werden kann:
+
+\begin{align}
+	Q_{k+1}(s, a) &= \mathbb{E}[r(s,a)] + \gamma \sum\limits_{s^{\prime}} \mathbb{P}(s^{\prime} | s, a ) Q_{k}(s^{\prime}, a^{\prime})
+\end{align}
+
+Daraus ergibt sich der SARSA Algorithmus. Hier wird die Q-Funktion iterativ aktuallisiert, während die Zustände und Aktionen beobachtet und ausgeführt werden:
+
+\begin{align}
+	Q(s_{n}, a_{n}) \: &+= \alpha ( r_n + \gamma Q(s_{n+1}, a_{n+1}) -  Q(s_n, a_n) ) \label{SARSA}
+\end{align}
+
+Hier ist $\alpha$ die Lernrate und n steht für die n-te Aktion die ausgeführt wird.
+
+\section{Die Methoden}
+\label{sec:methoden}
+
+\subsection{Q-Tabelle}
+\label{subsec:Q-Tabelle}
+
+Die einfachste Möglichkeit den SARSA Algorithmus umzusetzen ist die sogenannte Q-Tabelle. Betrachten wir dafür unser Beispiel der Police aus Figure \ref{police}, dann haben wir 16 States und 4 Aktionen. Damit ist unsere Q-Tabelle eine 16x4 Matrix. Wir können uns nun für einen State i die i-te Reihe in unserer Q-Tabelle anschauen und mit dem argmax dieser Reihe die beste Aktion auswählen. \\
+
+Am Anfang können wir bei dieser Methode einfach eine leere Tabelle verwenden, die nur mit 0-len gefüllt ist. Dann können wir in jedem Schritt mit dem $\epsilon$-greedy Algorithmus eine Aktion ausführen und nach jeder Aktion mit SARSA (\ref{SARSA}) die Q-Tabelle aktualisieren. Beachte hier, dass $Q(s_{n+1}, a_{n+1})$ immer null wird, falls wir bei diesem Zug in einem Loch oder am Ziel landen, weil dann keine weiteren Züge stattfinden können. \\
+
+Diese einfache Methode funktioniert hier sehr gut, da kaum Zusammenhänge zwischen Zuständen gibt. Insbesondere können wir hier nicht in zwei verschiedenen Zuständen gleichzeitig sein. Es gibt wirklich nur pro Feld einen Zustand. Bei ähnlichen Vektoren die mit neuronalen Netzen bearbeitet werden, kann ein binärer Vektor mit 16 Einträgen $2^{16}$ Zustände ausdrücken und nicht nur 16. \\
+
+\subsection{Ein einfaches neuronales Netz}
+\label{subsec:dn}
+
+\begin{figure}[hbt!]
+\centering
+\includegraphics[width=\textwidth]{Figures/dn.png}
+\caption{Einfaches euronales Netz}
+\label{police}
+\end{figure}
+
+Die naheliegenste Möglichkeit ein neuronales Netz zu verwenden, ist die Funktion $Q(s, a)$ mit einem neuronalen Netz zu approximieren. Hierfür benutzen wir einfach einen versteckten Layer von Neuronen und realisieren dies mit PyTorch. Diese Layer werden Linear verbunden und mit der Relu-Aktivierungsfunktion versehen. Wir können dann den Fehler direkt mit der rechten Seite von \ref{SARSA} berechnen und an das Netz übergeben. Dazu benutzen wir den Adams-Optimierer.
+
+\subsection{Generelle Boltzmann Maschine}
+\label{subsec:bm}
+
+Eine Boltzmann Maschine ist ein Ungerichtetes Probabilistisches Graphisches Modell \citep{DBLP:journals/jmlr/SallansH04}. Die Ecken des Graphen sind binäre Variablen und können die Werte 1 und 0 annehmen. Sie sind üblicherweise in sichtbare (v) und nicht-sichtbare (h) Variablen aufgeteilt. Die gewichteten Kanten sind paarweise symmetrische Interaktionen. Die Gewichte bestimmen die ``Energie'' von den Variablen. Allgemein können diese Gewichte zwischen allen Variablen auftauchen.
+
+\begin{align}
+	E(v,h) = - \sum_{k,i}w_{k,i}v_ih_k - \sum_{i < j}w_{ij}v_iv_j - \sum_{k<m}w_{km}h_kh_m \label{energie}
+\end{align}
+
+wobei i und j Indices über die sichtbaren Variaben und k und m Indices über die nicht-sichtbaren Variablen sind.
+Wir wollen eine Energie-Funktion in Abhängigkeit der sichtbaren Variablen aufstellen:
+
+\begin{align}
+	F(v) = \sum_{h}\mathbb{P}(h|v)E(v,h) + \sum_{h}\mathbb{P}(h|v)log(\mathbb{P}(h|v)) \label{F}
+\end{align}
+
+Dabei steht $\mathbb{P}(h|v)$ für die Wahrscheinlichkeit, dass die Variable h = 1 ist, mit dem gewählten Variblen v.
+Um die erste Summe zu minimieren, werden möglichst viele Variablen auf 1 gesetzt, wo E(v,h) niedrig bzw. negativ ist und um die zweite Summe zu minimieren, soll die Wahrscheinlichkeitsverteilung von $\mathbb{P}$ eine hohe Entropie haben, das heißt, die Wahrscheinlichkeit soll entweder 1 oder 0 sein.
+
+Interessanterweise ist es recht einfach die Gewichte zu optimieren:
+
+\begin{align}
+	\frac{\partial F(v)}{\partial w_{ik}} = -v_i \langle h_k \rangle_{\mathbb{P}(h|v)} \label{update}
+\end{align}
+
+Dies liegt daran, dass die die Verteilung $\mathbb{P}(h|v)$ für F(v) minimal ist, sodass die Ableitung von F(v) in Abhängigkeit zu dieser Verteilung 0 ist. Für Details dazu siehe \citep{DBLP:journals/jmlr/SallansH04} Appendix A.
+
+Wir können jetzt mit der Funktion F und der Optimierung der Gewichte eine Q-Funktion für einen Markov-Entscheidungsprozess mit einer Boltzmann Maschine darstellen. Die Zustände und Aktionen werden dabei zu einem Vektor vereinigt und bilden die sichtbaren Variablen. Es gilt:
+
+\begin{align}
+	F(v) = - Q(v)
+\end{align}
+
+\subsection{Beschränkte Boltzmann Maschine}
+\label{subsec:rbm}
+
+\begin{figure}[hbt!]
+\centering
+\includegraphics[width=\textwidth]{Figures/rbm.png}
+\caption{Beschränkte Boltzmann Maschine}
+\label{police}
+\end{figure}
+
+Eine beschränkte Boltzmann Maschine hat nur Gewichte zwischen sichtbaren und nicht-sichtbaren Variablen. So entsteht ein bipartiter Graph. Ansonsten bleibt alles gleich wie in (\ref{F}) und (\ref{diff}). Die Energie E(v,h) reduziert sich dann auf:
+
+\begin{align}
+	E(v,h) = - \sum_{i,k}w_{i,k}v_ih_k
+\end{align}
+
+Q(s,a) können wir dann wie folgt zusammenfassen:
+
+\begin{align*}
+	Q(s,a) 	&= \sum_{h}\mathbb{P}(h|s,a)E(s,a,h) - \sum_{h}\mathbb{P}(h|s,a)log(\mathbb{P}(h|s,a))  \\
+		=  	&- \sum_{k, } w_{i,k}s_i \langle h_k \rangle - \sum_{k,j} w_{j,k}a_j \langle h_k \rangle  \\
+			&- \sum_{k} \langle h_k \rangle log(\langle h_k \rangle) + (1 -  \langle h_k) \rangle log( (1 - \langle h_k \rangle) ) 
+\end{align*}
+
+wobei $\langle h_k \rangle$ mit der sigmoid Funktion berechnet wird:
+
+\begin{align*}
+	\langle h_k \rangle = \sigma (\sum_{i}w_{i,k}v_i)
+\end{align*}
+
+Dazu leiten wir uns aus (\ref{SARSA}) und (\ref{update}) die Regeln her, um nach jedem Schritt zu lernen:
+
+\begin{align*}
+	w_{sh} \:+= \alpha ( r_n + \gamma Q(s_{n+1}, a_{n+1}) -  Q(s_n, a_n) ) s \langle h \rangle \\
+	w_{ah} \: += \alpha ( r_n + \gamma Q(s_{n+1}, a_{n+1}) -  Q(s_n, a_n) ) a \langle h \rangle
+\end{align*}
+
+\subsection{Tiefe Boltzmann Maschine}
+\label{subsec:dbm}
+
+Die tiefe Boltzmann Maschine unterscheidet sich von der beschränkten Boltzmann Maschine dadurch, dass hier zusätzliche Verbindungen zwischen der Variablen der versteckten Schichten sind.
+
+\begin{figure}[hbt!]
+\centering
+\includegraphics[width=\textwidth]{Figures/dbm.png}
+\caption{Tiefe Boltzmann Maschine}
+\label{police}
+\end{figure}
+
+Allgemein kann man eine tiefe Boltzmann Maschine auch mit mehreren versteckten Schichten aufbauen. Dann wandern die sichtbare Schicht mit den Aktionen auf die rechte Seite und die sichtbaren Schichten beeinflussen nur die benachbarten Variablen in den nicht-sichtbaren Schichten. Diese Variante wollen wir hier nicht betrachten.
+
+Die Q-Funktion erweitert sich jetzt hier im Vergleich zur beschränkten Boltzmann Maschine um einen weiteren Term:
+
+\begin{align}
+	Q(s,a) =  	&- \sum_{k,i} w_{i,k}s_i \langle h_k \rangle  
+				- \sum_{k,j} w_{j,k}a_j \langle h_k \rangle   
+				- \sum_{k,m}w_{km} \langle h_k h_m \rangle \label{Qdbm1}   \\  
+				&- \sum_{k} \langle h_k \rangle log(\langle h_k \rangle) + (1 -  \langle h_k) \rangle log( (1 - \langle h_k \rangle) )  \label{Qdbm2}
+\end{align}
+
+und auch die Update-Regel bekommt einen weiteren Teil:
+
+\begin{align*}
+	w_{sh} \: 			&+= \alpha ( r_n + \gamma Q(s_{n+1}, a_{n+1}) -  Q(s_n, a_n) ) s \langle h \rangle \\
+	w_{ah} \: 			&+= \alpha ( r_n + \gamma Q(s_{n+1}, a_{n+1}) -  Q(s_n, a_n) ) a \langle h \rangle \\
+	w_{hh^{\prime}} \: 	&+= \alpha ( r_n + \gamma Q(s_{n+1}, a_{n+1}) -  Q(s_n, a_n) ) \langle h h^{\prime} \rangle 
+\end{align*}
+
+Jetzt kommt der spannende Teil. Die freie Energie der tiefen Boltzmann Maschine kann aus (\ref{energie}) abgeleitet wie folgt berechnet werden:
+
+\begin{align}
+	E_v(h) = - \sum_{k,i}w_{k,i}v_ih_k - \sum_{k<m}w_{km}h_kh_m \label{energiedbm}
+\end{align}
+
+Dabei sind die sichtbaren Schichten v jetzt feste Parameter und nur noch h sind freie Variablen. Da $\langle h \rangle$ binäre Variablen sind und wir die Gesamtenergie minimieren wollen, handelt es sich hier also um ein quadratisches, binäres Optimierungsproblem kurz QUBO. Dieses können wir mit Hilfe von Annealing lösen oder auch mit Hilfe von einem Quantencomputer mit QAOA oder mit adiabatischen Quantencomputern. Wir interessieren uns vor allem für Quanten-Annealing, einer Unterform von adiabatischen Quantencomputern, welches von DWave erforscht wird. Wir haben dabei einen vollvernetzten Graphen mit so vielen Variablen, wie wir Variablen in der versteckten Schicht haben. Hier kann der DWave bekanntlich auch Probleme mit z.B. 16 Variablen gut lösen. Da wir aber in unseren Tests für einen Testlauf meistens 10 000 Spiele auf dem Frozen Lake spielen wollen und für jeden einzelnen Zug 8 QUBO's lösen müssen, verwenden wir hier simuliertes Quanten Annealing.
+
+\subsection{Quanten Annealing}
+\label{subsec:QA}
+
+Wir können ein Optimierungsproblem als ein System beschreiben, sodass die minimale Energie des Systems der Lösung von unserem Optimierungssystem entspricht.
+Für das Quanten Annealing können wir hier das Ising Problem verwenden. Ein QUBO ist allerdings äquivalent dazu und wir können ein QUBO in ein Ising Problem umwandeln.
+So ein Ising Problem stellen wir dann mit einem Hamiltonian dar, welcher die Energie des Systems beschreibt.
+
+Nach dem Adiabatischen Theorem gilt: Wenn sich das System im Grundzustand des ersten Hamiltonians befindet und sich dann adiabatisch langsam genug zeitlich verändert, wird es sich danach im Grundzustand des zweiten Hamiltonians befinden. 
+
+Der erste Hamiltonian $H_{0}$ ist dabei das sogenannte Transverse Feld, dessen Energieminimum eine Superposition von allen Qubits ist. 
+Der zweite Hamiltonian $H_{1}$ ist dabei ein von uns aufgestellter Hamiltonian, dessen Energieminimum der Lösung von unserem Optimierungsproblem entspricht.
+
+\begin{equation}
+    H_{0} = - \sum_{i} \sigma^{x}_{i}
+ \end{equation}
+\begin{equation}
+    H_{1} = \sum_{i, j} J_{ij} \sigma^{z}_{i}  \sigma^{z}_{j}  + \sum_{i} h_i \sigma^{z}_{i}
+ \end{equation}
+
+Wir können dann einen zeitabhängigen Hamiltonian angeben, der eine Mischung vom ersten und zweiten Hamiltonian darstellt:
+
+\begin{equation}
+    H(t) = (1-t) H_{0} + t H_{1} , t \in [0,1]
+ \end{equation}
+
+Wenn wir diesen zeitlichen Prozess, den wir Annealing nennen, langsam genug durchführen, kommen wir am Schluss bei t = 1 sicher in der minimalen Energie des $H_{1}$ Hamiltonians an und haben damit unser Optimierungsproblem gelöst.
+Wie langsam dieser Prozess sein muss, hängt dabei vom minimalen Unterschied (Gap) des niedriegsten Energie Niveaus zum ersten angeregten Energienieveau ab.
+
+Wir benutzen Quanten Annealing oder simuliertes Quanten Annealing um eine Lösung von (\ref{energiedbm}) zu finden. Allerdings haben wir hier eine Besonderheit, wir wollen nicht unbedingt immer die beste Lösung finden, denn dann wären unsere versteckten Variablen immer entweder 0 oder 1, wie die binären Variablen in der Lösung vom QUBO. Stattdessen führen wir mehrere Durchläufe vom Annealing Prozess durch und wählen dabei die Annealing Zeit so kurz, das wir verschiedene Lösungen finden. So können wir den Durchschnitt der Lösungen berechnen und bekommen so weichere Aktivierungen für unsere versteckten Variablen, die auch zwischen 0 und 1 liegen können.
+
+Wir können dann (\ref{Qdbm1}) durch die durchschnittliche Energie ersetzen, die wir in unserem QUBO Problem durch den Hamiltonian ausgerechnet haben. Diese bekommen wir vom simulierten Annealing (wir benutzen dafür eine Library von DWave) zurück und können diese gleich einsetzen.
+
+Wie wir dann auch in unseren Experimenten sehen können, brauchen wir (\ref{Qdbm2}) für diese Version nicht mehr, da wir mit den Parametern im simulierten Annealing schon steuern können, wir sehr die Variablen richtung 0 oder 1 tendieren. Damit wird die Zeile einfach überflüssig und wir sehen auch in den Experimenten, dass dieser Term dafür sorgt, dass wir die Lösungen langsamer finden.
+
+\section{RESULTS}
+\label{sec:res}
+
+\ldots
+
+
+\begin{acknowledgement}
+Wir bedanken uns bei allen Unterstützern!
+\end{acknowledgement}
