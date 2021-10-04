@@ -1,15 +1,15 @@
 import numpy as np
 import math
+from dwave_qbsolv import QBSolv
 from neal.sampler import SimulatedAnnealingSampler
 
-class Dbm():
+class Qbm():
     def __init__(self, n_actions, n_states, params):
-        print("use dbm")
+        print("use qbm")
         self.lr = params["lr"]
         self.n_actions = n_actions
         self.n_states = n_states
         self.n_hidden = params["n_hidden"]
-        self.beta = params["beta"]
         self.num_reads = params["annealing"]["num_reads"]
         self.num_sweeps = params["annealing"]["num_sweeps"]
         self.beta_range = params["annealing"]["beta_range"]
@@ -58,21 +58,15 @@ class Dbm():
                 h_i = 0.000001
             h.append(h_i)
 
-        return h, 0
+        energies = list(response.record["energy"])
+        avg_energie = np.mean(energies)
+
+        return h, avg_energie
 
 
     def Q(self, s, a):
-        h, _ = self.get_h(s, a)
-        sum1 = np.dot(self.W1[s], h)
-        sum2 = np.dot(self.W2[a], h)
-        sum3 = 0
-        for i in range(self.n_hidden):
-            for j in range(self.n_hidden):
-                sum3 += self.Wh[i][j] * h[i] * h[j]
-        sum4 = 0
-        for item in h:
-            sum4 += item * math.log(item) + (1 - item) * math.log(1 - item)
-        result = sum1 + sum2 + sum3 - 1/self.beta * sum4
+        h, avg_energie = self.get_h(s, a)
+        result = -avg_energie
         return result
 
 

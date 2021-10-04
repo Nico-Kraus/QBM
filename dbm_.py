@@ -2,14 +2,13 @@ import numpy as np
 import math
 from neal.sampler import SimulatedAnnealingSampler
 
-class Dbm():
+class Dbm_():
     def __init__(self, n_actions, n_states, params):
         print("use dbm")
         self.lr = params["lr"]
         self.n_actions = n_actions
         self.n_states = n_states
         self.n_hidden = params["n_hidden"]
-        self.beta = params["beta"]
         self.num_reads = params["annealing"]["num_reads"]
         self.num_sweeps = params["annealing"]["num_sweeps"]
         self.beta_range = params["annealing"]["beta_range"]
@@ -69,10 +68,7 @@ class Dbm():
         for i in range(self.n_hidden):
             for j in range(self.n_hidden):
                 sum3 += self.Wh[i][j] * h[i] * h[j]
-        sum4 = 0
-        for item in h:
-            sum4 += item * math.log(item) + (1 - item) * math.log(1 - item)
-        result = sum1 + sum2 + sum3 - 1/self.beta * sum4
+        result = sum1 + sum2 + sum3
         return result
 
 

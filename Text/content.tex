@@ -1,5 +1,5 @@
 \begin{abstract}
-Wir wollen untersuchen, wie Quanten-Annealing für Reinforcment-Learning genutzt werden kann. Dafür nutzen wir Q-Learning mit einer $\epsilon$-Greedy-Strategie. Die Q-Funktion approximieren wir dabei mit einer Boltzmann-Maschine. Dabei repräsentiert der sichtbare Layer den Zustand und die Aktionen. Die Aktivierung des nicht-sichtbaren Layern können wir mit einem Quanten Annealer berechnen, bzw klassisch simulieren. Als Umgebung für unseren Agenten nutzen wir den ``zugefrorenen See'', ähnlich zu der bekannten Problemstellung von OpenAi mit kleinen Modifizierungen. Es zeigt sich, dass eine einfache Q-Table mit Abstand die besten Ergebnisse liefert. Wobei eine Quanten-Boltzmann Maschine komplexere Zusammenhänge modellieren kann und sehr ähnliche Ergebnisse liefert.
+Wir wollen untersuchen, wie Quanten-Annealing für Reinforcment-Learning genutzt werden kann. Dafür nutzen wir Q-Learning mit einer $\epsilon$-Greedy-Strategie. Die Q-Funktion approximieren wir dabei mit einer Boltzmann-Maschine. Dabei repräsentiert der sichtbare Layer den Zustand und die Aktionen. Die Aktivierung des nicht-sichtbaren Layern können wir mit einem Quanten Annealer berechnen, bzw klassisch simulieren. Als Umgebung für unseren Agenten nutzen wir den ``zugefrorenen See'', ähnlich zu der bekannten Problemstellung von OpenAi mit kleinen Modifizierungen. Es zeigt sich, dass eine einfache Q-Tabelle mit Abstand die besten Ergebnisse liefert. Wobei eine Quanten-Boltzmann Maschine komplexere Zusammenhänge modellieren kann und sehr ähnliche Ergebnisse liefert.
 \end{abstract}
 
 \section{Einleitung }
@@ -11,11 +11,11 @@ Wir wollen hier eine Methode anschauen, wie wir Quanten-Annealing für eine Deep
 
 Als Problem betrachten wir einen Agenten, der eine Frisbee auf einem zugefrorenen See finden muss. Es gibt jedoch Löcher im Eis. Der Agent startet auf einer Startposition und kann sich nun wie auf einem Schachbrett Feld für Feld über den See bewegen. Fällt er dabei in ein Loch, hat er verloren und bekommt 0 Punkte. Findet er den richtigen Weg zur Frisbee, hat er gewonnen und bekommt 1 Punkt. Wir versuchen also den kürzesten Weg vom der Startposition zur Frisbee zu finden, ohne dabei in ein Loch zu fallen.
 
-Ein bekanntes Problem dabei ist, dass wir einen guten Ausgleich zwischen Erkunden und bekannte Informationen verwenden finden wollen. Allgemeiner betrachtet, weiß der Agent nicht, wie viele Frisbees es gibt und wie viele Punkte er in dem Spiel bekommen kann. Daher will er möglichst viele Felder und Wege erkunden, bevor er sich einen konkreten Weg aussucht, den er bei jedem Spiel geht. Gleichzeitig will der Agent aber auch schnell die richtige Strategie finden, was konkret heißt, dass der Computer weniger Rechenzeit verbraucht, bis er den schnellsten Weg gefunden hat. Dieses Dilema lösen wir in unserem Beispiel mit der $\epsilon$-Greedy-Strategie.
+Ein bekanntes Problem dabei ist, dass wir einen guten Ausgleich zwischen Erkunden und bekannte Informationen verwenden finden wollen. Allgemeiner betrachtet, weiß der Agent nicht, wie viele Frisbees es gibt und wie viele Punkte er in dem Spiel bekommen kann. Daher will er möglichst viele Felder und Wege erkunden, bevor er sich einen konkreten Weg aussucht, den er bei jedem Spiel geht. Gleichzeitig will der Agent aber auch schnell die richtige Strategie finden, was konkret heißt, dass der Computer weniger Rechenzeit verbraucht, bis er den schnellsten Weg gefunden hat. Dieses Dilema lösen wir mit der $\epsilon$-Greedy-Strategie.
 
 Um die beste Aktion von einem gegebenen Feld zu finden, müssen wir die Aktionen bewerten. Die einfachste Möglichkeit dafür ist eine sogenannte Q-Tabelle, die für jedes Feld jedem Zug einen Wert zuordnet.
 
-Eine mächtigere aber auch komplexere Möglichkeit ist, die Aktionen mit einer Q-Funktion zu bewerten, die durch ein neuronales Netz realisiert wird. Dafür können wir beliebige neuronale Netze auswählen und mit bekannten Optimierungsmethoden trainieren. Eine Boltzmann-Maschine ist dabei besonders interessant, da die Struktur einer Deep-Boltzmann-Maschine oder einer Allgemeinen-Boltzmann-Maschine sehr ähnlich zu der Struktur von einem Ising Model in einem Quanten-Annealer ist. So können wir die Aktivierung des nicht-sichtbaren Layers auf dem DWave oder alternativ mit simuliertem Quaten-Annealing brechnen.
+Eine mächtigere aber auch komplexere Möglichkeit ist, die Aktionen mit einer Q-Funktion zu bewerten, die durch ein neuronales Netz realisiert wird. Dafür können wir beliebige neuronale Netze auswählen und mit bekannten Optimierungsmethoden trainieren. Eine Boltzmann-Maschine ist dabei besonders interessant, da die Struktur einer Deep-Boltzmann-Maschine sehr ähnlich zu der Struktur von einem Ising Model in einem Quanten-Annealer ist. So können wir die Aktivierung des nicht-sichtbaren Layers auf dem DWave oder alternativ mit simuliertem Quaten-Annealing brechnen.
 
 \section{Problemstellung}
 \label{sec:prob}
@@ -23,7 +23,7 @@ Eine mächtigere aber auch komplexere Möglichkeit ist, die Aktionen mit einer Q
 \subsection{Umgebung}
 \label{subsec:umg}
 
-Als erstes wollen wir genau definieren, wie unsere Umgebung/das Spielfeld aussieht und welche Regeln es gibt. Wir haben also ein Spieldeld wie ein Schachbrett mit verschiedenen Feldern. Der Agent wird am Anfang auf ein Startfeld gesetzt, was sich in der Regel in einer der Ecken befindet. Von diesem Startfeld kann er nun in eine der vier Richtungen (links, unten, rechts, oben) einen Zug machen und sich ein Feld bewegen. Falls er sich mit diesem Zug vom Spielfeld bewegen würde, passiert nichts und er bleibt auf seinem Feld. Ist das Feld auf das er zieht ein Loch, wird das Spiel beendet und der Agent hat verloren. Das wird dadurch symbolisiert, dass er 0 Punkte bekommt. Ist das Feld auf das er zieht das Ziel, dann wird das Spiel auch beendet und der Agent bekommt einen Punkt als Belohnung. Falls das Feld leer ist, bewegt sich der Agent auf das Feld und der Agent kann einen weiteren Zug machen.
+Als erstes wollen wir genau definieren, wie unsere Umgebung/das Spielfeld aussieht und welche Regeln es gibt. Wir haben also ein Spielfeld ähnlich wie ein Schachbrett mit verschiedenen Feldern. Der Agent wird am Anfang auf ein Startfeld gesetzt, was sich in der Regel in einer der Ecken befindet. Von diesem Startfeld kann er nun in eine der vier Richtungen (links, unten, rechts, oben) einen Zug machen und sich ein Feld bewegen. Falls er sich mit diesem Zug vom Spielfeld bewegen würde, passiert nichts und er bleibt auf seinem Feld. Ist das Feld auf das er zieht ein Loch, wird das Spiel beendet und der Agent hat verloren. Das wird dadurch symbolisiert, dass er 0 Punkte bekommt. Ist das Feld auf das er zieht das Ziel, dann wird das Spiel auch beendet und der Agent bekommt einen Punkt als Belohnung. Falls das Feld leer ist, bewegt sich der Agent auf das Feld und der Agent kann einen weiteren Zug machen.
 
 Unten sehen wir Beispielhaft zwei Spielfelder. In den Grafiken unten steht S für Start, Z für Ziel und L für Loch:
 
@@ -46,7 +46,7 @@ Unten sehen wir Beispielhaft zwei Spielfelder. In den Grafiken unten steht S fü
 
 Unsere Variante ist eine etwas abgewandelte Version von der ``Frozen-Lake'' Umgebung die aus der Library Gym von OpenAi stammt. In der Originalversion gibt es allerdings Unterschiede: Zum einen wird der Agent zurück aufs Startfeld gesetzt, wenn er das Spielfeld verlässt. Und zum anderen ist das Feld in den Standardeinstellungen ``rutschig''. Das heißt wählt der Agent für den nächsten Zug z.B. rechts aus, gibt es eine bestimmte Wahrscheinlichkeit, dass der Agent auch wirklich nach rechts geht. Ansonsten macht er einen zufälligen Zug. Beide Bedingungen machen das Spiel schwerer.
 
-In \citep{crawford2019reinforcement}, gibt es dagegen noch eine fünfte Aktion ``auf der Stelle bleiben''. Außerdem endet das Spiel nach einer festen Anzahl von Zügen und der Agent hat z.B. die Möglichkeit eine Belohnung öfter zu bekommen, indem er auf dem Zielfeld mehrere Züge bleibt. Die Löcher werden dann durch ``Bestrafungen'' ersetzt und der Agent kann über diese Felder drüber gehen. Dies ist also eine einfachere Version, da der Agent leichter zum Ziel kommt und die Belohnungen öfter einsammelt und damit öfter lernen kann. Außerdem werden zusätzlich Wände eingeführt, also im Prinzip Felder auf die der Agent nicht gehen kann. Die Grenzen des Spielfeldes sind auch Wände, dadurch reduzieren sich an den Randfeldern auch die Anzahl der möglichen Züge.
+In \citep{crawford2019reinforcement}, gibt es dagegen noch eine fünfte Aktion ``auf der Stelle bleiben''. Außerdem endet das Spiel nach einer festen Anzahl von Zügen und der Agent hat z.B. die Möglichkeit eine Belohnung öfter zu bekommen, indem er auf dem Zielfeld mehrere Züge bleibt. Die Löcher werden dann durch ``Bestrafungen'' ersetzt und der Agent kann über diese Felder gehen. Dies ist also eine einfachere Version, da der Agent leichter zum Ziel kommt und die Belohnungen öfter einsammelt und damit öfter lernen kann. Außerdem werden zusätzlich Wände eingeführt, also im Prinzip Felder auf die der Agent nicht gehen kann. Die Grenzen des Spielfeldes sind auch Wände, dadurch reduzieren sich an den Randfeldern auch die Anzahl der möglichen Züge.
 
 Wir haben uns für unsere Variante entschieden, da wir so mit durch den Ähnlichkeit mit OpenAi bessere Vergleichbarkeit zu bekannten Methoden haben. Gleichzeitig haben wir die Variante vom ``Frozen-Lake'' etwas vereinfacht, da eine komplexe Boltzmann-Maschine sich beim lernen etwas schwerer tut, als eine einfache Q-Tabelle wie sie bei OpenAI verwendet wird. Dafür kann eine Boltzmann-Maschine komplexere Zusammenhänge zwischen Zuständen und Aktionen erkennen. Dies hilft uns für diese Umgebung nicht, man sollte dies jedoch im Hinterkopf behalten, wenn man die Resultate vergleicht.
 
@@ -57,7 +57,7 @@ In Folgenden werden wir die Position auf dem Spielfeld als Zustand und die Züge
 
 In gleichem Sinne haben wir einen Vektor für die Aktionen, wobei der erste Eintrag für links, der zweite für unten, der dritte für rechts und der vierte für oben steht.
 
-Die Umgebung wird auf durch eine Matrix dargestellt, wobei eine 1 für das Ziel steht und eine -1 für ein Loch. Die restlichen Einträge sind 0.
+Die Umgebung wird auch durch eine Matrix dargestellt, wobei eine 1 für das Ziel steht und eine -1 für ein Loch. Die restlichen Einträge sind 0.
 
 \subsection{Der Agent}
 \label{subsec:agent}
@@ -75,6 +75,8 @@ Betrachten wir als Beispiel eine bestmögliche Police für unser 4x4 Beispiel vo
 
 Um diesen Lernvorgang sinnvoll zu gestalten nutzen wir die $\epsilon$-Greedy-Strategie. Wir spielen insgesamt 10000 Spiele wobei $\epsilon$ zu beginn auf 1 gesetzt wird. Jetzt wird eine Aktion zufällig gewählt. Nach jedem Spiel wird $\epsilon$ etwas gesenkt, um dann mit einer Wahrscheinlichkeit von $\epsilon$ eine zufällige Aktion zu wählen und sonst den besten Zug, den der Agent anhand seine Police auswählt. Nach 90\% der Spiele ist $\epsilon$ bei 0.01 angekommen, dass heißt wir wählen mit 99\% Wahrscheinlichkeit einen Zug nach der Police. So können wir bei den letzten 1000 Spielen beobachten, ob unser Agent die richtige Police gelernt hat.
 
+Die $\epsilon$-Greedy-Strategie hat den Vorteil, wirklich einen Roboter zu simulieren, der auf unbekannten Gelände unterwegs ist und aus seinen Aktionen lernt. Allerdings stößt sie schnell an ihre Grenzen, nämlich genau dann, wenn am Anfang vom Start aus durch zufällige Aktionen das Ziel fast nie gefunden wird. Tatsächlich passiert dies in unserer Version mit den Löchern die das Spiel beenden sehr schnell. Daher haben wir zwei Alternativen: Zum einen können wir verschiedene Startpositionen wählen, die erst nah am Ziel sind und sich dann weiter weg bewegen. Zum anderen können wir geordnet von jedem Feld jeden Zug machen und jeweils daraus lernen. Letzteres funktioniert natürlich viel besser, entspricht aber dann nicht mehr einem echten Spiel. Dafür können wir hier schauen, wie robust die Verfahren sind, wenn die Zustandsräume sehr groß werden.
+
 \subsection{Markov-Entscheidungsprozess}
 \label{subsec:mdp}
 
@@ -84,7 +86,7 @@ Konkret ist ein Markov-Entscheidungsprozess ein Tupel $(S, A, \mathbb{P}, r, \ga
 
 \begin{itemize}
  \item S eine endliche Menge von Zuständen ist
- \item A eine Menge von Aktionen ist
+ \item A eine endliche Menge von Aktionen ist
  \item $\mathbb{P}(s^{\prime} \in S | s \in S, a \in A)$ gibt für jede Kombination aus einem Zustand s und eine Aktion a, die Wahrscheinlich an, mit der wir in Zustand $s^{\prime}$ landen
  \item $r(s,a)$ ist eine Funktion in die rellen Zahlen, welche uns für einen Zustand s und eine Aktion a die Belohung ausgibt
  \item $\gamma \in [0,1)$ ist ein Diskontierungsfaktor für Belohungen in folgenden Zeitschritten
@@ -136,7 +138,7 @@ So können wir die Bellmann Optimalitätsgleichung mit $Q^{*}(s,a) = max_{\pi}Q(
 	Q^{*}(s, a) 	&= \mathbb{E}[r(s,a)] + \gamma \sum\limits_{s^{\prime}} \mathbb{P}(s^{\prime} | s, a ) Q^{*}(s^{\prime}, a^{\prime})
 \end{align}
 
-Mit Hilfe dieser Gleichung können wir eine Folge $Q_k$ aufstellen die mit einem beliebigen Startwert $Q_{0}$ startet und dann iterativ durch die folgende Regel geupdatet werden kann:
+Mit Hilfe dieser Gleichung können wir eine Folge $Q_k$ aufstellen die mit einem beliebigen Startwert $Q_{0}$ startet und dann iterativ durch die folgende Regel aktualisiert werden kann:
 
 \begin{align}
 	Q_{k+1}(s, a) &= \mathbb{E}[r(s,a)] + \gamma \sum\limits_{s^{\prime}} \mathbb{P}(s^{\prime} | s, a ) Q_{k}(s^{\prime}, a^{\prime})
@@ -156,11 +158,11 @@ Hier ist $\alpha$ die Lernrate und n steht für die n-te Aktion die ausgeführt 
 \subsection{Q-Tabelle}
 \label{subsec:Q-Tabelle}
 
-Die einfachste Möglichkeit den SARSA Algorithmus umzusetzen ist die sogenannte Q-Tabelle. Betrachten wir dafür unser Beispiel der Police aus Figure \ref{police}, dann haben wir 16 States und 4 Aktionen. Damit ist unsere Q-Tabelle eine 16x4 Matrix. Wir können uns nun für einen State i die i-te Reihe in unserer Q-Tabelle anschauen und mit dem argmax dieser Reihe die beste Aktion auswählen. \\
+Die einfachste Möglichkeit den SARSA Algorithmus umzusetzen ist die sogenannte Q-Tabelle. Betrachten wir dafür unser Beispiel der Police aus Figure \ref{police}, dann haben wir 16 Zustände und 4 Aktionen. Damit ist unsere Q-Tabelle eine 16x4 Matrix. Wir können uns nun für einen State i die i-te Reihe in unserer Q-Tabelle anschauen und mit dem argmax dieser Reihe die beste Aktion auswählen. \\
 
 Am Anfang können wir bei dieser Methode einfach eine leere Tabelle verwenden, die nur mit 0-len gefüllt ist. Dann können wir in jedem Schritt mit dem $\epsilon$-greedy Algorithmus eine Aktion ausführen und nach jeder Aktion mit SARSA (\ref{SARSA}) die Q-Tabelle aktualisieren. Beachte hier, dass $Q(s_{n+1}, a_{n+1})$ immer null wird, falls wir bei diesem Zug in einem Loch oder am Ziel landen, weil dann keine weiteren Züge stattfinden können. \\
 
-Diese einfache Methode funktioniert hier sehr gut, da kaum Zusammenhänge zwischen Zuständen gibt. Insbesondere können wir hier nicht in zwei verschiedenen Zuständen gleichzeitig sein. Es gibt wirklich nur pro Feld einen Zustand. Bei ähnlichen Vektoren die mit neuronalen Netzen bearbeitet werden, kann ein binärer Vektor mit 16 Einträgen $2^{16}$ Zustände ausdrücken und nicht nur 16. \\
+Diese einfache Methode funktioniert hier sehr gut, da es keine wirklichen Zusammenhänge zwischen Zuständen gibt. Insbesondere können wir hier nicht in zwei verschiedenen Zuständen gleichzeitig sein. Es gibt wirklich nur pro Feld einen Zustand. Bei ähnlichen Vektoren die mit neuronalen Netzen bearbeitet werden, kann ein binärer Vektor mit 16 Einträgen $2^{16}$ Zustände ausdrücken und nicht nur 16. \\
 
 \subsection{Ein einfaches neuronales Netz}
 \label{subsec:dn}
@@ -217,7 +219,7 @@ Wir können jetzt mit der Funktion F und der Optimierung der Gewichte eine Q-Fun
 \label{police}
 \end{figure}
 
-Eine beschränkte Boltzmann Maschine hat nur Gewichte zwischen sichtbaren und nicht-sichtbaren Variablen. So entsteht ein bipartiter Graph. Ansonsten bleibt alles gleich wie in (\ref{F}) und (\ref{diff}). Die Energie E(v,h) reduziert sich dann auf:
+Eine beschränkte Boltzmann Maschine hat nur Gewichte zwischen sichtbaren und nicht-sichtbaren Variablen. So entsteht ein bipartiter Graph. Ansonsten bleibt alles gleich wie in (\ref{F}) und (\ref{update}). Die Energie E(v,h) reduziert sich dann auf:
 
 \begin{align}
 	E(v,h) = - \sum_{i,k}w_{i,k}v_ih_k
@@ -247,7 +249,7 @@ Dazu leiten wir uns aus (\ref{SARSA}) und (\ref{update}) die Regeln her, um nach
 \subsection{Tiefe Boltzmann Maschine}
 \label{subsec:dbm}
 
-Die tiefe Boltzmann Maschine unterscheidet sich von der beschränkten Boltzmann Maschine dadurch, dass hier zusätzliche Verbindungen zwischen der Variablen der versteckten Schichten sind.
+Die tiefe Boltzmann Maschine unterscheidet sich von der beschränkten Boltzmann Maschine dadurch, dass hier zusätzliche Verbindungen zwischen den Variablen der versteckten Schichten sind.
 
 \begin{figure}[hbt!]
 \centering
@@ -327,7 +329,14 @@ Wir wollen hier festlegen, wie wir testen, was wir testen und wie die Ergebnisse
 
 Als erstes wollen wir bei jeder Methode die verschiedenen Parameter und ihre Auswirkungen auf die Lösungen testen. Dabei beschränken wir uns hauptsächlich auf ein 3x3 Feld mit der $\epsilon$-Greedy-Methode, da wir hier weniger Rechenzeit brauchen und mit jeder Methode richtige Lösungen finden können. Wenn wir bereits gute Parameter einer Methode gefunden haben, ist es auch interessant kompliziertere Spielfelder auszuprobieren. Bei sehr großen Spielfeldern stößt irgendwann die $\epsilon$-Greedy-Methode an ihre Grenzen, da wir hier mit einer zufälligen Police am Anfang nicht mehr das Ziel finden können. 
 
-Hier gibt es zwei Möglichkeiten, die erste ist, dass wir unser Startfeld in die Nähe des Ziels setzen und so lernen. Dann können wir ohne das Netz zu löschen, das Startfeld weiter vom Ziel entfernen und von dort weiter lernen. So können wir das Startfeld in mehreren Schritten zur eigentichen Startposition bewegen und haben so eine Chance, die richtige Lösung zu finden. Interessant ist hier, wie stabil die Methoden mit den bis jetzt gelernten Policen umgehen und etwas dazulernen können, ohne altes zu verlernen. 
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/Intermediate.png}
+\caption{3x3 Fekd}
+\label{advanced}
+\end{figure}
+
+Hier gibt es zwei Möglichkeiten, die erste ist, dass wir unser Startfeld in die Nähe des Ziels setzen und so lernen. Dann können wir ohne das Netz zurückzusetzen, das Startfeld weiter vom Ziel entfernen und von dort weiter lernen. So können wir das Startfeld in mehreren Schritten zur eigentichen Startposition bewegen und haben so eine Chance, die richtige Lösung zu finden. Interessant ist hier, wie stabil die Methoden mit den bis jetzt gelernten Policen umgehen und etwas dazulernen können, ohne altes zu verlernen. 
 
 Die zweite Möglichkeit ist, komplett von der $\epsilon$-Greedy-Methode abzusehen und eine Schleife über alle Felder zu machen und für jedes Feld jede Aktion zu testen und daraus zu lernen. Das funktioniert besser, braucht aber für große Spielfelder sehr viel Rechenzeit, bis wir die richtige Lösung gefunden haben.
 
@@ -375,7 +384,9 @@ Hier wollen wir als erstes testen, wie viele Neuronen wir in der versteckten Sch
 \label{police}
 \end{figure}
 
-Wir sehen also, wir brauchen mindestens 3 Neuronen, um auf die richtige Lösung zu kommen. Das ist interessant, da wir 4 Aktionen und 4 Zustände haben. Ab 5 Neuronen gibt es keine klaren Unterschiede mehr bei dem kleinen Spielfeld.
+Wir sehen also, wir brauchen mindestens 3 Neuronen, um auf die richtige Lösung zu kommen. Das ist interessant, da wir 4 Aktionen und 4 Zustände haben. Wir können das Problem also mit weniger Neuronen als möglichen Aktionen lösen. Ab 5 Neuronen gibt es keine klaren Unterschiede mehr bei dem kleinen Spielfeld.
+
+Beim 3x3 Feld brauchen wir gleich deutlich mehr Neuronen. Zwischen 8 und 64 Neuronen bekommen wir richtige Ergebnisse.
 
 \begin{figure}[H]
 \centering
@@ -384,7 +395,14 @@ Wir sehen also, wir brauchen mindestens 3 Neuronen, um auf die richtige Lösung 
 \label{police}
 \end{figure}
 
-Beim 3x3 Feld brauchen wir gleich deutlich mehr Neuronen. Zwischen 8 und 64 Neuronen bekommen wir richtige Ergebnisse.
+Als nächstes testen wir mit 16 Neuronen weiter und vergleichen verschiedene Werte für $\gamma$.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/3x3_dn_2_dn_4_dn_8_dn_16_dn_32_dn_64_dn_128_dn_256.png}
+\caption{Tiefe Boltzmann Maschine}
+\label{police}
+\end{figure}
 
 \newpage
 
