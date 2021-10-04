@@ -320,7 +320,74 @@ Wie wir dann auch in unseren Experimenten sehen können, brauchen wir (\ref{Qdbm
 \section{RESULTS}
 \label{sec:res}
 
-\ldots
+\subsection{Prinzipien des Testens}
+\label{subsec:Prinzipien}
+
+Wir wollen hier festlegen, wie wir testen, was wir testen und wie die Ergebnisse dargestellt und wie sie zu bewerten sind.
+
+Als erstes wollen wir bei jeder Methode die verschiedenen Parameter und ihre Auswirkungen auf die Lösungen testen. Dabei beschränken wir uns hauptsächlich auf ein 3x3 Feld mit der $\epsilon$-Greedy-Methode, da wir hier weniger Rechenzeit brauchen und mit jeder Methode richtige Lösungen finden können. Wenn wir bereits gute Parameter einer Methode gefunden haben, ist es auch interessant kompliziertere Spielfelder auszuprobieren. Bei sehr großen Spielfeldern stößt irgendwann die $\epsilon$-Greedy-Methode an ihre Grenzen, da wir hier mit einer zufälligen Police am Anfang nicht mehr das Ziel finden können. 
+
+Hier gibt es zwei Möglichkeiten, die erste ist, dass wir unser Startfeld in die Nähe des Ziels setzen und so lernen. Dann können wir ohne das Netz zu löschen, das Startfeld weiter vom Ziel entfernen und von dort weiter lernen. So können wir das Startfeld in mehreren Schritten zur eigentichen Startposition bewegen und haben so eine Chance, die richtige Lösung zu finden. Interessant ist hier, wie stabil die Methoden mit den bis jetzt gelernten Policen umgehen und etwas dazulernen können, ohne altes zu verlernen. 
+
+Die zweite Möglichkeit ist, komplett von der $\epsilon$-Greedy-Methode abzusehen und eine Schleife über alle Felder zu machen und für jedes Feld jede Aktion zu testen und daraus zu lernen. Das funktioniert besser, braucht aber für große Spielfelder sehr viel Rechenzeit, bis wir die richtige Lösung gefunden haben.
+
+Die Resultate lassen wir durch einen Graphen anzeigen. Bei der $\epsilon$-Greedy-Methode stehen auf der y-Achse die durchschnittlichen Punkte von 100 Spielen. Bei der Schleife über alle Felder dagegen, betrachten wir, von wie vielen Feldern wir die richtige Lösung finden können und zeichnen dies auf der y-Achse auf.
+
+\subsection{Q-Tabelle Resultate}
+\label{subsec:Q-Tabelle_r}
+
+Die Q-Tabelle findet immer eine passende Lösung, wenn bei der $\epsilon$-Greedy-Methode zumindest ab und zu eine Lösung gefunden werden kann.
+
+Der blaue Graph ist hier übrigens  $\epsilon$. In den meisten Vergleichen, wenn wir verschiedene Parameter testen wollen, lassen wir  $\epsilon$ weg. Die  $\epsilon$ Kurve sieht aber immer gleich aus, es sei denn, wenn wir verschiedene Startfelder nacheinander wählen. Dann startet  $\epsilon$ jedes Mal wieder bei 1.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/q_table_3x3.png}
+\caption{3x3}
+\label{police}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/q_table_5x5.png}
+\caption{5x5}
+\label{police}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/q_table_8x8.png}
+\caption{8x8}
+\label{police}
+\end{figure}
+
+Das 5x5 Feld ist sehr voll mit Löchern, daher sorgen hier geringe $\epsilon$ immer noch für einige falsche Züge und damit für niedrigere Punkte. Allgemein sind die Ergebnisse alle vergleichsweise sehr gut. Parameter testen lohnt sicht hier nicht, da wir nur die Lernrate benötigen und diese quasi keine Rollen spielt. Z.B. eine Verdopplung der Lernrate sorgt einfach nur dafür, dass sich alle Einträge in der Q-Tabelle verdoppeln, was zu exakt dem gleichen Ergebnis führt. Wir können im weiteren die Ergebnisse der Q-Tabelle als Referenz für eine sehr gute Methode hernehmen.
+
+\subsection{Einfaches neuronales Netz Resultate}
+\label{subsec:dn_r}
+
+Hier wollen wir als erstes testen, wie viele Neuronen wir in der versteckten Schicht brauchen, um überhaupt richtige Ergebnisse zu erzielen. Dies testen wir in dem kleinsten 2x2 Spielfeld.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/2x2_dn_1_dn_2_dn_3_dn_4_dn_5.png}
+\caption{Tiefe Boltzmann Maschine}
+\label{police}
+\end{figure}
+
+Wir sehen also, wir brauchen mindestens 3 Neuronen, um auf die richtige Lösung zu kommen. Das ist interessant, da wir 4 Aktionen und 4 Zustände haben. Ab 5 Neuronen gibt es keine klaren Unterschiede mehr bei dem kleinen Spielfeld.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/3x3_dn_2_dn_4_dn_8_dn_16_dn_32_dn_64_dn_128_dn_256.png}
+\caption{Tiefe Boltzmann Maschine}
+\label{police}
+\end{figure}
+
+Beim 3x3 Feld brauchen wir gleich deutlich mehr Neuronen. Zwischen 8 und 64 Neuronen bekommen wir richtige Ergebnisse.
+
+\newpage
+
 
 
 \begin{acknowledgement}

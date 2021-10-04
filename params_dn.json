@@ -1,0 +1,37 @@
+{
+    "env": {
+        "example": 4,
+        "border_rule": "stay"
+    },
+    "play": {
+        "num_samples": 10000,
+        "max_steps": 6
+    },
+    "agents": [
+        {
+            "method": "dn",
+            "name": "dn_g0,6",
+            "n_hidden": 16,
+            "lr": 0.00005,
+            "gamma": 0.6
+        },{
+            "method": "dn",
+            "name": "dn_g0,8",
+            "n_hidden": 16,
+            "lr": 0.00005,
+            "gamma": 0.8
+        },{
+            "method": "dn",
+            "name": "dn_g0,9",
+            "n_hidden": 16,
+            "lr": 0.00005,
+            "gamma": 0.9
+        },{
+            "method": "dn",
+            "name": "dn_g0,95",
+            "n_hidden": 16,
+            "lr": 0.00005,
+            "gamma": 0.95
+        }
+    ]
+}
