@@ -1,11 +1,11 @@
 {
     "env": {
-        "example": 4,
+        "example": 5,
         "border_rule": "stay"
     },
     "play": {
         "num_samples": 10000,
-        "max_steps": 10
+        "max_steps": 15
     },
     "agents": [
         {
