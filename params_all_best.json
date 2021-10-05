@@ -26,7 +26,7 @@
             "lr": 0.01,
             "gamma": 0.8,
             "beta": 20,
-            "init_sd": 0.1
+            "init_sd": 1
         },{
             "method": "dbm",
             "name": "dbm_4",
