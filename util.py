@@ -160,6 +160,7 @@ def compare_learning_curves(scores, filename, agents, avg):
     ax.axes.get_xaxis().set_visible(False)
     ax.yaxis.set_label_position('left')
     ax.tick_params(axis='y', colors="C0")
+    ax.tick_params(axis='x', colors="C0")
 
     plt.savefig("images/" + filename, dpi=300)
 
@@ -191,6 +192,7 @@ def compare_learning_curves_rdn(scores, filename, agents, avg):
     ax.axes.get_xaxis().set_visible(False)
     ax.yaxis.set_label_position('left')
     ax.tick_params(axis='y', colors="C0")
+    ax.tick_params(axis='x', colors="C0")
 
     plt.savefig("images/" + filename, dpi=300)
 

@@ -1,0 +1,77 @@
+{
+    "env": {
+        "example": 3,
+        "border_rule": "stay"
+    },
+    "play": {
+        "num_samples": 10000,
+        "max_steps": 10
+    },
+    "agents": [
+        {
+            "method": "rbm",
+            "name": "rbm_2",
+            "n_hidden": 2,
+            "lr": 0.01,
+            "gamma": 0.8,
+            "beta": 20,
+            "init_sd": 0.1
+        },{
+            "method": "rbm",
+            "name": "rbm_4",
+            "n_hidden": 4,
+            "lr": 0.01,
+            "gamma": 0.8,
+            "beta": 20,
+            "init_sd": 0.1
+        },{
+            "method": "rbm",
+            "name": "rbm_8",
+            "n_hidden": 8,
+            "lr": 0.01,
+            "gamma": 0.8,
+            "beta": 20,
+            "init_sd": 0.1
+        },{
+            "method": "rbm",
+            "name": "rbm_16",
+            "n_hidden": 16,
+            "lr": 0.01,
+            "gamma": 0.8,
+            "beta": 20,
+            "init_sd": 0.1
+        },{
+            "method": "rbm",
+            "name": "rbm_32",
+            "n_hidden": 32,
+            "lr": 0.01,
+            "gamma": 0.8,
+            "beta": 20,
+            "init_sd": 0.1
+        },{
+            "method": "rbm",
+            "name": "rbm_64",
+            "n_hidden": 64,
+            "lr": 0.01,
+            "gamma": 0.8,
+            "beta": 20,
+            "init_sd": 0.1
+        },{
+            "method": "rbm",
+            "name": "rbm_128",
+            "n_hidden": 128,
+            "lr": 0.01,
+            "gamma": 0.8,
+            "beta": 20,
+            "init_sd": 0.1
+        },{
+            "method": "rbm",
+            "name": "rbm_256",
+            "n_hidden": 256,
+            "lr": 0.01,
+            "gamma": 0.8,
+            "beta": 20,
+            "init_sd": 0.1
+        }
+    ]
+}

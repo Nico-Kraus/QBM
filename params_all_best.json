@@ -17,8 +17,8 @@
             "method": "dn",
             "name": "dn",
             "n_hidden": 16,
-            "lr": 0.00005,
-            "gamma": 0.8
+            "lr": 0.0001,
+            "gamma": 0.4
         },{
             "method": "rbm",
             "name": "rbm",

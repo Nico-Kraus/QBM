@@ -31,14 +31,14 @@ Unten sehen wir Beispielhaft zwei Spielfelder. In den Grafiken unten steht S fü
 \centering
 \includegraphics[width=\textwidth]{Figures/advanced1.png}
 \caption{4x4 Feld}
-\label{advanced}
+\label{advanced1}
 \end{figure}
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Figures/advanced2.png}
 \caption{3x5 Fekd}
-\label{advanced}
+\label{advanced2}
 \end{figure}
 
 \subsection{Varianten der Umgebung}
@@ -347,27 +347,31 @@ Die Resultate lassen wir durch einen Graphen anzeigen. Bei der $\epsilon$-Greedy
 
 Die Q-Tabelle findet immer eine passende Lösung, wenn bei der $\epsilon$-Greedy-Methode zumindest ab und zu eine Lösung gefunden werden kann.
 
-Der blaue Graph ist hier übrigens  $\epsilon$. In den meisten Vergleichen, wenn wir verschiedene Parameter testen wollen, lassen wir  $\epsilon$ weg. Die  $\epsilon$ Kurve sieht aber immer gleich aus, es sei denn, wenn wir verschiedene Startfelder nacheinander wählen. Dann startet  $\epsilon$ jedes Mal wieder bei 1.
+Der blaue Graph ist hier übrigens  $\epsilon$. In den meisten Vergleichen, wenn wir verschiedene Parameter testen wollen, lassen wir  $\epsilon$ weg. Die  $\epsilon$ Kurve sieht aber immer gleich aus, es sei denn, wenn wir verschiedene Startfelder nacheinander wählen.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Figures/q_table_3x3.png}
-\caption{3x3}
-\label{police}
+\caption{3x3 Q-Tabelle}
+\label{q1}
 \end{figure}
+
+Das 5x5 Feld ist sehr dicht mit Löchern besetzt. Hier erhöhen wir die Anzahl der Spiele auf 100000.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Figures/q_table_5x5.png}
-\caption{5x5}
-\label{police}
+\caption{5x5 Q-Tabelle}
+\label{q2}
 \end{figure}
+
+Das 8x8 Feld ist zwar groß, hat aber viele freie Felder und viele Wege zum Ziel.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Figures/q_table_8x8.png}
-\caption{8x8}
-\label{police}
+\caption{8x8 Q-Tabelle}
+\label{q3}
 \end{figure}
 
 Das 5x5 Feld ist sehr voll mit Löchern, daher sorgen hier geringe $\epsilon$ immer noch für einige falsche Züge und damit für niedrigere Punkte. Allgemein sind die Ergebnisse alle vergleichsweise sehr gut. Parameter testen lohnt sicht hier nicht, da wir nur die Lernrate benötigen und diese quasi keine Rollen spielt. Z.B. eine Verdopplung der Lernrate sorgt einfach nur dafür, dass sich alle Einträge in der Q-Tabelle verdoppeln, was zu exakt dem gleichen Ergebnis führt. Wir können im weiteren die Ergebnisse der Q-Tabelle als Referenz für eine sehr gute Methode hernehmen.
@@ -380,29 +384,58 @@ Hier wollen wir als erstes testen, wie viele Neuronen wir in der versteckten Sch
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Figures/2x2_dn_1_dn_2_dn_3_dn_4_dn_5.png}
-\caption{Tiefe Boltzmann Maschine}
-\label{police}
+\caption{2x2 Neuronales Netz: Neuronen}
+\label{dn1}
 \end{figure}
 
-Wir sehen also, wir brauchen mindestens 3 Neuronen, um auf die richtige Lösung zu kommen. Das ist interessant, da wir 4 Aktionen und 4 Zustände haben. Wir können das Problem also mit weniger Neuronen als möglichen Aktionen lösen. Ab 5 Neuronen gibt es keine klaren Unterschiede mehr bei dem kleinen Spielfeld.
+Wir brauchen also mindestens 3 Neuronen, um auf die richtige Lösung zu kommen. Das ist interessant, da wir 4 Aktionen und 4 Zustände haben. Wir können das Problem also mit weniger Neuronen als möglichen Aktionen lösen. Ab 5 Neuronen gibt es keine klaren Unterschiede mehr bei dem kleinen Spielfeld.
 
 Beim 3x3 Feld brauchen wir gleich deutlich mehr Neuronen. Zwischen 8 und 64 Neuronen bekommen wir richtige Ergebnisse.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Figures/3x3_dn_2_dn_4_dn_8_dn_16_dn_32_dn_64_dn_128_dn_256.png}
-\caption{Tiefe Boltzmann Maschine}
-\label{police}
+\caption{3x3 Neuronales Netz: Neuronen}
+\label{dn2}
 \end{figure}
 
 Als nächstes testen wir mit 16 Neuronen weiter und vergleichen verschiedene Werte für $\gamma$.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Figures/3x3_dn_2_dn_4_dn_8_dn_16_dn_32_dn_64_dn_128_dn_256.png}
-\caption{Tiefe Boltzmann Maschine}
-\label{police}
+\includegraphics[width=\textwidth]{Figures/3x3_dn_g0,01_dn_g0,1_dn_g0,8_dn_g0,95_dn_g0,99.png}
+\caption{3x3 Neuronales Netz: $\gamma$}
+\label{dn3}
 \end{figure}
+
+Am besten haben hier die Werte 0,1 und 0,8 für $\gamma$ funktioniert. Wir bleiben also im weiteren bei dem Wert 0,8. Dieser wird auch häufig in der Literatur verwendet. Behalten wir aber im Auge, das eventuell niedrigere Werte besser funktionieren könnten.
+
+Zuletzt wollen wir die Lernrate testen. Eine hohe Lernrate kann dazu führen, dass das Netz hin und her schwankt und sich nicht einpendelt. Eine zu niedrige Lernrate kann dazu führen, dass die 10000 Spiele nicht ausreichen, um das richtige Ergebnis zu lernen.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/3x3_dn_lr0,01_dn_lr0,001_dn_lr0,0001_dn_lr0,00005_dn_lr0,000001_dn_lr0,0000005.png}
+\caption{3x3 Neuronales Netz: Lernrate}
+\label{dn4}
+\end{figure}
+
+Hier sieht man also, dass das Netz wirklich sehr empfindlich auf die Lernrate reagiert. Ein Wert von 0,00005 scheint in jedem Fall gut zu sein. Aber genau wie bei $\gamma$ kann man hier noch andere Werte in der Nähe testen.
+
+Als letztes wollen wir das 4x4 Feld testen (Figure \ref{advanced1}). Dazu kombinieren wir verschiedene gute Parameter aus den vorigen Testläufen.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/4x4_16_dn_lr0,0001_g0,8_dn_lr0,0001_g0,4_dn_lr0,00005_g0,8_dn_lr0,00005_g0,4.png}
+\caption{4x4 Neuronales Netz: Gamma und Lernrate}
+\label{dn5}
+\end{figure}
+
+Hier schneidet der Agent mit $\gamma$ = 0,4 und einer Lernrate von 0,0001 am besten ab. Meine erste Vermutung war hier, dass es sich um einen Zufall handelt und es davon abhängt, wie oft der Agent in den ersten 2000-3000 Spielen zufällig das Ziel findet. Durch eine Wiederholung des Experiments konnten wir das jedoch ausschließen. Mit anderen Parametern konnte zwar manchmal auch die beste Police gelernt werden, allerdings waren die gerade genannten Parameter immer am schnellsten.
+
+\subsection{Beschränkte Boltzmann Maschine}
+\label{subsec:dbm_r}
+
+Bei der beschränkten Boltzmann Maschine haben wir 2 weitere Parameter. Zum einen den Wert $\beta$, der die Entropy abschwächt und zum anderen initialisieren wir die Gewichte am Anfang zufällig mit dem Erwartungswert 0 und einer Standardabweichung. Die Standardabweichung hat tatsächlich großen Einfluss auf das Ergebniss, da eine hohe Standardabweichung dazu führt, dass der Agent auf verschiedenen leeren Feldern sehr hohe Belohungen oder Bestrafungen erwartet. Diese Vorannahmen müssen dann erst wieder verlernt werden, was zu einem langsameren Lernverhalten führt.
 
 \newpage
 
