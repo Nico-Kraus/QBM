@@ -5,6 +5,7 @@ from q_table import Q_table
 from dn import Dn
 from rbm import Rbm
 from dbm import Dbm
+from dbm_ import Dbm_
 from qbm import Qbm
 
 class Agent():
@@ -22,6 +23,9 @@ class Agent():
             self.method = Rbm(self.n_actions, self.n_states, params)
         if params["method"] == 'dbm':
             self.method = Dbm(self.n_actions, self.n_states, params)
+            std_dev_from_h(self)
+        if params["method"] == 'dbm_':
+            self.method = Dbm_(self.n_actions, self.n_states, params)
             std_dev_from_h(self)
         if params["method"] == 'dbm_2':
             print("under construction")

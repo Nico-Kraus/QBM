@@ -4,7 +4,7 @@
         "border_rule": "stay"
     },
     "play": {
-        "num_samples": 5000,
+        "num_samples": 10000,
         "max_steps": 6
     },
     "agents": [
@@ -22,15 +22,15 @@
         },{
             "method": "rbm",
             "name": "rbm",
-            "n_hidden": 15,
+            "n_hidden": 64,
             "lr": 0.01,
             "gamma": 0.8,
-            "beta": 20,
+            "beta": 50,
             "init_sd": 1
         },{
             "method": "dbm",
             "name": "dbm_4",
-            "n_hidden": 4,
+            "n_hidden": 16,
             "lr": 0.001,
             "gamma": 0.8,
             "beta": 1000,
