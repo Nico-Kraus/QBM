@@ -247,7 +247,7 @@ Dazu leiten wir uns aus (\ref{SARSA}) und (\ref{update}) die Regeln her, um nach
 	w_{ah} \: += \alpha ( r_n + \gamma Q(s_{n+1}, a_{n+1}) -  Q(s_n, a_n) ) a \langle h \rangle
 \end{align*}
 
-\subsection{Tiefe Boltzmann Maschine}
+\subsection{Tiefe Boltzmann Maschine Resultate mit Quanten Annealing}
 \label{subsec:dbm}
 
 Die tiefe Boltzmann Maschine unterscheidet sich von der beschränkten Boltzmann Maschine dadurch, dass hier zusätzliche Verbindungen zwischen den Variablen der versteckten Schichten sind.
@@ -521,7 +521,7 @@ Da wir bei den Feldern aus (Figure \ref{advanced1}) und (Figure \ref{advanced2})
 
 Hier sehen wir zum ersten Mal, wie 16 Neuronen nicht mehr ausreichen. Der $\beta$-Wert dageben scheint in einer recht großen Spannweite gut zu funktionieren. Wobei anscheinend der Wert 50 sogar besser ist, da hier selbst mit 16 Neuronen noch die richtige Police gefunden wurde.
 
-\subsection{Tiefe Boltzmann Maschine Resultate}
+\subsection{Tiefe Boltzmann Maschine Resultate mit Quanten Annealing}
 \label{subsec:dbm_r}
 
 Die Neuheit bei diesem Algorithmus ist vor allem, dass wir die Aktivierung der versteckten Neuronen mit simuliertem Quanten Annealing berechnen. Daher kommen hier 3 neue Parameter hinzu: Anzahl der Annealing-Durchläufe, Anzahl der Schritte beim Annealing und die Annealing Temperatur, die aus einem Startwert und einem Endwert besteht. 
@@ -536,8 +536,33 @@ Dafür können wir in diesem Verfahren $\beta$ weglassen, da wir die Entropy üb
 \centering
 \includegraphics[width=\textwidth]{Figures/rbm8_5x5_rbm_16_b10_rbm_64_b10_rbm_16_b50_rbm_64_b50.png}
 \caption{5x5 Beschränkte Boltzmann maschine: Neuronen und $\beta$}
-\label{rbm5}
+\label{dbm1}
 \end{figure}
+
+\subsection{Die besten Parameter}
+\label{subsec:best}
+
+Bevor wir die Ergebnisse von allen Methoden im Vergleich zeigen, hier eine Auflistung der besten Parameter aus den bisherigen Experimenten:
+
+\begin{tabular}[h]{c|c|c|c|c}
+Parameter 				& Q-Tabelle 	& Einfaches Netz 	& Beschränkte Boltzmann 	& Quanten Boltzmann  		\\
+\hline
+Lernrate 					& 0.001 		& 0.0001			& 0.01				& 0.01					\\
+\hline
+Neuronen 					& - 			& 16 - 32			& 64 					& 16 						\\
+\hline
+$\gamma$ 				& 0.8			& 0.4				& 0.8					& 0.8						\\
+\hline
+$\beta$ 					& - 			& - 				& 50 					& - 						\\
+\hline
+Standardabweichung 			& - 			& - 				& 1 					& 0.1						\\
+\hline
+Annealing Durchläufe (runs)	& - 			& - 				& - 					& 100-1000				\\
+\hline
+Annealing Schritte (sweeps)	& - 			& - 				& - 					& 100-1000				\\
+\hline
+Annealing Temperatur		& - 			& - 				& - 					& [2,20]					\\
+\end{tabular}
 
 \newpage
 
