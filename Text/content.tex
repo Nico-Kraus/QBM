@@ -544,12 +544,13 @@ Dafür können wir in diesem Verfahren $\beta$ weglassen, da wir die Entropy üb
 
 Bevor wir die Ergebnisse von allen Methoden im Vergleich zeigen, hier eine Auflistung der besten Parameter aus den bisherigen Experimenten:
 
-\begin{tabular}[h]{c|c|c|c|c}
+
+\begin{tabular}[H]{c|c|c|c|c}
 Parameter 				& Q-Tabelle 	& Einfaches Netz 	& Beschränkte Boltzmann 	& Quanten Boltzmann  		\\
 \hline
 Lernrate 					& 0.001 		& 0.0001			& 0.01				& 0.01					\\
 \hline
-Neuronen 					& - 			& 16 - 32			& 64 					& 16 						\\
+Neuronen 					& - 			& 16 - 32			& 64 					& 8 - 16					\\
 \hline
 $\gamma$ 				& 0.8			& 0.4				& 0.8					& 0.8						\\
 \hline
@@ -557,11 +558,11 @@ $\beta$ 					& - 			& - 				& 50 					& - 						\\
 \hline
 Standardabweichung 			& - 			& - 				& 1 					& 0.1						\\
 \hline
-Annealing Durchläufe (runs)	& - 			& - 				& - 					& 100-1000				\\
+Annealing Durchläufe (runs)	& - 			& - 				& - 					& 100 - 1000				\\
 \hline
-Annealing Schritte (sweeps)	& - 			& - 				& - 					& 100-1000				\\
+Annealing Schritte (sweeps)	& - 			& - 				& - 					& 100 - 1000				\\
 \hline
-Annealing Temperatur		& - 			& - 				& - 					& [2,20]					\\
+Annealing Temperatur		& - 			& - 				& - 					& [2, 20]					\\
 \end{tabular}
 
 \newpage
