@@ -189,11 +189,12 @@ wobei i und j Indices über die sichtbaren Variaben und k und m Indices über di
 Wir wollen eine Energie-Funktion in Abhängigkeit der sichtbaren Variablen aufstellen:
 
 \begin{align}
-	F(v) = \sum_{h}\mathbb{P}(h|v)E(v,h) + \sum_{h}\mathbb{P}(h|v)log(\mathbb{P}(h|v)) \label{F}
+	F(v) = \sum_{h}\mathbb{P}(h|v)E(v,h) + \frac{1}{\beta} \sum_{h}\mathbb{P}(h|v)log(\mathbb{P}(h|v)) \label{F}
 \end{align}
 
 Dabei steht $\mathbb{P}(h|v)$ für die Wahrscheinlichkeit, dass die Variable h = 1 ist, mit dem gewählten Variblen v.
 Um die erste Summe zu minimieren, werden möglichst viele Variablen auf 1 gesetzt, wo E(v,h) niedrig bzw. negativ ist und um die zweite Summe zu minimieren, soll die Wahrscheinlichkeitsverteilung von $\mathbb{P}$ eine hohe Entropie haben, das heißt, die Wahrscheinlichkeit soll entweder 1 oder 0 sein.
+$\beta$ ist ein Parameter, den man wählen kann. Durch ihn kann man die Wirkung der zweiten Summe abschwächen.
 
 Interessanterweise ist es recht einfach die Gewichte zu optimieren:
 
@@ -228,9 +229,9 @@ Eine beschränkte Boltzmann Maschine hat nur Gewichte zwischen sichtbaren und ni
 Q(s,a) können wir dann wie folgt zusammenfassen:
 
 \begin{align*}
-	Q(s,a) 	&= \sum_{h}\mathbb{P}(h|s,a)E(s,a,h) - \sum_{h}\mathbb{P}(h|s,a)log(\mathbb{P}(h|s,a))  \\
-		=  	&- \sum_{k, } w_{i,k}s_i \langle h_k \rangle - \sum_{k,j} w_{j,k}a_j \langle h_k \rangle  \\
-			&- \sum_{k} \langle h_k \rangle log(\langle h_k \rangle) + (1 -  \langle h_k) \rangle log( (1 - \langle h_k \rangle) ) 
+	Q(s,a) 	= 		&\sum_{h}\mathbb{P}(h|s,a)E(s,a,h) - \sum_{h}\mathbb{P}(h|s,a)log(\mathbb{P}(h|s,a))  \\
+			=  	- 	&\sum_{k, } w_{i,k}s_i \langle h_k \rangle - \sum_{k,j} w_{j,k}a_j \langle h_k \rangle  \\
+	- 	\frac{1}{\beta} 	&\sum_{k} \langle h_k \rangle log(\langle h_k \rangle) + (1 -  \langle h_k) \rangle log( (1 - \langle h_k \rangle) ) 
 \end{align*}
 
 wobei $\langle h_k \rangle$ mit der sigmoid Funktion berechnet wird:
@@ -242,11 +243,11 @@ wobei $\langle h_k \rangle$ mit der sigmoid Funktion berechnet wird:
 Dazu leiten wir uns aus (\ref{SARSA}) und (\ref{update}) die Regeln her, um nach jedem Schritt zu lernen:
 
 \begin{align*}
-	w_{sh} \:+= \alpha ( r_n + \gamma Q(s_{n+1}, a_{n+1}) -  Q(s_n, a_n) ) s \langle h \rangle \\
+	w_{sh} \: += \alpha ( r_n + \gamma Q(s_{n+1}, a_{n+1}) -  Q(s_n, a_n) ) s \langle h \rangle \\
 	w_{ah} \: += \alpha ( r_n + \gamma Q(s_{n+1}, a_{n+1}) -  Q(s_n, a_n) ) a \langle h \rangle
 \end{align*}
 
-\subsection{Tiefe Boltzmann Maschine}
+\subsection{Tiefe Boltzmann Maschine Resultate mit Quanten Annealing}
 \label{subsec:dbm}
 
 Die tiefe Boltzmann Maschine unterscheidet sich von der beschränkten Boltzmann Maschine dadurch, dass hier zusätzliche Verbindungen zwischen den Variablen der versteckten Schichten sind.
@@ -266,7 +267,7 @@ Die Q-Funktion erweitert sich jetzt hier im Vergleich zur beschränkten Boltzman
 	Q(s,a) =  	&- \sum_{k,i} w_{i,k}s_i \langle h_k \rangle  
 				- \sum_{k,j} w_{j,k}a_j \langle h_k \rangle   
 				- \sum_{k,m}w_{km} \langle h_k h_m \rangle \label{Qdbm1}   \\  
-				&- \sum_{k} \langle h_k \rangle log(\langle h_k \rangle) + (1 -  \langle h_k) \rangle log( (1 - \langle h_k \rangle) )  \label{Qdbm2}
+				&-  \frac{1}{\beta} \sum_{k} \langle h_k \rangle log(\langle h_k \rangle) + (1 -  \langle h_k) \rangle log( (1 - \langle h_k \rangle) )  \label{Qdbm2}
 \end{align}
 
 und auch die Update-Regel bekommt einen weiteren Teil:
@@ -283,7 +284,26 @@ Jetzt kommt der spannende Teil. Die freie Energie der tiefen Boltzmann Maschine 
 	E_v(h) = - \sum_{k,i}w_{k,i}v_ih_k - \sum_{k<m}w_{km}h_kh_m \label{energiedbm}
 \end{align}
 
-Dabei sind die sichtbaren Schichten v jetzt feste Parameter und nur noch h sind freie Variablen. Da $\langle h \rangle$ binäre Variablen sind und wir die Gesamtenergie minimieren wollen, handelt es sich hier also um ein quadratisches, binäres Optimierungsproblem kurz QUBO. Dieses können wir mit Hilfe von Annealing lösen oder auch mit Hilfe von einem Quantencomputer mit QAOA oder mit adiabatischen Quantencomputern. Wir interessieren uns vor allem für Quanten-Annealing, einer Unterform von adiabatischen Quantencomputern, welches von DWave erforscht wird. Wir haben dabei einen vollvernetzten Graphen mit so vielen Variablen, wie wir Variablen in der versteckten Schicht haben. Hier kann der DWave bekanntlich auch Probleme mit z.B. 16 Variablen gut lösen. Da wir aber in unseren Tests für einen Testlauf meistens 10 000 Spiele auf dem Frozen Lake spielen wollen und für jeden einzelnen Zug 8 QUBO's lösen müssen, verwenden wir hier simuliertes Quanten Annealing.
+Dabei sind die sichtbaren Schichten v jetzt feste Parameter und nur noch h sind freie Variablen. Da $\langle h \rangle$ binäre Variablen sind und wir die Gesamtenergie minimieren wollen, handelt es sich hier also um ein quadratisches, binäres Optimierungsproblem kurz QUBO. Dieses können wir mit Hilfe von Annealing lösen oder auch mit Hilfe von einem Quantencomputer mit QAOA oder mit adiabatischen Quantencomputern. Wir interessieren uns vor allem für Quanten-Annealing, einer Unterform von adiabatischen Quantencomputern, welches von DWave erforscht wird. Wir haben dabei einen vollvernetzten Graphen mit so vielen Variablen, wie wir Neuronen in der versteckten Schicht haben. Hier kann der DWave bekanntlich auch Probleme mit z.B. 16 Variablen gut lösen. Da wir aber in unseren Tests für einen Testlauf meistens 10 000 Spiele auf dem Frozen Lake spielen wollen und für jeden einzelnen Zug 8 QUBO's lösen müssen, verwenden wir hier simuliertes Quanten Annealing.
+
+Eine naheliegende Idee wäre jetzt (\ref{Qdbm1}) mit der durchschnittlichen Energie zu ersetzen, die wir in unserem QUBO Problem durch den Hamiltonian ausgerechnet haben. Diese bekommen wir vom simulierten Annealing (wir benutzen dafür eine Library von DWave) zurück und können diese gleich einsetzen.
+Allerdings ist die durchschnittliche Energie nicht identisch mit der Energie, die wir aus den verstecken Variablen h berechnen. Der Grund dafür sind die quadratischen Terme im QUBO. Dazu ein kleines Beispiel:
+
+Sei ein QUBO gegeben, durch zwei Variablen die mit einer Kante verbunden sind. Diese Kante hat den Wert -1. Führen wir jetzt zwei Annealing Durchläufe aus, bekommen wir zum Beispiel die Ergebnisse (1,1) und (0,0). Damit berechnen wir die Aktivierung von den versteckten Variablen mit:
+
+\begin{align}
+	\frac{(1, 1) + (0, 0)}{2} = (0.5, 0.5)
+\end{align}
+
+Es ergibt sich mit (\ref{Qdbm1}) ohne die Entropy die Energie:
+
+\begin{align}
+	0.5 * 0.5 * -1 = -0.25
+\end{align}
+
+Im Vergleich dazu, hat das erste Ergebnis (1,1) die Energie -1 und das zweite Ergebnis (0,0) die Energie 0 und damit wäre die durchschnittliche Energie -0.5.
+
+Das heißt wir bekommen mit der durchschnittlichen Energie unserer Messergebnisse ein ähnliches aber leicht verschiedenes Ergebniss zu (\ref{Qdbm1}), welches die freie Energie der Boltzmann Maschine beschreibt. In verschiedenen Tests zeigte sich auch, dass der Algorithmus mit der durchschnittlichen Energie aus den Messergebnissen ähnliche Ergebnisse liefert, jedoch ein wenig schlechter als mit der direkten Berechnung durch  (\ref{Qdbm1}). Wir wollen daher die Variante mit der durchschnittlichen Energie im weiteren nicht näher betrachten.
 
 \subsection{Quanten Annealing}
 \label{subsec:QA}
@@ -315,28 +335,26 @@ Wie langsam dieser Prozess sein muss, hängt dabei vom minimalen Unterschied (Ga
 
 Wir benutzen Quanten Annealing oder simuliertes Quanten Annealing um eine Lösung von (\ref{energiedbm}) zu finden. Allerdings haben wir hier eine Besonderheit, wir wollen nicht unbedingt immer die beste Lösung finden, denn dann wären unsere versteckten Variablen immer entweder 0 oder 1, wie die binären Variablen in der Lösung vom QUBO. Stattdessen führen wir mehrere Durchläufe vom Annealing Prozess durch und wählen dabei die Annealing Zeit so kurz, das wir verschiedene Lösungen finden. So können wir den Durchschnitt der Lösungen berechnen und bekommen so weichere Aktivierungen für unsere versteckten Variablen, die auch zwischen 0 und 1 liegen können.
 
-Wir können dann (\ref{Qdbm1}) durch die durchschnittliche Energie ersetzen, die wir in unserem QUBO Problem durch den Hamiltonian ausgerechnet haben. Diese bekommen wir vom simulierten Annealing (wir benutzen dafür eine Library von DWave) zurück und können diese gleich einsetzen.
-
 Wie wir dann auch in unseren Experimenten sehen können, brauchen wir (\ref{Qdbm2}) für diese Version nicht mehr, da wir mit den Parametern im simulierten Annealing schon steuern können, wir sehr die Variablen richtung 0 oder 1 tendieren. Damit wird die Zeile einfach überflüssig und wir sehen auch in den Experimenten, dass dieser Term dafür sorgt, dass wir die Lösungen langsamer finden.
 
-\section{RESULTS}
+\section{Resultate}
 \label{sec:res}
 
 \subsection{Prinzipien des Testens}
 \label{subsec:Prinzipien}
 
-Wir wollen hier festlegen, wie wir testen, was wir testen und wie die Ergebnisse dargestellt und wie sie zu bewerten sind.
+Wir wollen hier festlegen, wie wir testen, was wir testen, wie die Ergebnisse dargestellt und wie sie zu bewerten sind.
 
 Als erstes wollen wir bei jeder Methode die verschiedenen Parameter und ihre Auswirkungen auf die Lösungen testen. Dabei beschränken wir uns hauptsächlich auf ein 3x3 Feld mit der $\epsilon$-Greedy-Methode, da wir hier weniger Rechenzeit brauchen und mit jeder Methode richtige Lösungen finden können. Wenn wir bereits gute Parameter einer Methode gefunden haben, ist es auch interessant kompliziertere Spielfelder auszuprobieren. Bei sehr großen Spielfeldern stößt irgendwann die $\epsilon$-Greedy-Methode an ihre Grenzen, da wir hier mit einer zufälligen Police am Anfang nicht mehr das Ziel finden können. 
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Figures/Intermediate.png}
-\caption{3x3 Fekd}
+\caption{3x3 Feld}
 \label{advanced}
 \end{figure}
 
-Hier gibt es zwei Möglichkeiten, die erste ist, dass wir unser Startfeld in die Nähe des Ziels setzen und so lernen. Dann können wir ohne das Netz zurückzusetzen, das Startfeld weiter vom Ziel entfernen und von dort weiter lernen. So können wir das Startfeld in mehreren Schritten zur eigentichen Startposition bewegen und haben so eine Chance, die richtige Lösung zu finden. Interessant ist hier, wie stabil die Methoden mit den bis jetzt gelernten Policen umgehen und etwas dazulernen können, ohne altes zu verlernen. 
+Hier gibt es zwei Möglichkeiten, die erste ist, dass wir unser Startfeld in die Nähe des Ziels setzen und so lernen. Dann können wir ohne das Netz zurückzusetzen, das Startfeld weiter vom Ziel entfernen und von dort weiter lernen. So können wir das Startfeld in mehreren Schritten zur eigentlichen Startposition bewegen und haben so eine Chance, die richtige Lösung zu finden. Interessant ist hier, wie stabil die Methoden mit den bis jetzt gelernten Policen umgehen und etwas dazulernen können, ohne altes zu verlernen. 
 
 Die zweite Möglichkeit ist, komplett von der $\epsilon$-Greedy-Methode abzusehen und eine Schleife über alle Felder zu machen und für jedes Feld jede Aktion zu testen und daraus zu lernen. Das funktioniert besser, braucht aber für große Spielfelder sehr viel Rechenzeit, bis wir die richtige Lösung gefunden haben.
 
@@ -436,6 +454,115 @@ Hier schneidet der Agent mit $\gamma$ = 0,4 und einer Lernrate von 0,0001 am bes
 \label{subsec:dbm_r}
 
 Bei der beschränkten Boltzmann Maschine haben wir 2 weitere Parameter. Zum einen den Wert $\beta$, der die Entropy abschwächt und zum anderen initialisieren wir die Gewichte am Anfang zufällig mit dem Erwartungswert 0 und einer Standardabweichung. Die Standardabweichung hat tatsächlich großen Einfluss auf das Ergebniss, da eine hohe Standardabweichung dazu führt, dass der Agent auf verschiedenen leeren Feldern sehr hohe Belohungen oder Bestrafungen erwartet. Diese Vorannahmen müssen dann erst wieder verlernt werden, was zu einem langsameren Lernverhalten führt.
+
+Als erstes testen wir wieder, wie viele versteckte Neuronen wir brauchen:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/rbm6_3x3_rbm_2_rbm_4_rbm_8_rbm_16_rbm_32_rbm_64_rbm_128_rbm_256.png}
+\caption{3x3 Beschränkte Boltzmann maschine: Neuronen}
+\label{rbm1}
+\end{figure}
+
+Wir sehen hier also, je mehr Neuronen umso besser. Das ist schon ein erster spannender Unterschied zu dem einfachen neuronalen Netz, wo zu viele Neuronen schlecht waren. Allerdings führen viele Neuronen hier gleich zu einem deutlichen Anstieg an Rechenzeit. Daher wollen wir im Folgenden 16 Neuronen für das 3x3 Feld verwenden und nur bei größeren Feldern auf mehr Neuronen umsteigen.
+
+Als nächstes wollen wir verschiedene Werte für $\gamma$ testen.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/rbm3_3x3_rbm_g0,6_rbm_g0,7_rbm_g0,8_rbm_g0,9_rbm_g0,95.png}
+\caption{3x3 Beschränkte Boltzmann maschine: $\gamma$}
+\label{rbm2}
+\end{figure}
+
+Die besten Ergebnisse bekommen wir also mit einem $\gamma$- Wert von 0,7 oder 0,8. Daher bleiben wir im weiteren wie in \citep{crawford2019reinforcement} bei 0,8.
+
+Wir wollen nun $\beta$ vergleichen. Mit $\beta$ schwächen wir die zweite Summe in (\ref{F}) ab. Dadurch können wir steuern, wie stark die Werte der versteckten Neuronen richtung 0 oder 1 gesteuert werden.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/rbm4_3x3_rbm_b0,1_rbm_b1_rbm_b5_rbm_b10_rbm_b50_rbm_b100_rbm_b500_rbm_b1000_rbm_b10000.png}
+\caption{3x3 Beschränkte Boltzmann maschine: $\beta$}
+\label{rbm3}
+\end{figure}
+
+Wir sehen hier, dass bei Werten zwischen 5 und 100 richtige Policen gefunden werden. Es scheint also sinnvoll zu sein, diesen Entropy-Faktor stark abzuschwächen. aber nicht ganz wegzulassen. Wir verwenden im Folgenden einen mittleren Wert von 20.
+
+Nun schauen wir uns die Lernrate an:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/rbm5_3x3_rbm_lr1_rbm_lr0,5_rbm_lr0,1_rbm_lr0,01_rbm_lr0,001_rbm_lr0,0001_rbm_lr0,00001.png}
+\caption{3x3 Beschränkte Boltzmann maschine: Lernrate}
+\label{rbm4}
+\end{figure}
+
+Hier sehen wir gute Ergebnisse zwischen 0,1 und 0,001. Daher nehmen wir auch hier den mittleren Wert von 0,01 für folgende Experimente.
+
+Als letztes testen wir die Standardabweichung für die Initialisierung der Gewichte.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/rbm7_3x3_rbm_0,01_rbm_0,1_rbm_1_rbm_10_rbm_100.png}
+\caption{3x3 Beschränkte Boltzmann maschine: Standardabweichung}
+\label{rbm5}
+\end{figure}
+
+Wir sehen also, dass zu große oder zu kleine Werte zu schlechteren Ergebnissen führen und verwenden genau wie in \citep{crawford2019reinforcement} die übliche Standardabweichung von 1.
+
+Da wir bei den Feldern aus (Figure \ref{advanced1}) und (Figure \ref{advanced2}) noch sehr gute Ergebnisse bekommen und sogar verschiedene Parameter alle zuverlässig das richtige Ergebnis liefern, wollen wir hier gleich zu dem 5x5 Spielfeld übergehen. Hier testen wir sowohl mit 16 als auch mit 64 Neuronen und mit $\beta$ von 10 und 50:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/rbm8_5x5_rbm_16_b10_rbm_64_b10_rbm_16_b50_rbm_64_b50.png}
+\caption{5x5 Beschränkte Boltzmann maschine: Neuronen und $\beta$}
+\label{rbm5}
+\end{figure}
+
+Hier sehen wir zum ersten Mal, wie 16 Neuronen nicht mehr ausreichen. Der $\beta$-Wert dageben scheint in einer recht großen Spannweite gut zu funktionieren. Wobei anscheinend der Wert 50 sogar besser ist, da hier selbst mit 16 Neuronen noch die richtige Police gefunden wurde.
+
+\subsection{Tiefe Boltzmann Maschine Resultate mit Quanten Annealing}
+\label{subsec:dbm_r}
+
+Die Neuheit bei diesem Algorithmus ist vor allem, dass wir die Aktivierung der versteckten Neuronen mit simuliertem Quanten Annealing berechnen. Daher kommen hier 3 neue Parameter hinzu: Anzahl der Annealing-Durchläufe, Anzahl der Schritte beim Annealing und die Annealing Temperatur, die aus einem Startwert und einem Endwert besteht. 
+
+Die Anzahl der Annealing-Durchläufe und die Anzahl der Schritte beim Annealing sollten möglichst hoch gewählt werden, da wir so genauere Ergebnisse bekommen. Gleichzeitig sind diese beiden Parameter für einen starken Anstieg der Rechenzeit verantwortlich. Daher setzen wir beide für unsere Testdurchläufe für die anderen Parameter beide auf 100. So bekommen wir auch noch in akzeptabler Zeit Ergebnisse. Später für die Vergleiche zwischen den verschiedenen Algorithmen können wir noch höhere Werte nehmen. Um diese beiden Werte zu testen, kann man 100 mal die Aktivierung der versteckten Neuronen berechnen und aus diesen 100 Vektoren die Standardabweichung berechnen. Diese liegt zwischen 0.01 und 0.03 mit den gerade genannten Parametern.
+
+Die Annealing Temperatur sollte so gewählt werden, dass wir gute Ergebnisse bekommen, aber nicht immer das Richtige. Wenn wir immer das bestmögliche Ergebniss berechnen würden,  wären unsere versteckten Neuronen immer 1 oder 0 und damit hätten wir keine sauberen Übergänge zwischen den Lernphasen sondern ``Brüche'' wenn die versteckten Neuronen den Zustand wechseln. Dies führt zu schlechteren Ergebnissen. Wir starten hier mit dem Startwert 2 und dem Endwert 20, wie auch in \citep{crawford2019reinforcement}.
+
+Dafür können wir in diesem Verfahren $\beta$ weglassen, da wir die Entropy über die Annealing Temperatur steuern können. Konkreter gesagt, wenn wir die Temperatur sehr gut wählen, bekommen wir immer das optimale Ergebniss und das wiederum führt zu einer maximalen Entropy. Diese Vermutung werden wir später noch mit Tests bestätigen.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/rbm8_5x5_rbm_16_b10_rbm_64_b10_rbm_16_b50_rbm_64_b50.png}
+\caption{5x5 Beschränkte Boltzmann maschine: Neuronen und $\beta$}
+\label{dbm1}
+\end{figure}
+
+\subsection{Die besten Parameter}
+\label{subsec:best}
+
+Bevor wir die Ergebnisse von allen Methoden im Vergleich zeigen, hier eine Auflistung der besten Parameter aus den bisherigen Experimenten:
+
+\begin{tabular}[h]{c|c|c|c|c}
+Parameter 				& Q-Tabelle 	& Einfaches Netz 	& Beschränkte Boltzmann 	& Quanten Boltzmann  		\\
+\hline
+Lernrate 					& 0.001 		& 0.0001			& 0.01				& 0.01					\\
+\hline
+Neuronen 					& - 			& 16 - 32			& 64 					& 16 						\\
+\hline
+$\gamma$ 				& 0.8			& 0.4				& 0.8					& 0.8						\\
+\hline
+$\beta$ 					& - 			& - 				& 50 					& - 						\\
+\hline
+Standardabweichung 			& - 			& - 				& 1 					& 0.1						\\
+\hline
+Annealing Durchläufe (runs)	& - 			& - 				& - 					& 100-1000				\\
+\hline
+Annealing Schritte (sweeps)	& - 			& - 				& - 					& 100-1000				\\
+\hline
+Annealing Temperatur		& - 			& - 				& - 					& [2,20]					\\
+\end{tabular}
 
 \newpage
 
