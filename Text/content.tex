@@ -363,8 +363,9 @@ Die Resultate lassen wir durch einen Graphen anzeigen. Bei der $\epsilon$-Greedy
 \subsection{Q-Tabelle Resultate}
 \label{subsec:Q-Tabelle_r}
 
-Die Q-Tabelle findet immer eine passende Lösung, wenn bei der $\epsilon$-Greedy-Methode zumindest ab und zu eine Lösung gefunden werden kann.
+Die Q-Tabelle findet immer eine passende Lösung, wenn durch zufällige Aktionen zumindestens einmal die Lösung gefunden werden kann.
 
+Testen wir erst mit Standardparametern.
 Der blaue Graph ist hier übrigens  $\epsilon$. In den meisten Vergleichen, wenn wir verschiedene Parameter testen wollen, lassen wir  $\epsilon$ weg. Die  $\epsilon$ Kurve sieht aber immer gleich aus, es sei denn, wenn wir verschiedene Startfelder nacheinander wählen.
 
 \begin{figure}[H]
@@ -374,16 +375,12 @@ Der blaue Graph ist hier übrigens  $\epsilon$. In den meisten Vergleichen, wenn
 \label{q1}
 \end{figure}
 
-Das 5x5 Feld ist sehr dicht mit Löchern besetzt. Hier erhöhen wir die Anzahl der Spiele auf 100000.
-
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{Figures/q_table_5x5.png}
 \caption{5x5 Q-Tabelle}
 \label{q2}
 \end{figure}
-
-Das 8x8 Feld ist zwar groß, hat aber viele freie Felder und viele Wege zum Ziel.
 
 \begin{figure}[H]
 \centering
@@ -392,7 +389,20 @@ Das 8x8 Feld ist zwar groß, hat aber viele freie Felder und viele Wege zum Ziel
 \label{q3}
 \end{figure}
 
-Das 5x5 Feld ist sehr voll mit Löchern, daher sorgen hier geringe $\epsilon$ immer noch für einige falsche Züge und damit für niedrigere Punkte. Allgemein sind die Ergebnisse alle vergleichsweise sehr gut. Parameter testen lohnt sicht hier nicht, da wir nur die Lernrate benötigen und diese quasi keine Rollen spielt. Z.B. eine Verdopplung der Lernrate sorgt einfach nur dafür, dass sich alle Einträge in der Q-Tabelle verdoppeln, was zu exakt dem gleichen Ergebnis führt. Wir können im weiteren die Ergebnisse der Q-Tabelle als Referenz für eine sehr gute Methode hernehmen.
+Das 5x5 Feld ist sehr voll mit Löchern, daher sorgen hier geringe $\epsilon$ immer noch für einige falsche Züge und damit für niedrigere Punkte.
+
+Allerdings fällt auf, dass wir bei dem 5x5 Feld schon die Anzahl der Spiele deutlich erhöhen müssen, um überhaupt das Ziel zu finden. Eine elegantere Alternative ist, die Q-Tabelle nicht mit 0 zu initialisieren, sondern z.B. mit 0.5. Es passiert dann Folgendes: Sobald der Agent eine Aktion macht, die keine Belohnung bekommt, wird der Wert der Q-Tabelle reduziert. Daher macht der Agent beim nächsten Mal eine andere Aktion. So werden vor allem weit entfernte Ecken des Spielfeldes erreicht.
+
+Im Folgenden die Ergebnisse mit den Initialwerten 0, 0.5 und 1:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/5x5_q_table_0_q_table_0,5_q_table_1.png}
+\caption{5x5 Q-Tabelle}
+\label{q2}
+\end{figure}
+
+Während der Agent mit dem Initialwert 0 das Ziel nie findet und garnicht anfangen kann zu lernen, finden die beiden anderen Versionen die Lösung extrem schnell.
 
 \subsection{Einfaches neuronales Netz Resultate}
 \label{subsec:dn_r}
@@ -526,42 +536,102 @@ Hier sehen wir zum ersten Mal, wie 16 Neuronen nicht mehr ausreichen. Der $\beta
 
 Die Neuheit bei diesem Algorithmus ist vor allem, dass wir die Aktivierung der versteckten Neuronen mit simuliertem Quanten Annealing berechnen. Daher kommen hier 3 neue Parameter hinzu: Anzahl der Annealing-Durchläufe, Anzahl der Schritte beim Annealing und die Annealing Temperatur, die aus einem Startwert und einem Endwert besteht. 
 
-Die Anzahl der Annealing-Durchläufe und die Anzahl der Schritte beim Annealing sollten möglichst hoch gewählt werden, da wir so genauere Ergebnisse bekommen. Gleichzeitig sind diese beiden Parameter für einen starken Anstieg der Rechenzeit verantwortlich. Daher setzen wir beide für unsere Testdurchläufe für die anderen Parameter beide auf 100. So bekommen wir auch noch in akzeptabler Zeit Ergebnisse. Später für die Vergleiche zwischen den verschiedenen Algorithmen können wir noch höhere Werte nehmen. Um diese beiden Werte zu testen, kann man 100 mal die Aktivierung der versteckten Neuronen berechnen und aus diesen 100 Vektoren die Standardabweichung berechnen. Diese liegt zwischen 0.01 und 0.03 mit den gerade genannten Parametern.
+Die Anzahl der Annealing-Durchläufe und die Anzahl der Schritte beim Annealing sollten möglichst hoch gewählt werden, da wir so genauere Ergebnisse bekommen. Gleichzeitig sind diese beiden Parameter für einen starken Anstieg der Rechenzeit verantwortlich. Daher setzen wir beide für unsere Testdurchläufe für die anderen Parameter auf 100. So bekommen wir auch noch in akzeptabler Zeit Ergebnisse. Später für die Vergleiche zwischen den verschiedenen Algorithmen können wir noch höhere Werte nehmen. Um diese beiden Werte zu testen, kann man 100 mal die Aktivierung der versteckten Neuronen berechnen und aus diesen 100 Vektoren die Standardabweichung berechnen. Diese liegt zwischen 0.01 und 0.03 mit den gerade genannten Parametern.
 
 Die Annealing Temperatur sollte so gewählt werden, dass wir gute Ergebnisse bekommen, aber nicht immer das Richtige. Wenn wir immer das bestmögliche Ergebniss berechnen würden,  wären unsere versteckten Neuronen immer 1 oder 0 und damit hätten wir keine sauberen Übergänge zwischen den Lernphasen sondern ``Brüche'' wenn die versteckten Neuronen den Zustand wechseln. Dies führt zu schlechteren Ergebnissen. Wir starten hier mit dem Startwert 2 und dem Endwert 20, wie auch in \citep{crawford2019reinforcement}.
 
 Dafür können wir in diesem Verfahren $\beta$ weglassen, da wir die Entropy über die Annealing Temperatur steuern können. Konkreter gesagt, wenn wir die Temperatur sehr gut wählen, bekommen wir immer das optimale Ergebniss und das wiederum führt zu einer maximalen Entropy. Diese Vermutung werden wir später noch mit Tests bestätigen.
 
+Starten wir unsere Tests mit der Anzahl an Neuronen:
+
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Figures/rbm8_5x5_rbm_16_b10_rbm_64_b10_rbm_16_b50_rbm_64_b50.png}
-\caption{5x5 Beschränkte Boltzmann maschine: Neuronen und $\beta$}
+\includegraphics[width=\textwidth]{Figures/dbm1_3x3_dbm_1_dbm_2_dbm_4_dbm_8_dbm_16_dbm_32.png}
+\caption{3x3 Tiefe Boltzmann maschine: Neuronen}
 \label{dbm1}
 \end{figure}
+
+Hier zeigt sich bereits die Stärke dieses Verfahrens. Während wir beim einfachen neuronalen Netz mindestens 8 Neuronen gebraucht haben, brauchen wir hier nur 2. Die beschränkte Boltzmann Maschine konnte dieses Beispiel zwar auch mit 2 Neuronen lösen, fand die richtige Police allerdings sehr spät. Nach oben scheint es hier keine Grenze zu geben, obwohl die Version mit 32 Neuronen minimal langsamer reagiert. Eine höhere Anzahl von Neuronen führt hier bereits zu sehr langen Rechenzeiten, weswegen wir diese hier nicht testen.
+
+Als nächstes schauen wir uns wieder $\gamma$ an. Da die Ergebnisse hier nur für extreme Randwerte schlechter werden, testen wir es auch gleich noch auf dem 4x4 Spielfeld:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/dbm4_3x3_dbm_g0,1_dbm_g0,4_dbm_g0,6_dbm_g0,8_dbm_g0,9_dbm_g0,95.png}
+\caption{3x3 Tiefe Boltzmann maschine:$\gamma$}
+\label{dbm1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/dbm5_4x4_dbm_g0,1_dbm_g0,4_dbm_g0,6_dbm_g0,8_dbm_g0,9_dbm_g0,95.png}
+\caption{4x4 Tiefe Boltzmann maschine: $\gamma$}
+\label{dbm1}
+\end{figure}
+
+Hier sind die Ergebnisse ähnlich wie bei der beschränkten Boltzmann Maschine. Zwischen 0,6 und 0,9 sind die Resultate gut. Daher bleiben wir hier wie auch in \citep{crawford2019reinforcement} bei $\gamma = 0.8$. Wir können hier im Hinterkopf behalten, dass größere Spielfelder eventuell mit höheren $\gamma$ Werten besser funktionieren. Anschaulich macht das Sinn, da der erwartete Gewinn über eine längere Kette von Aktionen bis zum Startfeld erhalten bleiben soll. Man kann diesen Effekt bei dem Vergleich zwischen dem 3x3 und dem 4x4 Feld auch erkennen.
+
+Als nächstes testen wir $\beta$. Wie auch zuvor schon erwähnt, gibt es hier eine Variante dbm\_ , welche den Entropy Term komplett weglässt.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/dbm2_3x3_dbm_b0,1_dbm_b1_dbm_b10_dbm_b100_dbm_b1000_dbm_.png}
+\caption{3x3 Tiefe Boltzmann maschine: $\beta$}
+\label{dbm1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/dbm3_4x4_dbm_b0,1_dbm_b1_dbm_b10_dbm_b100_dbm_b1000_dbm_.png}
+\caption{4x4 Tiefe Boltzmann maschine: $\beta$}
+\label{dbm1}
+\end{figure}
+
+Wir sehen also hier, je höher der Wert für $\beta$ umso besser die Ergebnisse. $\beta$ ist dabei der Faktor, durch den der Entropy-Term geteilt wird. Also ein sehr hoher Wert für $\beta$ reduziert den Einfluss von diesem Term. Werte wie 1000 sind dabei so groß, dass der Term quasi keinen Einfluss mehr hat. Man sieht hier auch, dass die Variante dbm\_ ohne die Entropy vergleichbare Ergebnisse erzielt wie sehr hohe $\beta$ Werte. Infolgedessen können wir ab hier den Entropy-Term komplett weglassen.
+
+Als nächstes testen wir die Lernrate:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/dbm2_3x3_dbm_b0,1_dbm_b1_dbm_b10_dbm_b100_dbm_b1000_dbm_.png}
+\caption{3x3 Tiefe Boltzmann maschine: $\beta$}
+\label{dbm1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/dbm3_4x4_dbm_b0,1_dbm_b1_dbm_b10_dbm_b100_dbm_b1000_dbm_.png}
+\caption{4x4 Tiefe Boltzmann maschine: $\beta$}
+\label{dbm1}
+\end{figure}
+
+\newpage
 
 \subsection{Die besten Parameter}
 \label{subsec:best}
 
 Bevor wir die Ergebnisse von allen Methoden im Vergleich zeigen, hier eine Auflistung der besten Parameter aus den bisherigen Experimenten:
 
-\begin{tabular}[h]{c|c|c|c|c}
+\begin{tabular}[H]{c|c|c|c|c}
 Parameter 				& Q-Tabelle 	& Einfaches Netz 	& Beschränkte Boltzmann 	& Quanten Boltzmann  		\\
 \hline
-Lernrate 					& 0.001 		& 0.0001			& 0.01				& 0.01					\\
+Lernrate 					& 0.1 		& 0.0001			& 0.01				& 0.01					\\
 \hline
-Neuronen 					& - 			& 16 - 32			& 64 					& 16 						\\
+Neuronen 					& - 			& 16 - 32			& 64 					& 8 - 16					\\
 \hline
 $\gamma$ 				& 0.8			& 0.4				& 0.8					& 0.8						\\
 \hline
 $\beta$ 					& - 			& - 				& 50 					& - 						\\
 \hline
+Initialwert 					& 0.5 		& - 				& 0 					& 0						\\
+\hline
 Standardabweichung 			& - 			& - 				& 1 					& 0.1						\\
 \hline
-Annealing Durchläufe (runs)	& - 			& - 				& - 					& 100-1000				\\
+Annealing Durchläufe (runs)	& - 			& - 				& - 					& 100 - 1000				\\
 \hline
-Annealing Schritte (sweeps)	& - 			& - 				& - 					& 100-1000				\\
+Annealing Schritte (sweeps)	& - 			& - 				& - 					& 100 - 1000				\\
 \hline
-Annealing Temperatur		& - 			& - 				& - 					& [2,20]					\\
+Annealing Temperatur		& - 			& - 				& - 					& [2, 20]					\\
 \end{tabular}
 
 \newpage

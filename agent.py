@@ -1,5 +1,6 @@
 import numpy as np
 import random
+import time
 from util import std_dev_from_h
 from q_table import Q_table
 from dn import Dn

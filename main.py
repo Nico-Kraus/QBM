@@ -1,6 +1,6 @@
 from env import Env
 from agent import Agent
-from util import load_config, create_filename, create_filename_compare, compare_learning_curves, plot_learning_curve, play_eps_greedy_rounds, play_eps_greedy, play_rdn_sample, compare_learning_curves_rdn
+from util import *
 
 if __name__ == '__main__':
 

@@ -68,6 +68,42 @@ def play_eps_greedy(env, agent, num_samples, max_steps, start):
 
     return scores, eps_history
 
+def play_rounds(env, agent, num_samples, max_steps, start):
+
+    env.set_start(start)
+    agent.print_policy()
+
+    scores = []
+    for i in range(num_samples):
+        score = 0
+        done = False
+        obs = env.reset()
+
+        index = 0
+        done = False
+        while not done:
+            action = agent.choose_action(obs)
+            obs_, reward, done = env.take_action(action)
+            score += reward
+            agent.learn(obs, action, reward, obs_)
+            obs = obs_
+            index += 1
+            if index >= max_steps:
+                break
+        
+        print('.', end='', flush=True)
+        scores.append(score)
+
+        if i % 100 == 0 and i != 0:
+            print()
+            agent.print_policy()
+            avg_score = np.mean(scores[-100:])
+            print('episode: %d, avg score: %.2f' %(i, avg_score))
+
+    print()
+
+    return scores
+
 
 def play_eps_greedy_rounds(env, agent, num_samples, max_steps, fields):
     
