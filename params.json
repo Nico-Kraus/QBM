@@ -1,46 +1,19 @@
 {
     "env": {
-        "example": 7,
+        "example": 3,
         "border_rule": "stay"
     },
     "play": {
         "num_samples": 10000,
-        "max_steps": 40
+        "max_steps": 10
     },
     "agents": [
         {
-            "method": "dbm",
-            "name": "dbm_b10",
-            "n_hidden": 16,
-            "lr": 0.01,
+            "method": "dbm_",
+            "name": "dbm_lr0,00001",
+            "n_hidden": 8,
+            "lr": 0.00001,
             "gamma": 0.8,
-            "beta": 10,
-            "init_sd": 0.1,
-            "annealing": {
-                "num_reads": 100,
-                "num_sweeps": 100,
-                "beta_range": [2, 20]
-            }
-        },{
-            "method": "dbm",
-            "name": "dbm_b100",
-            "n_hidden": 16,
-            "lr": 0.01,
-            "gamma": 0.8,
-            "beta": 100,
-            "init_sd": 0.1,
-            "annealing": {
-                "num_reads": 100,
-                "num_sweeps": 100,
-                "beta_range": [2, 20]
-            }
-        },{
-            "method": "dbm",
-            "name": "dbm_b1000",
-            "n_hidden": 16,
-            "lr": 0.01,
-            "gamma": 0.8,
-            "beta": 1000,
             "init_sd": 0.1,
             "annealing": {
                 "num_reads": 100,
@@ -49,9 +22,57 @@
             }
         },{
             "method": "dbm_",
-            "name": "dbm_",
-            "n_hidden": 16,
+            "name": "dbm_lr0,0001",
+            "n_hidden": 8,
+            "lr": 0.0001,
+            "gamma": 0.8,
+            "init_sd": 0.1,
+            "annealing": {
+                "num_reads": 100,
+                "num_sweeps": 100,
+                "beta_range": [2, 20]
+            }
+        },{
+            "method": "dbm_",
+            "name": "dbm_lr0,001",
+            "n_hidden": 8,
+            "lr": 0.001,
+            "gamma": 0.8,
+            "init_sd": 0.1,
+            "annealing": {
+                "num_reads": 100,
+                "num_sweeps": 100,
+                "beta_range": [2, 20]
+            }
+        },{
+            "method": "dbm_",
+            "name": "dbm_lr0,01",
+            "n_hidden": 8,
             "lr": 0.01,
+            "gamma": 0.8,
+            "init_sd": 0.1,
+            "annealing": {
+                "num_reads": 100,
+                "num_sweeps": 100,
+                "beta_range": [2, 20]
+            }
+        },{
+            "method": "dbm_",
+            "name": "dbm_lr0,1",
+            "n_hidden": 8,
+            "lr": 0.1,
+            "gamma": 0.8,
+            "init_sd": 0.1,
+            "annealing": {
+                "num_reads": 100,
+                "num_sweeps": 100,
+                "beta_range": [2, 20]
+            }
+        },{
+            "method": "dbm_",
+            "name": "dbm_lr1",
+            "n_hidden": 8,
+            "lr": 1,
             "gamma": 0.8,
             "init_sd": 0.1,
             "annealing": {
