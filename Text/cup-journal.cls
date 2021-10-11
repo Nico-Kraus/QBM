@@ -43,6 +43,7 @@
 \renewcommand*\familydefault{\sfdefault}  %% Only if the base font of the document is to be sans serif
 \RequirePackage[T1]{fontenc}
 \RequirePackage{sansmath}
+\usepackage{xcolor}
 \RequirePackage{amsmath}
 \RequirePackage{amsfonts}
 \RequirePackage[normal,eulergreek]{mathastext}

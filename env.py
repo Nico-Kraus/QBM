@@ -85,6 +85,29 @@ class Env():
             env.print_env()
             return env
         if num == 6:
+            rows = 6
+            cols = 6
+            env = Env(rows,cols,border)
+            start = np.zeros(2, dtype=int)
+            start[0] = 0
+            start[1] = 0
+            env.set_start(start)
+            env.add_reward(2, 1)
+            env.add_penalty(1,0)
+            env.add_penalty(1,1)
+            env.add_penalty(1,2)
+            env.add_penalty(1,4)
+            env.add_penalty(1,5)
+            env.add_penalty(2,2)
+            env.add_penalty(3,1)
+            env.add_penalty(3,2)
+            env.add_penalty(3,4)
+            env.add_penalty(4,1)
+            env.add_penalty(4,2)
+            env.add_penalty(4,4)
+            env.print_env()
+            return env
+        if num == 7:
             rows = 8
             cols = 8
             env = Env(rows,cols,border)
@@ -104,7 +127,7 @@ class Env():
             #env.add_penalty(0,7)
             env.print_env()
             return env
-        if num == 7:
+        if num == 8:
             rows = 8
             cols = 8
             env = Env(rows,cols,border)

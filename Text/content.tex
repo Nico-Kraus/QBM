@@ -593,17 +593,137 @@ Als nächstes testen wir die Lernrate:
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Figures/dbm2_3x3_dbm_b0,1_dbm_b1_dbm_b10_dbm_b100_dbm_b1000_dbm_.png}
+\includegraphics[width=\textwidth]{Figures/dbm6_3x3_dbm_lr0,00001_dbm_lr0,0001_dbm_lr0,001_dbm_lr0,01_dbm_lr0,1_dbm_lr1.png}
 \caption{3x3 Tiefe Boltzmann maschine: $\beta$}
 \label{dbm1}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Figures/dbm3_4x4_dbm_b0,1_dbm_b1_dbm_b10_dbm_b100_dbm_b1000_dbm_.png}
+\includegraphics[width=\textwidth]{Figures/dbm7_4x4_dbm_lr0,00001_dbm_lr0,0001_dbm_lr0,001_dbm_lr0,01_dbm_lr0,1_dbm_lr1.png}
 \caption{4x4 Tiefe Boltzmann maschine: $\beta$}
 \label{dbm1}
 \end{figure}
+
+Am besten schneiden hier die Werte 0,1 und 0,01 ab. Wir entscheiden uns daher im weiteren einen mittleren Wert von 0,05 zu benutzen.
+
+Schauen wir uns nun die Standardabweichung an, mit der wir die Gewichte initialisieren:
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/dbm8_3x3_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\caption{3x3 Tiefe Boltzmann maschine: $\beta$}
+\label{dbm1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\caption{4x4 Tiefe Boltzmann maschine: $\beta$}
+\label{dbm1}
+\end{figure}
+
+Hier scheinen vor allem kleine Werte gut zu funktionieren. Wir wählen im Folgenden 0,05, da dieser Wert gute Ergebnisse liefert.
+
+Als letztes wollen wir noch die Annealing Temperatur testen. Dies gestaltet sich von allem Parametern am schwierigsten. Zum einen müssen wir hier drei Werte im Auge behalten: Den Startwert, den Endwert und das Verhältnis von beiden. Zum anderen liefern hier viele Werte gute Ergebnisse. Daher schauen wir uns gleich das 5x5 Spielfeld an. Hier ist es aber so schwierig, überhaupt das Ziel zu finden, dass die Ergebnisse ein wenig vom Zufall abhängen. Daher wollen wir hier keine Graphen von einzelnen Durchläufen zeigen, sondern die Azahl der richtige Policen die mit den drei oben genannten Werten gefunden wurden, in einer Tabelle aufzeigen:
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{c|c}
+	Startwert		& Richtige Policen	\\
+	\hline
+	0,001		& 	0 / 1			\\
+	\hline
+	0,01			& 	4 / 7			\\
+	\hline
+	0,1			& 	5 / 13		\\
+	\hline
+	1			& 	6 / 12		\\
+	\hline
+	10 			&	11 / 13		\\
+	\hline
+	100			&	5 / 8			\\
+	\hline
+	1000			&	2 / 3
+	\end{tabular}
+\end{table} 
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{c|c}
+	Endwert		& Richtige Policen	\\
+	\hline
+	0,2			&	0 / 1			\\
+	\hline
+	0,5			&	0 / 2			\\
+	\hline
+	1			& 	0 / 6			\\
+	\hline
+	2			& 	1 / 2			\\
+	\hline
+	5			& 	0 / 2			\\
+	\hline
+	10			& 	4 / 5			\\
+	\hline
+	20			& 	2 / 2			\\
+	\hline
+	50			& 	2 / 3			\\
+	\hline
+	100			& 	7 / 9			\\
+	\hline
+	200			& 	1 / 1			\\
+	\hline
+	500			& 	1 / 2			\\
+	\hline
+	1000			& 	7 / 10		\\
+	\hline
+	5000			& 	1 / 2			\\
+	\hline
+	10 000		&	6 / 9			\\
+	\hline
+	100 000		&	1 / 1
+	\end{tabular}
+\end{table} 
+
+\begin{table}[H]
+	\centering
+	\begin{tabular}{c|c}
+	Verhältnis		& Richtige Policen	\\
+	\hline
+	1 zu 2		&	4 / 6			\\
+	\hline
+	1 zu 5		&	3 / 7			\\
+	\hline
+	1 zu 10		& 	7 / 13		\\
+	\hline
+	1 zu 50		& 	1 / 4			\\
+	\hline
+	1 zu 100		& 	8 / 12		\\
+	\hline
+	1 zu 1000		& 	2 / 5			\\
+	\hline
+	1 zu 10000		& 	6 / 7			\\
+	\hline
+	1 zu 100000	& 	1 / 2			\\
+	\hline
+	1 zu 1000000	& 	1 / 1
+	\end{tabular}
+\end{table} 
+
+Insgesamt haben wir also 57 Strategien getestet und dabei 33 mal die richtige Police gefunden. Das entspricht 58\%. Allerdings ist es garnicht einfach, die Ergebnisse zu interpretieren. Wir testen also am besten mehrere Varianten von guten Parametern mit mehreren Durchläufen. 
+
+Bei den Startwerten haben wir die besten Ergebnisse für 10. Bei den Endwerten scheinen tendenziell größere Werte besser zu funktionieren. Auch bei dem Verhältnis, sind größere Verhaltnisse in der Regel besser. \\
+
+Wir wollen daher einen Testlauf mit dem Startwert 10 und dem besten Verhältnis 1 zu 10000 machen. So kommen wir auf die Parameter [10, 100000].
+Einen zweiten Testlauf wollen wir mit dem besten Endwert machen. Dieser ist nicht ganz klar, wir wählen hier 100, da dieser Wert öfter getestet wurde. Was auch bei den Tests oft richtige Policen lieferte war [1, 100]. Wählen wir also diese Werte.
+Und zuletzt wollen wir noch die Werte aus \citep{crawford2019reinforcement} mit [2, 20] testen.
+
+Der Gewinner von diesen drei Vergleichen ist [2, 20] mit 27 von 30 richtigen Policen.
+Platz 2 ist [10, 100000] mit 24 von 30. Und Letzter ist [1, 100] mit 20 von 30. Beachte aber das auch alle drei über den 58\% liegen, die wir in den gemischten Parametern erreicht haben.
+
+Hier wäre es sicherlich noch spannend weiter zu testen. Vor allem fällt hier auf, das teilweise sehr kleine Verhältnisse wie bei [2, 20] gut funktionieren. Dann sind größere Verhältnisse wie 1 zu 1000 plötzlich schlecht und 1 zu 10000 funktioniert wieder gut. Hier scheint es keine lineare Abhängigkeit zu geben. \\
+
+Fassen wir nun die besten Ergebnisse von allen Methoden zusammen und testen dann die Methoden gegeneinander.
 
 \newpage
 
@@ -615,7 +735,7 @@ Bevor wir die Ergebnisse von allen Methoden im Vergleich zeigen, hier eine Aufli
 \begin{tabular}[H]{c|c|c|c|c}
 Parameter 				& Q-Tabelle 	& Einfaches Netz 	& Beschränkte Boltzmann 	& Quanten Boltzmann  		\\
 \hline
-Lernrate 					& 0.1 		& 0.0001			& 0.01				& 0.01					\\
+Lernrate 					& 0.1 		& 0.0001			& 0.01				& 0.05					\\
 \hline
 Neuronen 					& - 			& 16 - 32			& 64 					& 8 - 16					\\
 \hline
@@ -625,18 +745,25 @@ $\beta$ 					& - 			& - 				& 50 					& - 						\\
 \hline
 Initialwert 					& 0.5 		& - 				& 0 					& 0						\\
 \hline
-Standardabweichung 			& - 			& - 				& 1 					& 0.1						\\
+Standardabweichung 			& - 			& - 				& 1 					& 0.05					\\
 \hline
-Annealing Durchläufe (runs)	& - 			& - 				& - 					& 100 - 1000				\\
+Annealing Durchläufe (runs)	& - 			& - 				& - 					& 100 - $\infty$				\\
 \hline
-Annealing Schritte (sweeps)	& - 			& - 				& - 					& 100 - 1000				\\
+Annealing Schritte (sweeps)	& - 			& - 				& - 					& 100 - $\infty$				\\
 \hline
 Annealing Temperatur		& - 			& - 				& - 					& [2, 20]					\\
 \end{tabular}
 
 \newpage
 
+\bigskip
 
+\color{white}
+Test
+\color{black}
+Test 2
+
+\newpage
 
 \begin{acknowledgement}
 Wir bedanken uns bei allen Unterstützern!
