@@ -1,56 +1,43 @@
 {
     "env": {
-        "example": 2,
+        "example": 8,
         "border_rule": "stay"
     },
     "play": {
         "num_samples": 10000,
-        "max_steps": 6
+        "max_steps": 40
     },
     "agents": [
         {
             "method": "q_table",
             "name": "q_table",
-            "lr": 0.001,
+            "init": 0.5,
+            "lr": 0.1,
             "gamma": 0.8
         },{
             "method": "dn",
-            "name": "dn",
-            "n_hidden": 16,
+            "name": "dn_64",
+            "n_hidden": 64,
             "lr": 0.0001,
             "gamma": 0.4
         },{
             "method": "rbm",
             "name": "rbm",
-            "n_hidden": 64,
+            "n_hidden": 128,
             "lr": 0.01,
             "gamma": 0.8,
             "beta": 50,
             "init_sd": 1
         },{
-            "method": "dbm",
-            "name": "dbm_4",
-            "n_hidden": 16,
-            "lr": 0.001,
+            "method": "dbm_",
+            "name": "dbm_32",
+            "n_hidden": 32,
+            "lr": 0.05,
             "gamma": 0.8,
-            "beta": 1000,
-            "init_sd": 0.1,
+            "init_sd": 0.05,
             "annealing": {
-                "num_reads": 40,
-                "num_sweeps": 40,
-                "beta_range": [2, 20]
-            }
-        },{
-            "method": "qbm",
-            "name": "qbm_4",
-            "n_hidden": 4,
-            "lr": 0.001,
-            "gamma": 0.8,
-            "beta": 1000,
-            "init_sd": 0.1,
-            "annealing": {
-                "num_reads": 40,
-                "num_sweeps": 40,
+                "num_reads": 1000,
+                "num_sweeps": 1000,
                 "beta_range": [2, 20]
             }
         }

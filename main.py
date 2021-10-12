@@ -15,8 +15,8 @@ if __name__ == '__main__':
     for agent_params in params["agents"]:
         agent = Agent(env, agent_params)
         # scores, eps_history = play_eps_greedy(env, agent, params["play"]["num_samples"], params["play"]["max_steps"], env.start)
-        scores, eps_history = play_eps_greedy_rounds(env, agent, params["play"]["num_samples"], params["play"]["max_steps"], [[5,0],[4,3],[1,3],[0,0]])
-        #scores = play_rdn_sample(env, agent, params["play"]["num_samples"], params["play"]["max_steps"], env.start)
+        scores, eps_history = play_eps_greedy_rounds(env, agent, params["play"]["num_samples"], params["play"]["max_steps"], [[2,0],[8,0],[6,8],[0,10],[0,0]])
+        # scores = play_rdn_sample(env, agent, params["play"]["num_samples"], params["play"]["max_steps"], env.start)
         compare_scores.append(scores)
 
     filename = create_filename_compare(env, params["agents"])

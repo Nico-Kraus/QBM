@@ -116,15 +116,9 @@ class Env():
             start[1] = 0
             env.set_start(start)
             env.add_reward(rows-1, cols-1)
-            # env.add_penalty(2,1)
-            # env.add_penalty(1,4)
-
-            #env.add_penalty(5,0)
             env.add_penalty(4,3)
             env.add_penalty(4,4)
             env.add_penalty(4,5)
-            #env.add_penalty(7,3)
-            #env.add_penalty(0,7)
             env.print_env()
             return env
         if num == 8:
@@ -150,6 +144,35 @@ class Env():
             env.add_penalty(6,6)
             env.add_penalty(6,7)
             env.add_penalty(0,7)
+            env.print_env()
+            return env
+        if num == 9:
+            rows = 11
+            cols = 11
+            env = Env(rows,cols,border)
+            start = np.zeros(2, dtype=int)
+            start[0] = 0
+            start[1] = 0
+            env.set_start(start)
+            penalties = [
+                [0,0,0,0,0,1,0,0,0,0,0],
+                [1,1,1,1,0,1,0,1,0,1,0],
+                [0,0,0,1,0,0,0,1,0,1,0],
+                [0,1,0,1,0,1,1,1,0,1,0],
+                [0,1,2,1,0,0,0,1,0,1,0],
+                [0,1,1,1,0,1,1,1,1,1,0],
+                [0,1,0,0,0,1,0,0,0,1,0],
+                [0,1,1,1,1,1,0,1,0,1,0],
+                [0,0,0,0,0,0,0,1,0,1,0],
+                [1,1,0,1,0,1,1,1,0,1,0],
+                [0,0,0,1,0,0,0,1,0,0,0]
+            ]
+            for x, row in enumerate(penalties):
+                for y, value in enumerate(row):
+                    if value == 1:
+                        env.add_penalty(x,y)
+                    if value == 2:
+                        env.add_reward(x,y)
             env.print_env()
             return env
 
