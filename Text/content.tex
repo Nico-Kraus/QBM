@@ -762,60 +762,60 @@ Bevor wir die Ergebnisse von allen Methoden im Vergleich zeigen, hier eine Aufli
 
 Wir untersuchen als erstes 8 verschiedene Spielfelder in aufsteigender Größe und testen jeweils alle 4 Methoden. Die Spielfelder haben dabei die Größen 2x2, 3x3, 3x5, 4x4, 5x5, 6x6, 8x8 und 8x8. Dabei sind die beiden 8x8 Spielfelder nur noch mit wenigen Löchern versehen.
 
-Bei der Anzahl an Neuronen haben wir hier noch etwas erhöht, da tendenziell bei größeren Spielfeldern mehr Neuronen gebraucht werden. Hier kommt das einfache Netz mit 64 Neuronen daher, die beschränkte Boltzmann Maschine mit 128 und die Quanten Boltzmann Maschine mit 32. Die Annealing Runs und Sweeps werden auf 1000 gesetzt, für eine höhere Genauigkeit. Alle anderen Werte die benutzt wurden können 1 zu 1 auf der oben genannten Tabelle abgelesen werden.
+Bei der Anzahl an Neuronen haben wir hier noch etwas erhöht, da tendenziell bei größeren Spielfeldern mehr Neuronen gebraucht werden. Hier kommt das einfache Netz mit 32 Neuronen daher, die beschränkte Boltzmann Maschine mit 128 und die Quanten Boltzmann Maschine mit 16. Die Annealing Runs und Sweeps werden auf 200 gesetzt, für eine höhere Genauigkeit. Höhere Werte fürs Annealing sind leider aufgrund von der Rechenzeit auf meinem PC nicht möglich. Alle anderen Werte die benutzt wurden können 1 zu 1 auf der oben genannten Tabelle abgelesen werden.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\includegraphics[width=\textwidth]{Figures/all_2x2_q_table_dn_32_rbm_128_dbm_16.png}
 \caption{2x2 Alle Methoden}
 \label{all_1}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\includegraphics[width=\textwidth]{Figures/all_3x3_q_table_dn_32_rbm_128_dbm_16.png}
 \caption{3x3 Alle Methoden}
 \label{all_2}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\includegraphics[width=\textwidth]{Figures/all_3x5_q_table_dn_32_rbm_128_dbm_16.png}
 \caption{3x5 Alle Methoden}
 \label{all_3}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\includegraphics[width=\textwidth]{Figures/all_4x4_q_table_dn_32_rbm_128_dbm_16.png}
 \caption{4x4 Alle Methoden}
 \label{all_4}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\includegraphics[width=\textwidth]{Figures/all_5x5_q_table_dn_32_rbm_128_dbm_16.png}
 \caption{5x5 Alle Methoden}
 \label{all_5}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\includegraphics[width=\textwidth]{Figures/all_6x6_q_table_dn_32_rbm_128_dbm_16.png}
 \caption{6x6 Alle Methoden}
 \label{all_6}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\includegraphics[width=\textwidth]{Figures/all_8x8_s_q_table_dn_32_rbm_128_dbm_16.png}
 \caption{8x8 einfach Alle Methoden}
 \label{all_7}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\includegraphics[width=\textwidth]{Figures/all_8x8_s_q_table_dn_32_rbm_128_dbm_16.png}
 \caption{8x8 schwer Alle Methoden}
 \label{all_8}
 \end{figure}
