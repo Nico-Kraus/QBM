@@ -1,5 +1,5 @@
 \begin{abstract}
-Wir wollen untersuchen, wie Quanten-Annealing für Reinforcment-Learning genutzt werden kann. Dafür nutzen wir Q-Learning mit einer $\epsilon$-Greedy-Strategie. Die Q-Funktion approximieren wir dabei mit einer Boltzmann-Maschine. Dabei repräsentiert der sichtbare Layer den Zustand und die Aktionen. Die Aktivierung des nicht-sichtbaren Layern können wir mit einem Quanten Annealer berechnen, bzw klassisch simulieren. Als Umgebung für unseren Agenten nutzen wir den ``zugefrorenen See'', ähnlich zu der bekannten Problemstellung von OpenAi mit kleinen Modifizierungen. Es zeigt sich, dass eine einfache Q-Tabelle mit Abstand die besten Ergebnisse liefert. Wobei eine Quanten-Boltzmann Maschine komplexere Zusammenhänge modellieren kann und sehr ähnliche Ergebnisse liefert.
+Wir wollen untersuchen, wie Quanten-Annealing für Reinforcment-Learning genutzt werden kann. Dafür nutzen wir Q-Learning mit einer $\epsilon$-Greedy-Strategie. Die Q-Funktion approximieren wir dabei mit einer Boltzmann-Maschine. Dabei repräsentiert der sichtbare Layer den Zustand und die Aktionen. Die Aktivierung des nicht-sichtbaren Layern können wir mit einem Quanten Annealer berechnen, bzw klassisch simulieren. Als Umgebung für unseren Agenten nutzen wir den ``zugefrorenen See'', ähnlich zu der bekannten Problemstellung von OpenAi mit kleinen Modifizierungen. Wir vergleichen diese Quanten Boltzmann Maschine anschließend mit eine einfachen Q-Tabelle, mit einem einfachen neuronalen Netz von PyTorch und mit einer Beschränkten Boltzmann Maschine.
 \end{abstract}
 
 \section{Einleitung }
@@ -730,38 +730,95 @@ Fassen wir nun die besten Ergebnisse von allen Methoden zusammen und testen dann
 \subsection{Die besten Parameter}
 \label{subsec:best}
 
-Bevor wir die Ergebnisse von allen Methoden im Vergleich zeigen, hier eine Auflistung der besten Parameter aus den bisherigen Experimenten:
+Bevor wir die Ergebnisse von allen Methoden im Vergleich zeigen, hier eine Auflistung der besten Parameter aus den bisherigen Experimenten. Rbm steht für beschränkte Boltzmann Maschine und Qbm für die tiefe Boltzmann Maschine mit Quanten Annealing:
 
-\begin{tabular}[H]{c|c|c|c|c}
-Parameter 				& Q-Tabelle 	& Einfaches Netz 	& Beschränkte Boltzmann 	& Quanten Boltzmann  		\\
-\hline
-Lernrate 					& 0.1 		& 0.0001			& 0.01				& 0.05					\\
-\hline
-Neuronen 					& - 			& 16 - 32			& 64 					& 8 - 16					\\
-\hline
-$\gamma$ 				& 0.8			& 0.4				& 0.8					& 0.8						\\
-\hline
-$\beta$ 					& - 			& - 				& 50 					& - 						\\
-\hline
-Initialwert 					& 0.5 		& - 				& 0 					& 0						\\
-\hline
-Standardabweichung 			& - 			& - 				& 1 					& 0.05					\\
-\hline
-Annealing Durchläufe (runs)	& - 			& - 				& - 					& 100 - $\infty$				\\
-\hline
-Annealing Schritte (sweeps)	& - 			& - 				& - 					& 100 - $\infty$				\\
-\hline
-Annealing Temperatur		& - 			& - 				& - 					& [2, 20]					\\
-\end{tabular}
+\begin{table}[H]
+	\centering
+	\begin{tabular}{c|c|c|c|c}
+	Parameter 				& Q-Tabelle 	& Einfaches Netz 	& Rbm			 	& Qbm			  		\\
+	\hline
+	Lernrate 					& 0.1 		& 0.0001			& 0.01				& 0.05					\\
+	\hline
+	Neuronen 					& - 			& 16 - 64			& 64 	- $\infty$			& 8 - 32					\\
+	\hline
+	$\gamma$ 				& 0.8			& 0.4				& 0.8					& 0.8						\\
+	\hline
+	$\beta$ 					& - 			& - 				& 50 					& - 						\\
+	\hline
+	Initialwert 					& 0.5 		& - 				& 0 					& 0						\\
+	\hline
+	Std			 			& - 			& - 				& 1 					& 0.05					\\
+	\hline
+	Ann. runs					& - 			& - 				& - 					& 100 - $\infty$				\\
+	\hline
+	Ann. sweeps				& - 			& - 				& - 					& 100 - $\infty$				\\
+	\hline
+	Ann. Temp					& - 			& - 				& - 					& [2, 20]					\\
+	\end{tabular}
+\end{table} 
 
-\newpage
+\subsection{Vergleich der Methoden gegeneinander}
+\label{subsec:best_method}
 
-\bigskip
+Wir untersuchen als erstes 8 verschiedene Spielfelder in aufsteigender Größe und testen jeweils alle 4 Methoden. Die Spielfelder haben dabei die Größen 2x2, 3x3, 3x5, 4x4, 5x5, 6x6, 8x8 und 8x8. Dabei sind die beiden 8x8 Spielfelder nur noch mit wenigen Löchern versehen.
 
-\color{white}
-Test
-\color{black}
-Test 2
+Bei der Anzahl an Neuronen haben wir hier noch etwas erhöht, da tendenziell bei größeren Spielfeldern mehr Neuronen gebraucht werden. Hier kommt das einfache Netz mit 64 Neuronen daher, die beschränkte Boltzmann Maschine mit 128 und die Quanten Boltzmann Maschine mit 32. Die Annealing Runs und Sweeps werden auf 1000 gesetzt, für eine höhere Genauigkeit. Alle anderen Werte die benutzt wurden können 1 zu 1 auf der oben genannten Tabelle abgelesen werden.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\caption{2x2 Alle Methoden}
+\label{all_1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\caption{3x3 Alle Methoden}
+\label{all_2}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\caption{3x5 Alle Methoden}
+\label{all_3}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\caption{4x4 Alle Methoden}
+\label{all_4}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\caption{5x5 Alle Methoden}
+\label{all_5}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\caption{6x6 Alle Methoden}
+\label{all_6}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\caption{8x8 einfach Alle Methoden}
+\label{all_7}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\caption{8x8 schwer Alle Methoden}
+\label{all_8}
+\end{figure}
 
 \newpage
 
