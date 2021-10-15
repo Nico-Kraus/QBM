@@ -8,6 +8,7 @@ from rbm import Rbm
 from dbm import Dbm
 from dbm_ import Dbm_
 from qbm import Qbm
+from qabm import Qabm
 
 class Agent():
     def __init__(self, env, params):
@@ -35,6 +36,8 @@ class Agent():
         if params["method"] == 'qbm':
             self.method = Qbm(self.n_actions, self.n_states, params)
             std_dev_from_h(self)
+        if params["method"] == 'qabm':
+            self.method = Qabm(self.n_actions, self.n_states, params)
 
 
     def choose_action(self, state):

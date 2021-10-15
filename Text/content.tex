@@ -880,6 +880,17 @@ Nun wollen wir schauen, wie stabil die Netze bei großen Feldern sind. Dafür ge
 \label{all_14}
 \end{figure}
 
+Als letztes wollen wir noch schauen, ob dieses Verfahren auch mit einem echten Quanten Annealer von DWave funktionieren würde. Da wir begrenzte Rechenzeit haben, testen wir nur das 2x2 Spielfeld und reduzieren die Anzahl der Spiele auf 100. Wir wählen dazu die gleichen Parameter wie beim simulierten Annealing. Nur die Anzahl der Annealing Durchläufe setzen wir auf 50. Die Annealing Zeit lassen wir bei 20$\mu$s wie in der Voreinstellung. Dieses Ergebnis vergleichen wir mit dem simulierten Annealing.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/qabm_c2x2_dbm_8_qabm.png}
+\caption{11x11 schwer Alle Methoden}
+\label{all_14}
+\end{figure}
+
+Wir sehen hier, beide Algorithmen finden bei dem kleinen Spielfeld schon nach 100 Spielen die richtige Police. Dieses Verfahren scheint also mit einem echten Quantencomputer zu funktionieren. Obs dies auch bei schwierigeren Beispielen funktioniert, müsste noch getestet werden.
+
 \newpage
 
 \begin{acknowledgement}
