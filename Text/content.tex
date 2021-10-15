@@ -404,6 +404,8 @@ Im Folgenden die Ergebnisse mit den Initialwerten 0, 0.5 und 1:
 
 Während der Agent mit dem Initialwert 0 das Ziel nie findet und garnicht anfangen kann zu lernen, finden die beiden anderen Versionen die Lösung extrem schnell.
 
+Übrigens wird für die Grafik bei jeder Methode am Schluss der Wert 1 in die Scores eingefügt. Das führt dazu, dass immer die richtige Scala (0 bis 1) auf der y-Achse zu sehen ist. Dadurch entsteht in der letzten Grafik die farbige blaue Linie rechts im Bild.
+
 \subsection{Einfaches neuronales Netz Resultate}
 \label{subsec:dn_r}
 
@@ -762,62 +764,120 @@ Bevor wir die Ergebnisse von allen Methoden im Vergleich zeigen, hier eine Aufli
 
 Wir untersuchen als erstes 8 verschiedene Spielfelder in aufsteigender Größe und testen jeweils alle 4 Methoden. Die Spielfelder haben dabei die Größen 2x2, 3x3, 3x5, 4x4, 5x5, 6x6, 8x8 und 8x8. Dabei sind die beiden 8x8 Spielfelder nur noch mit wenigen Löchern versehen.
 
-Bei der Anzahl an Neuronen haben wir hier noch etwas erhöht, da tendenziell bei größeren Spielfeldern mehr Neuronen gebraucht werden. Hier kommt das einfache Netz mit 64 Neuronen daher, die beschränkte Boltzmann Maschine mit 128 und die Quanten Boltzmann Maschine mit 32. Die Annealing Runs und Sweeps werden auf 1000 gesetzt, für eine höhere Genauigkeit. Alle anderen Werte die benutzt wurden können 1 zu 1 auf der oben genannten Tabelle abgelesen werden.
+Bei der Anzahl an Neuronen haben wir hier noch etwas erhöht, da tendenziell bei größeren Spielfeldern mehr Neuronen gebraucht werden. Hier kommt das einfache Netz mit 32 Neuronen daher, die beschränkte Boltzmann Maschine mit 128 und die Quanten Boltzmann Maschine mit 16. Die Annealing Runs und Sweeps werden auf 200 gesetzt, für eine höhere Genauigkeit. Höhere Werte fürs Annealing sind leider aufgrund von der Rechenzeit auf meinem PC nicht möglich. Alle anderen Werte die benutzt wurden können 1 zu 1 auf der oben genannten Tabelle abgelesen werden.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\includegraphics[width=\textwidth]{Figures/all_2x2_q_table_dn_32_rbm_128_dbm_16.png}
 \caption{2x2 Alle Methoden}
 \label{all_1}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\includegraphics[width=\textwidth]{Figures/all_3x3_q_table_dn_32_rbm_128_dbm_16.png}
 \caption{3x3 Alle Methoden}
 \label{all_2}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\includegraphics[width=\textwidth]{Figures/all_3x5_q_table_dn_32_rbm_128_dbm_16.png}
 \caption{3x5 Alle Methoden}
 \label{all_3}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\includegraphics[width=\textwidth]{Figures/all_4x4_q_table_dn_32_rbm_128_dbm_16.png}
 \caption{4x4 Alle Methoden}
 \label{all_4}
 \end{figure}
 
+Bis hierher funktionieren alle Methoden also perfekt.
+
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\includegraphics[width=\textwidth]{Figures/all_5x5_q_table_dn_32_rbm_128_dbm_16.png}
 \caption{5x5 Alle Methoden}
 \label{all_5}
 \end{figure}
 
+Hier wird es also zum ersten Mal interessant. Das einfache Netz findet hier nicht mehr die Lösung, während alle anderen gut abschneiden. Man sieht bei der Quanten Boltzmann Maschine hier einen leicht verzögerten Start im Vergleich zu den anderen Netzen.
+
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\includegraphics[width=\textwidth]{Figures/all_6x6_q_table_dn_32_rbm_128_dbm_16.png}
 \caption{6x6 Alle Methoden}
 \label{all_6}
 \end{figure}
 
+Dieses Beispiel ist bereits so kompliziert, dass es quasi unmöglich ist, mit zufälligen Zügen das Ziel zu finden. Überraschenderweise ist hier die beschränkte Boltzmann Maschine sehr gut darin, automatisch in unbekannte Gebiete zu wandern. Eine mögliche Erklärung dafür ist, dass bei vier Aktionen pro Feld die Wahrscheinlichkeit hoch ist, dass mindestens eine davon und damit auch das gesamte Feld einen positiven Gewinn verspricht. Durch mehrmaliges Ausführen der Aktion, wandern alle Werte gegen 0 und damit haben Felder die noch nicht oft besucht wurden, einen höheren zu erwartenden Gewinn. Warum dies bei der Quanten Boltzmann Maschine nicht funktioniert ist nicht ganz klar. Zum einen könnte dies an der niedrigeren Initialisierung der Gewichte liegen. Zum anderen an der Ungenauigkeit bei der Aktivierung der versteckten Neuronen die durch das Annealing entsteht.
+
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\includegraphics[width=\textwidth]{Figures/all_8x8_q_table_dn_32_rbm_128_dbm_16.png}
 \caption{8x8 einfach Alle Methoden}
 \label{all_7}
 \end{figure}
 
+Das 8x8 Feld hat nur 3 Löcher und dadurch werden hier immer richtige Lösungen gefunden. Das einfache Netz mit nur 32 Neuronen scheint allerdings nicht in der Lage zu sein, so viele Felder abzubilden.
+
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{Figures/dbm9_4x4_dbm_i0,01_dbm_i0,05_dbm_i0,1_dbm_i0,5_dbm_i1_dbm_i5.png}
+\includegraphics[width=\textwidth]{Figures/all_8x8_s_q_table_dn_32_rbm_128_dbm_16.png}
 \caption{8x8 schwer Alle Methoden}
 \label{all_8}
+\end{figure}
+
+Hier sehen wir wieder ein ähnliches Verhalten wie beim 6x6 Feld.
+
+Als nächstes wollen wir das $\epsilon$-Greedy-Verfahren verfeinern, in dem wir von verschiedenen Startpositionen starten, die sich nach und nach vom Ziel wegbewegen.
+
+Da hier sehr gute Ergebnisse erwartet werden, prüfen wir nur die schwersten Felder (6x6 und 8x8) und bauen zusätzlich ein 11x11 Feld, welches einem Labyrinth entspricht mit nur einem möglichen Weg zum Ziel.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/all_6x6_q_table_dn_32_rbm_128_dbm_16.png}
+\caption{6x6 Alle Methoden}
+\label{all_12}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/all_8x8_q_table_dn_32_rbm_128_dbm_16.png}
+\caption{8x8 einfach Alle Methoden}
+\label{all_13}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/all_8x8_s_q_table_dn_32_rbm_128_dbm_16.png}
+\caption{11x11 schwer Alle Methoden}
+\label{all_14}
+\end{figure}
+
+Nun wollen wir schauen, wie stabil die Netze bei großen Feldern sind. Dafür gehen wir mit einer Schleife über alle Felder und führen von da jeweils jede Aktion einmal aus und lernen daraus. Hier findet also jede Methode zum Ziel und hat so die Möglichkeit, die richtige Police zu finden. Wir starten dann alle 10 Durchläufe ein Spiel von jedem Feld und messen so, von wie vielen Feldern das Ziel erreicht wird. Dies ist unser Score. Insgesamt gehen wir 1000 mal über alle Felder.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/all_6x6_q_table_dn_32_rbm_128_dbm_16.png}
+\caption{6x6 Alle Methoden}
+\label{all_12}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/all_8x8_q_table_dn_32_rbm_128_dbm_16.png}
+\caption{8x8 einfach Alle Methoden}
+\label{all_13}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{Figures/all_8x8_s_q_table_dn_32_rbm_128_dbm_16.png}
+\caption{11x11 schwer Alle Methoden}
+\label{all_14}
 \end{figure}
 
 \newpage
