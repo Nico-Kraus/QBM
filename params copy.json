@@ -1,0 +1,55 @@
+{
+    "env": {
+        "example": 9,
+        "border_rule": "stay"
+    },
+    "play": {
+        "num_samples": 1000,
+        "max_steps": 100
+    },
+    "agents": [
+        {
+            "method": "q_table",
+            "name": "rdn_q_table",
+            "init": 0.5,
+            "lr": 0.1,
+            "gamma": 0.8
+        },{
+            "method": "dn",
+            "name": "dn_32",
+            "n_hidden": 32,
+            "lr": 0.0001,
+            "gamma": 0.4
+        },{
+            "method": "rbm",
+            "name": "rbm_128",
+            "n_hidden": 128,
+            "lr": 0.01,
+            "gamma": 0.8,
+            "beta": 50,
+            "init_sd": 1
+        },{
+            "method": "dbm_",
+            "name": "dbm_16",
+            "n_hidden": 16,
+            "lr": 0.05,
+            "gamma": 0.8,
+            "init_sd": 0.05,
+            "annealing": {
+                "num_reads": 200,
+                "num_sweeps": 200,
+                "beta_range": [2, 20]
+            }
+        },{
+            "method": "qabm",
+            "name": "qabm",
+            "n_hidden": 8,
+            "lr": 0.05,
+            "gamma": 0.8,
+            "init_sd": 0.05,
+            "annealing": {
+                "num_reads": 100
+            }
+        }
+    ]
+}

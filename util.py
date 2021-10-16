@@ -233,7 +233,7 @@ def compare_learning_curves_rdn(scores, filename, agents, avg):
     plt.savefig("images/" + filename, dpi=300)
 
 
-def plot_learning_curve(scores, epsilons, filename):
+def plot_learning_curve(scores, epsilons, filename, avg):
 
     x = [i+1 for i in range(len(scores)+1)]
     
@@ -249,7 +249,7 @@ def plot_learning_curve(scores, epsilons, filename):
     N = len(scores)
     running_avg = np.empty(N+1)
     for t in range(N):
-        running_avg[t] = np.mean(scores[max(0, t-100):(t+1)])
+        running_avg[t] = np.mean(scores[max(0, t-avg):(t+1)])
     running_avg[N] = 1
 
     ax2 = ax.twinx()
